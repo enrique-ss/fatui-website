@@ -4,6 +4,79 @@ document.addEventListener('DOMContentLoaded', () => {
     const videos = document.querySelectorAll('[data-video]');
     const sections = document.querySelectorAll('section');
     const characterSections = document.querySelectorAll('section[data-theme]');
+    const timeButtons = document.querySelectorAll('.time-btn');
+    const navbar = document.getElementById('barra-nav');
+    
+    // Estado do tempo (presente ou passado)
+    let currentTime = null;
+    
+    // ==================== CONTROLE DE TEMPO ====================
+    
+    // Oculta navbar e seções de personagens inicialmente
+    navbar.style.display = 'none';
+    characterSections.forEach(section => {
+        section.style.display = 'none';
+    });
+    
+    // Função para alternar entre presente e passado
+    function setTimePeriod(time) {
+        currentTime = time;
+        
+        // Mostra navbar e seções de personagens
+        navbar.style.display = 'block';
+        characterSections.forEach(section => {
+            section.style.display = 'flex';
+        });
+        
+        // Alterna títulos e subtítulos dos cards
+        document.querySelectorAll('.title-presente, .subtitle-presente, .section-title-presente').forEach(el => {
+            el.style.display = time === 'presente' ? 'inline' : 'none';
+        });
+        
+        document.querySelectorAll('.title-passado, .subtitle-passado, .section-title-passado').forEach(el => {
+            el.style.display = time === 'passado' ? 'inline' : 'none';
+        });
+        
+        // Alterna conteúdo de história
+        document.querySelectorAll('.history-content').forEach(content => {
+            const contentTime = content.getAttribute('data-time');
+            if (contentTime === time) {
+                content.style.display = 'block';
+            } else {
+                content.style.display = 'none';
+            }
+        });
+        
+        // Controla visibilidade de elementos que só aparecem no presente
+        document.querySelectorAll('[data-show-in]').forEach(element => {
+            const showIn = element.getAttribute('data-show-in');
+            if (showIn === time) {
+                element.style.display = element.classList.contains('info-grid') ? 'grid' : 
+                                       element.classList.contains('video-container') ? 'block' : 
+                                       element.tagName === 'H2' ? 'flex' : 'block';
+            } else {
+                element.style.display = 'none';
+            }
+        });
+        
+        // Scroll suave para a primeira seção de personagem após um delay
+        setTimeout(() => {
+            if (characterSections.length > 0) {
+                characterSections[0].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        }, 200);
+    }
+    
+    // Event listeners dos botões de tempo
+    timeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const time = btn.getAttribute('data-time');
+            setTimePeriod(time);
+        });
+    });
     
     // ==================== CONFIGURAÇÕES DOS OBSERVERS ====================
     
@@ -95,16 +168,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // ==================== SMOOTH SCROLL ====================
-    // Scroll suave com centralização da seção
+    // Scroll suave com centralização da seção (com pequeno delay para garantir posicionamento)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
-                });
+                // Pequeno delay para garantir que a seção está visível
+                setTimeout(() => {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }, 50);
             }
         });
     });
