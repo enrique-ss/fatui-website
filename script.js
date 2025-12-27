@@ -77,6 +77,17 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimePeriod(time);
         });
     });
+
+    // ADICIONE ESTA FUNÇÃO NOVA:
+    // Ajusta scroll para compensar o header fixo
+    function scrollToSection(target) {
+        const navHeight = navbar.offsetHeight;
+        const targetPosition = target.offsetTop - navHeight;
+        window.scrollTo({
+            behavior: 'smooth',
+            top: targetPosition
+        });
+    }
     
     // ==================== CONFIGURAÇÕES DOS OBSERVERS ====================
     
@@ -168,20 +179,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // ==================== SMOOTH SCROLL ====================
-    // Scroll suave com centralização da seção (com pequeno delay para garantir posicionamento)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                // Pequeno delay para garantir que a seção está visível
-                setTimeout(() => {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center'
-                    });
-                }, 50);
+                const navHeight = navbar.offsetHeight;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                
+                window.scrollTo({
+                    behavior: 'smooth',
+                    top: targetPosition
+                });
             }
         });
-    });
+});
 });

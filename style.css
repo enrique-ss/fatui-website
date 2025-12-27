@@ -54,6 +54,7 @@ body {
     border-bottom: 1px solid var(--glass-border);
     padding: 15px 20px;
     transition: all 0.3s ease;
+    height: 70px; /* ADICIONE ESTA LINHA */
 }
 
 .nav-content {
@@ -136,6 +137,7 @@ section {
     align-items: center;
     justify-content: flex-start;
     padding-left: 10%;
+    padding-top: 70px; /* ADICIONE ESTA LINHA */
     opacity: 0;
     transform: translateY(60px);
     transition: opacity 0.8s ease, transform 0.8s ease;
@@ -203,6 +205,7 @@ section.active .overlay {
 #intro {
     justify-content: center;
     padding-left: 0;
+    padding-top: 70px; /* ADICIONE ESTA LINHA */
 }
 
 .intro-content {
@@ -761,6 +764,7 @@ section.active[data-theme="itto"] .card-face {
     section {
         justify-content: center;
         padding-left: 0;
+        padding-top: 60px; /* ADICIONE ESTA LINHA */
     }
     
     section.active {
