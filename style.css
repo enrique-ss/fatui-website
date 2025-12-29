@@ -356,8 +356,8 @@ section.is-active .overlay {
 }
 
 .card-text { 
-    font-size: 0.95rem; 
-    color: #ddd; 
+    font-size: 1rem; 
+    color: #dddddd;
 }
 
 .tap-hint { 
