@@ -142,17 +142,15 @@ body {
     transform: translateX(0);
 }
 
-/* SEÇÕES - AJUSTADO PARA A ESQUERDA */
+/* SEÇÕES GERAIS */
 section {
     position: relative;
     width: 100%;
     min-height: 100vh;
     display: flex;
     align-items: center;
-    /* Movendo para a esquerda no Desktop */
     justify-content: flex-start; 
     padding: 50px 20px;
-    /* Adiciona um recuo para o card não bater na borda */
     padding-left: clamp(20px, 10vw, 150px); 
     opacity: 0;
     transform: translateY(30px);
@@ -178,6 +176,43 @@ section.visible {
     inset: 0;
     background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, transparent 50%, rgba(0,0,0,0.85) 100%);
     z-index: 1;
+}
+
+/* === AJUSTES EXCLUSIVOS DA INTRO === */
+#intro {
+    justify-content: center; /* Centraliza o texto da Tsaritsa */
+    padding-left: 20px; /* Remove o recuo da esquerda apenas aqui */
+}
+
+#intro .overlay {
+    /* Vídeo escuro nas bordas e claro no centro */
+    background: radial-gradient(
+        circle, 
+        rgba(0, 0, 0, 0.2) 0%, 
+        rgba(0, 0, 0, 0.6) 40%, 
+        rgba(0, 0, 0, 0.9) 100%
+    );
+}
+
+#intro .intro-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 900px;
+}
+
+.citacao {
+    font-size: 1.8rem;
+    font-style: italic;
+    font-weight: 300;
+    text-shadow: 0 0 20px rgba(0,0,0,0.9); /* Sombra para ler bem sobre o vídeo */
+}
+
+/* === FIM DA INTRO === */
+
+/* ESPELHAR VÍDEO DO SCARA */
+#scaramouche .video-fundo {
+    transform: scaleX(-1);
 }
 
 /* CARDS - ALTURA REDUZIDA */
@@ -284,11 +319,12 @@ section.visible {
 /* RESPONSIVIDADE (MOBILE) */
 @media (max-width: 768px) {
     section {
-        /* No Mobile, volta a centralizar para não cortar conteúdo */
         justify-content: center;
         padding-left: 10px;
         padding-right: 10px;
     }
+
+    #intro .citacao { font-size: 1.4rem; }
 
     .nav-lateral {
         top: auto;

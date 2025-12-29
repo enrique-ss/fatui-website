@@ -91,15 +91,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Smooth Scroll Ajustado (considerando o centro da tela)
+    // Scroll direto pra posição exata da seção
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', (e) => {
             e.preventDefault();
             const target = document.querySelector(a.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'center' 
+                const posicao = target.offsetTop;
+                window.scrollTo({
+                    top: posicao,
+                    behavior: 'auto'
                 });
             }
         });
