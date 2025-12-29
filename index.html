@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inazuma</title>
+    <title>Santuário Grand Narukami</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
             <a href="#raiden" class="btn-nav" data-color="raiden">Raiden</a>
             <a href="#kokomi" class="btn-nav" data-color="kokomi">Kokomi</a>
             <a href="#yae" class="btn-nav" data-color="yae">Yae Miko</a>
-            <a href="#itto" class="btn-nav" data-color="itto">Itto</a>
+            <a href="#scara" class="btn-nav" data-color="scara">Scaramouche</a>
             <a href="#galeria" class="btn-nav">Galeria</a>
         </div>
     </nav>
@@ -30,36 +30,12 @@
         </video>
         <div class="overlay"></div>
         <div class="intro-content">
-            <h1 class="intro-title">Inazuma</h1>
-            <div class="intro-divider"></div>
-            <p class="intro-text">
-                Nas terras onde o trovão ecoa eternamente, duas visões de Inazuma coexistem através do tempo.
-                A nação insular que hoje conhecemos carrega as cicatrizes e glórias de eras passadas,
-                onde deuses caminhavam entre mortais e lendas nasciam sob cerejeiras em flor.
-            </p>
-            <p class="intro-text-secondary">
-                Escolha sua jornada através do tempo e descubra os segredos que moldaram
-                o arquipélago do trovão e aqueles que o protegem.
-            </p>
-            <div class="time-selection">
-                <h3 class="time-selection-title">Selecione uma Era</h3>
-                <div class="time-buttons-wrapper">
-                    <button class="time-btn time-btn-presente" data-time="presente">
-                        <div class="time-btn-icon">⚡</div>
-                        <div class="time-btn-content">
-                            <span class="time-btn-label">Era Presente</span>
-                            <span class="time-btn-desc">A Inazuma de hoje</span>
-                        </div>
-                    </button>
-                    <button class="time-btn time-btn-passado" data-time="passado">
-                        <div class="time-btn-icon">🕰️</div>
-                        <div class="time-btn-content">
-                            <span class="time-btn-label">Era Passada</span>
-                            <span class="time-btn-desc">Ecos da história</span>
-                        </div>
-                    </button>
-                </div>
-            </div>
+            <h2 class="citacao">
+                "Um arquipélago isolado <span style="color: #80bbff">distante ao extremo leste de Teyvat.</span><br><br>
+                Supere tempestades intermináveis e pise nas ilhas de <span style="color: #f12d0b">bordo vermelho</span> e <span style="color: #ff6f87">cerejeiras.</span><br>
+                Em praias sinuosas e penhascos imponentes...<br><br>
+                Testemunhe a Eternidade da <span style="color: #9457eb; text-shadow: 0 0 15px currentColor;">Todo-Poderosa Narukami Ogosho.</span>"
+            </h2>
         </div>
     </section>
 
@@ -76,52 +52,28 @@
                 <!-- Frente do Card -->
                 <div class="card-face card-frente">
                     <div class="card-header">
-                        <h1 class="card-title">
-                            <span class="title-presente">Raiden Shogun</span>
-                            <span class="title-passado" style="display: none;">Raiden Makoto</span>
-                        </h1>
-                        <small>
-                            <span class="subtitle-presente">Euthymia Plane</span>
-                            <span class="subtitle-passado" style="display: none;">Baal - Arconte do Trovão</span>
-                        </small>
+                        <h1 class="card-title">Raiden Shogun</h1>
+                        <small>Euthymia Plane</small>
                     </div>
-                    <div class="history-content" data-time="presente">
-                        <ul class="card-skills">
-                            <li><strong>Ataque:</strong> Origem</li>
-                            <li><strong>Skill:</strong> Transcendência: Presságio Maléfico</li>
-                            <li><strong>Burst:</strong> Musou no Hitotachi</li>
-                        </ul>
-                    </div>
-                    <div class="history-content" data-time="passado" style="display: none;">
-                        <ul class="card-skills">
-                            <li><strong>Período:</strong> Era Arcôntica (~2000 anos até 500 anos atrás)</li>
-                            <li><strong>Papel:</strong> Arconte Electro Original</li>
-                            <li><strong>Filosofia:</strong> Eternidade nos Momentos Transitórios</li>
-                        </ul>
-                    </div>
-                    <div class="info-grid" data-show-in="presente">
+                    <ul class="card-skills">
+                        <li><strong>Ataque:</strong> Origem</li>
+                        <li><strong>Skill:</strong> Transcendência: Presságio Maléfico</li>
+                        <li><strong>Burst:</strong> Musou no Hitotachi</li>
+                    </ul>
+                    <div class="info-grid">
                         <span>⚡ Electro</span>
                         <span>🗡️ Lança</span>
                         <span>🏯 Inazuma</span>
                         <span>⭐⭐⭐⭐⭐</span>
                     </div>
-                    <h2>
-                        <span class="section-title-presente">Build Recomendada</span>
-                        <span class="section-title-passado" style="display: none;">Legado</span>
-                    </h2>
-                    <div class="history-content" data-time="presente">
-                        <p class="build-desc">4 Peças: Emblema do Destino Cortado</p>
-                        <div class="artifacts-grid">
-                            <img src="resources/emblem-flower.png" class="artifact-img" alt="Flor">
-                            <img src="resources/emblem-feather.png" class="artifact-img" alt="Pena">
-                            <img src="resources/emblem-sands.png" class="artifact-img" alt="Areia">
-                            <img src="resources/emblem-goblet.png" class="artifact-img" alt="Cálice">
-                            <img src="resources/emblem-circlet.png" class="artifact-img" alt="Tiara">
-                        </div>
-                    </div>
-                    <div class="history-content" data-time="passado" style="display: none;">
-                        <p class="build-desc">Plantou a Cerejeira Sagrada • Governou com sabedoria • Acreditava no progresso</p>
-                        <p class="card-text-small" style="margin-top: 15px;">Makoto era sobre crescimento e vida. Diferente de Ei, ela acreditava que eternidade tava nos momentos que passam, cada instante fugaz era eterno do jeito dele. Foi amada pelo povo de Inazuma por governar com compaixão.</p>
+                    <h2>Build Recomendada</h2>
+                    <p class="build-desc">4 Peças: Emblema do Destino Cortado</p>
+                    <div class="artifacts-grid">
+                        <img src="resources/emblem-flower.png" class="artifact-img" alt="Flor">
+                        <img src="resources/emblem-feather.png" class="artifact-img" alt="Pena">
+                        <img src="resources/emblem-sands.png" class="artifact-img" alt="Areia">
+                        <img src="resources/emblem-goblet.png" class="artifact-img" alt="Cálice">
+                        <img src="resources/emblem-circlet.png" class="artifact-img" alt="Tiara">
                     </div>
                     <p class="tap-hint">👆 CLIQUE PARA DETALHES</p>
                 </div>
@@ -131,22 +83,13 @@
                     <div class="card-header">
                         <h1 class="card-title">História</h1>
                     </div>
-                    <div class="history-content" data-time="presente">
-                        <p class="card-text">
-                            A Raiden Shogun na verdade são duas pessoas: Ei, a verdadeira Arconte, e a Shogun, uma marionete que Ei criou pra governar no lugar dela. Ei fica meditando dentro da própria espada que a marionete carrega. Depois que sua irmã gêmea Makoto morreu há 500 anos, Ei assumiu como Shogun e criou leis rígidas tipo o Decreto Sakoku, tudo em nome de preservar Inazuma eternamente.
-                        </p>
-                        <h2>Personalidade</h2>
-                        <p class="card-text-small">Ei é obcecada pela ideia de eternidade e quer manter Inazuma num estado imutável. A marionete Shogun é fria e robótica, seguindo programação. Ei realmente se importa com Inazuma, mas no começo tinha uma visão bem negativa sobre ambições humanas por causa das perdas que sofreu.</p>
-                    </div>
-                    <div class="history-content" data-time="passado" style="display: none;">
-                        <p class="card-text">
-                            Raiden Makoto, conhecida como Baal, foi a Arconte Electro original que governou Inazuma por uns 1500 anos. Ela e Ei eram gêmeas, mas Makoto foi escolhida como Arconte enquanto Ei virou sua guerreira sombra. Makoto era aquela líder sábia e gentil que botava o povo em primeiro lugar. Pra ela, eternidade não era congelar o tempo, mas sim apreciar cada momento que passa.
-                        </p>
-                        <h2>Filosofia e Legado</h2>
-                        <p class="card-text-small">Makoto plantou a Cerejeira Sagrada como símbolo da filosofia dela: algo é bonito justamente porque floresce e murcha, tipo o ciclo da vida. Durante o Cataclismo há 500 anos, ela foi até Khaenri'ah e acabou morrendo. Antes de ir, passou os poderes pra Ei, mas a irmã entendeu tudo ao contrário. O Plano de Euthymia da Ei é basicamente ela tentando entender o que Makoto quis dizer.</p>
-                    </div>
-                    <h2 data-show-in="presente">Trailer</h2>
-                    <div class="video-container" data-show-in="presente">
+                    <p class="card-text">
+                        A Raiden Shogun é composta por dois seres: Ei (Beelzebul), a atual Arconte Electro de Inazuma, e a Shogun, uma marionete criada por Ei para governar em seu lugar. Ei medita dentro do Plano de Euthymia, localizado na espada Musou Isshin guardada no corpo da marionete. Após a morte de sua irmã gêmea Makoto há 500 anos, Ei assumiu o título de Shogun e instituiu políticas como o Decreto Sakoku para preservar a Eternidade.
+                    </p>
+                    <h2>Personalidade</h2>
+                    <p class="card-text-small">Firme em sua crença na Eternidade, Ei deseja preservar Inazuma em um estado imutável. A marionete Shogun segue diretrizes programadas e é fria e calculista. Ei demonstra cuidado genuíno por Inazuma, mas inicialmente tinha baixa opinião sobre ambições humanas devido às perdas sofridas.</p>
+                    <h2>Trailer</h2>
+                    <div class="video-container">
                         <iframe src="https://www.youtube.com/embed/mvrW4aKwAXw?si=rj_aF7Am2jazmASt" allowfullscreen></iframe>
                     </div>
                     <p class="tap-hint">👆 CLIQUE PARA VOLTAR</p>
@@ -167,52 +110,28 @@
             <div class="card-inner">
                 <div class="card-face card-frente">
                     <div class="card-header">
-                        <h1 class="card-title">
-                            <span class="title-presente">Sangonomiya Kokomi</span>
-                            <span class="title-passado" style="display: none;">Sacerdotisas Divinas</span>
-                        </h1>
-                        <small>
-                            <span class="subtitle-presente">Pérola da Sabedoria</span>
-                            <span class="subtitle-passado" style="display: none;">Linhagem de Orobashi</span>
-                        </small>
+                        <h1 class="card-title">Sangonomiya Kokomi</h1>
+                        <small>Pérola da Sabedoria</small>
                     </div>
-                    <div class="history-content" data-time="presente">
-                        <ul class="card-skills">
-                            <li><strong>Ataque:</strong> A Forma da Água</li>
-                            <li><strong>Skill:</strong> Juramento da Água-Viva</li>
-                            <li><strong>Burst:</strong> Ascensão da Nereida</li>
-                        </ul>
-                    </div>
-                    <div class="history-content" data-time="passado" style="display: none;">
-                        <ul class="card-skills">
-                            <li><strong>Período:</strong> Era de Orobashi (até ~2000 anos atrás)</li>
-                            <li><strong>Papel:</strong> Líderes Espirituais de Watatsumi</li>
-                            <li><strong>Método:</strong> Estratégia e Diplomacia sobre Força</li>
-                        </ul>
-                    </div>
-                    <div class="info-grid" data-show-in="presente">
+                    <ul class="card-skills">
+                        <li><strong>Ataque:</strong> A Forma da Água</li>
+                        <li><strong>Skill:</strong> Juramento da Água-Viva</li>
+                        <li><strong>Burst:</strong> Ascensão da Nereida</li>
+                    </ul>
+                    <div class="info-grid">
                         <span>💧 Hydro</span>
                         <span>📖 Catalisador</span>
                         <span>🌊 Watatsumi</span>
                         <span>⭐⭐⭐⭐⭐</span>
                     </div>
-                    <h2>
-                        <span class="section-title-presente">Build Recomendada</span>
-                        <span class="section-title-passado" style="display: none;">Tradição</span>
-                    </h2>
-                    <div class="history-content" data-time="presente">
-                        <p class="build-desc">4 Peças: Concha Matizada</p>
-                        <div class="artifacts-grid">
-                            <img src="resources/ocean-flower.png" class="artifact-img" alt="Flor">
-                            <img src="resources/ocean-feather.png" class="artifact-img" alt="Pena">
-                            <img src="resources/ocean-sands.png" class="artifact-img" alt="Areia">
-                            <img src="resources/ocean-goblet.png" class="artifact-img" alt="Cálice">
-                            <img src="resources/ocean-circlet.png" class="artifact-img" alt="Tiara">
-                        </div>
-                    </div>
-                    <div class="history-content" data-time="passado" style="display: none;">
-                        <p class="build-desc">Guiaram pelo Oráculo • Resistência através da Razão • Preservação Cultural</p>
-                        <p class="card-text-small" style="margin-top: 15px;">As Sacerdotisas antigas de Watatsumi governavam pela sabedoria estratégica, não força militar. Mantiveram viva a memória de Orobashi e a identidade de Watatsumi contra a pressão cultural do Shogunato.</p>
+                    <h2>Build Recomendada</h2>
+                    <p class="build-desc">4 Peças: Concha Matizada</p>
+                    <div class="artifacts-grid">
+                        <img src="resources/ocean-flower.png" class="artifact-img" alt="Flor">
+                        <img src="resources/ocean-feather.png" class="artifact-img" alt="Pena">
+                        <img src="resources/ocean-sands.png" class="artifact-img" alt="Areia">
+                        <img src="resources/ocean-goblet.png" class="artifact-img" alt="Cálice">
+                        <img src="resources/ocean-circlet.png" class="artifact-img" alt="Tiara">
                     </div>
                     <p class="tap-hint">👆 CLIQUE PARA DETALHES</p>
                 </div>
@@ -220,22 +139,13 @@
                     <div class="card-header">
                         <h1 class="card-title">História</h1>
                     </div>
-                    <div class="history-content" data-time="presente">
-                        <p class="card-text">
-                            Kokomi é a jovem Sacerdotisa Divina da Ilha Watatsumi e descendente do Clã Sangonomiya. Ela tem que proteger o povo dela e liderar tudo na ilha, incluindo estratégias militares. Parece frágil e serena, mas é uma estrategista foda versada em arte da guerra. Liderou a resistência contra o Decreto de Caça às Visões e ganhou várias batalhas na base da tática.
-                        </p>
-                        <h2>Personalidade</h2>
-                        <p class="card-text-small">Calma e misteriosa com um sorriso tranquilo. Mas tem um segredo: Kokomi é super introvertida e socializar esgota ela completamente. As mãos dela tremem antes de fazer discurso. Ela usa um sisteminha interno de "energia" e o sonho secreto dela seria ser só uma conselheira nos bastidores, perdida nos livros de estratégia militar.</p>
-                    </div>
-                    <div class="history-content" data-time="passado" style="display: none;">
-                        <p class="card-text">
-                            As antigas Sacerdotisas Divinas de Watatsumi eram descendentes diretas do deus serpente Orobashi, que trouxe o povo delas de Enkanomiya pra superfície. Elas eram líderes espirituais, diplomatas e estrategistas. Quando a Raiden Shogun executou Orobashi por desafiar ela, as Sacerdotisas assumiram a missão impossível de manter Watatsumi independente e culturalmente separado do resto de Inazuma. Governavam pela razão, não pela força.
-                        </p>
-                        <h2>Método e Legado</h2>
-                        <p class="card-text-small">Diferente dos generais do Shogunato que dependiam de porrada, as Sacerdotisas de Watatsumi eram mestras em guerra defensiva e estratégia de longo prazo. Ensinavam que cada geração tinha que preservar a memória de Orobashi e a autonomia do povo. Kokomi carrega essa tradição milenar: líder relutante que governa pela mente, não pela espada.</p>
-                    </div>
-                    <h2 data-show-in="presente">Trailer</h2>
-                    <div class="video-container" data-show-in="presente">
+                    <p class="card-text">
+                        Kokomi é a jovem Sacerdotisa Divina da Ilha Watatsumi e descendente do Clã Sangonomiya. Carrega a responsabilidade de proteger seu povo e liderar os assuntos da ilha, incluindo estratégias militares. Apesar de sua aparência delicada e serena, é uma estrategista brilhante versada na arte da guerra, tendo liderado a resistência contra o Decreto de Caça às Visões com inúmeras vitórias táticas.
+                    </p>
+                    <h2>Personalidade</h2>
+                    <p class="card-text-small">Calma e enigmática com um sorriso tranquilo. Apesar de seu talento para estratégia, Kokomi é introvertida e socializar a esgota profundamente. Suas mãos tremem antes de discursos. Ela usa um sistema de "energia" interno e seu maior desejo seria apenas ser uma conselheira nos bastidores, perdida em seus livros de estratégia militar.</p>
+                    <h2>Trailer</h2>
+                    <div class="video-container">
                         <iframe src="https://www.youtube.com/embed/fVf0RB3nvOU?si=K3JdqhkwaWXU4use" allowfullscreen></iframe>
                     </div>
                     <p class="tap-hint">👆 CLIQUE PARA VOLTAR</p>
@@ -256,52 +166,28 @@
             <div class="card-inner">
                 <div class="card-face card-frente">
                     <div class="card-header">
-                        <h1 class="card-title">
-                            <span class="title-presente">Yae Miko</span>
-                            <span class="title-passado" style="display: none;">Yae Miko (Era Makoto)</span>
-                        </h1>
-                        <small>
-                            <span class="subtitle-presente">Guuji do Grande Santuário</span>
-                            <span class="subtitle-passado" style="display: none;">Jovem Familiar de Makoto</span>
-                        </small>
+                        <h1 class="card-title">Yae Miko</h1>
+                        <small>Guuji do Grande Santuário</small>
                     </div>
-                    <div class="history-content" data-time="presente">
-                        <ul class="card-skills">
-                            <li><strong>Ataque:</strong> Devorador de Espíritos</li>
-                            <li><strong>Skill:</strong> Evocação Yakan: Sesshou Sakura</li>
-                            <li><strong>Burst:</strong> Grande Arte Secreta: Tenko Kenshin</li>
-                        </ul>
-                    </div>
-                    <div class="history-content" data-time="passado" style="display: none;">
-                        <ul class="card-skills">
-                            <li><strong>Período:</strong> 500+ anos atrás (Era de Makoto)</li>
-                            <li><strong>Papel:</strong> Familiar e Aprendiz</li>
-                            <li><strong>Status:</strong> Testemunha Viva da História</li>
-                        </ul>
-                    </div>
-                    <div class="info-grid" data-show-in="presente">
+                    <ul class="card-skills">
+                        <li><strong>Ataque:</strong> Devorador de Espíritos</li>
+                        <li><strong>Skill:</strong> Evocação Yakan: Sesshou Sakura</li>
+                        <li><strong>Burst:</strong> Grande Arte Secreta: Tenko Kenshin</li>
+                    </ul>
+                    <div class="info-grid">
                         <span>⚡ Electro</span>
                         <span>📖 Catalisador</span>
                         <span>🌸 Inazuma</span>
                         <span>⭐⭐⭐⭐⭐</span>
                     </div>
-                    <h2>
-                        <span class="section-title-presente">Build Recomendada</span>
-                        <span class="section-title-passado" style="display: none;">Jornada</span>
-                    </h2>
-                    <div class="history-content" data-time="presente">
-                        <p class="build-desc">4 Peças: Sonhos Dourados / Fúria</p>
-                        <div class="artifacts-grid">
-                            <img src="resources/fury-flower.png" class="artifact-img" alt="Flor">
-                            <img src="resources/fury-feather.png" class="artifact-img" alt="Pena">
-                            <img src="resources/fury-sands.png" class="artifact-img" alt="Areia">
-                            <img src="resources/fury-goblet.png" class="artifact-img" alt="Cálice">
-                            <img src="resources/fury-circlet.png" class="artifact-img" alt="Tiara">
-                        </div>
-                    </div>
-                    <div class="history-content" data-time="passado" style="display: none;">
-                        <p class="build-desc">Serviu Makoto e Ei • Testemunhou o Cataclismo • Guardou Memórias</p>
-                        <p class="card-text-small" style="margin-top: 15px;">Como kitsune imortal, Yae não é eco do passado, ela É o passado vivo. Serviu tanto Makoto quanto Ei, viu amigos morrerem, civilizações caírem. Ela é a única ponte real entre as eras de Inazuma.</p>
+                    <h2>Build Recomendada</h2>
+                    <p class="build-desc">4 Peças: Sonhos Dourados / Fúria</p>
+                    <div class="artifacts-grid">
+                        <img src="resources/fury-flower.png" class="artifact-img" alt="Flor">
+                        <img src="resources/fury-feather.png" class="artifact-img" alt="Pena">
+                        <img src="resources/fury-sands.png" class="artifact-img" alt="Areia">
+                        <img src="resources/fury-goblet.png" class="artifact-img" alt="Cálice">
+                        <img src="resources/fury-circlet.png" class="artifact-img" alt="Tiara">
                     </div>
                     <p class="tap-hint">👆 CLIQUE PARA DETALHES</p>
                 </div>
@@ -309,22 +195,13 @@
                     <div class="card-header">
                         <h1 class="card-title">História</h1>
                     </div>
-                    <div class="history-content" data-time="presente">
-                        <p class="card-text">
-                            Yae Miko é a Guuji do Grande Santuário Narukami e editora chefe da Editora Yae. Uma kitsune ancestral e youkai com uma inteligência absurda escondida sob aquela aparência linda. Ela é serva e amiga de Ei, uma das poucas amigas próximas que sobreviveu ao tempo todo. Adora observar humanos com diversão e curiosidade, sempre aprontando truques e brincadeiras elaboradas.
-                        </p>
-                        <h2>Personalidade</h2>
-                        <p class="card-text-small">Misteriosa e travessa com um lado enigmático. Como kitsune, ela AMA provocar e manipular os outros através de planos elaborados só por diversão. Não mede palavras nem com Ei. Apesar da personalidade safada, demonstra emoção de verdade e se importa com quem tá na vida dela. Viciada em tofu frito e odeia conservas.</p>
-                    </div>
-                    <div class="history-content" data-time="passado" style="display: none;">
-                        <p class="card-text">
-                            Yae Miko é única entre todos os personagens de Inazuma porque ela não representa um eco simbólico do passado. Ela literalmente VIVEU esse passado. Como kitsune imortal, serviu sob Raiden Makoto, viu o Cataclismo há 500 anos, presenciou a morte de Makoto, acompanhou a transformação de Ei de guerreira pra Arconte, e observou Inazuma mudar através dos séculos. Ela lembra de coisas que até Ei esqueceu. Na era de Makoto, Yae era mais jovem e menos experiente, mas já era astuta e leal.
-                        </p>
-                        <h2>Perspectiva Única</h2>
-                        <p class="card-text-small">Yae é a única que realmente saca tanto Makoto quanto Ei. Viu a filosofia de eternidade de Makoto (momentos que passam) e a interpretação de Ei (tudo parado). Conheceu yokai e deuses que hoje estão extintos, viu civilizações subirem e caírem. A longevidade dela faz dela a verdadeira guardiã da história de Inazuma, e ela usa esse conhecimento pra guiar (e às vezes manipular) os eventos modernos. Ela é do passado e do presente ao mesmo tempo.</p>
-                    </div>
-                    <h2 data-show-in="presente">Trailer</h2>
-                    <div class="video-container" data-show-in="presente">
+                    <p class="card-text">
+                        Yae Miko é a Guuji (sacerdotisa suprema) do Grande Santuário Narukami e editora-chefe da Editora Yae. Uma kitsune ancestral e youkai com inteligência inimaginável escondida sob sua bela aparência. Ela é serva e amiga da Eternidade, uma das poucas amigas próximas de Ei que sobreviveu às ravagens do tempo. Observa os humanos com diversão e curiosidade, frequentemente os provocando com elaborados truques e brincadeiras.
+                    </p>
+                    <h2>Personalidade</h2>
+                    <p class="card-text-small">Misteriosa e travessa com um lado enigmático. Como kitsune, adora provocar e manipular outros através de estratagemas elaborados que faz por pura diversão. Não mede palavras, mesmo com sua amiga e mestre Ei. Apesar de sua personalidade travessa, demonstra um lado emocional e se importa genuinamente com aqueles em sua vida. Adora tofu frito e detesta conservas.</p>
+                    <h2>Trailer</h2>
+                    <div class="video-container">
                         <iframe src="https://www.youtube.com/embed/4yFiBhNIWYo?si=pDRoDMtDL7k9gBXo" allowfullscreen></iframe>
                     </div>
                     <p class="tap-hint">👆 CLIQUE PARA VOLTAR</p>
@@ -333,64 +210,40 @@
         </label>
     </section>
 
-    <!-- SEÇÃO ARATAKI ITTO -->
-    <section id="itto" data-theme="itto">
-        <video loop muted playsinline class="video-fundo itto-video" data-video="itto">
-            <source src="resources/itto-video.mp4" type="video/mp4">
+    <!-- SEÇÃO SCARAMOUCHE -->
+    <section id="scara" data-theme="scara">
+        <video loop muted playsinline class="video-fundo scara-video" data-video="scara">
+            <source src="resources/scara-slide.mp4" type="video/mp4">
         </video>
-        <div class="overlay itto-overlay"></div>
+        <div class="overlay scara-overlay"></div>
         
-        <input type="checkbox" id="flip-itto" class="flip-checkbox">
-        <label for="flip-itto" class="card-wrapper">
+        <input type="checkbox" id="flip-scara" class="flip-checkbox">
+        <label for="flip-scara" class="card-wrapper">
             <div class="card-inner">
                 <div class="card-face card-frente">
                     <div class="card-header">
-                        <h1 class="card-title">
-                            <span class="title-presente">Arataki Itto</span>
-                            <span class="title-passado" style="display: none;">Oni Ancestrais</span>
-                        </h1>
-                        <small>
-                            <span class="subtitle-presente">Oni Carmesim Hanamizaka</span>
-                            <span class="subtitle-passado" style="display: none;">Raça dos Oni</span>
-                        </small>
+                        <h1 class="card-title">Wanderer</h1>
+                        <small>O Andarilho</small>
                     </div>
-                    <div class="history-content" data-time="presente">
-                        <ul class="card-skills">
-                            <li><strong>Ataque:</strong> Luta da Besta Oni</li>
-                            <li><strong>Skill:</strong> Arremesso de Ushi, Massacrando Tudo!</li>
-                            <li><strong>Burst:</strong> Modo Enfurecido Real Oni: A Gloriosa Superbesta Que Esmaga!</li>
-                        </ul>
-                    </div>
-                    <div class="history-content" data-time="passado" style="display: none;">
-                        <ul class="card-skills">
-                            <li><strong>Período:</strong> Era Antiga (centenas a milhares de anos atrás)</li>
-                            <li><strong>Status:</strong> Raça de Yokai perseguida</li>
-                            <li><strong>Destino:</strong> Quase extintos após o Decreto de Caça aos Oni</li>
-                        </ul>
-                    </div>
-                    <div class="info-grid" data-show-in="presente">
-                        <span>🪨 Geo</span>
-                        <span>⚔️ Espadão</span>
-                        <span>🏯 Inazuma</span>
+                    <ul class="card-skills">
+                        <li><strong>Ataque:</strong> Yuuban Meigen</li>
+                        <li><strong>Skill:</strong> Hanega: Canção do Vento</li>
+                        <li><strong>Burst:</strong> Kyougen: Cinco Farças</li>
+                    </ul>
+                    <div class="info-grid">
+                        <span>🍃 Anemo</span>
+                        <span>📖 Catalisador</span>
+                        <span>🌏 Sumeru</span>
                         <span>⭐⭐⭐⭐⭐</span>
                     </div>
-                    <h2>
-                        <span class="section-title-presente">Build Recomendada</span>
-                        <span class="section-title-passado" style="display: none;">Legado dos Oni</span>
-                    </h2>
-                    <div class="history-content" data-time="presente">
-                        <p class="build-desc">4 Peças: Eco dos Sonhos Opulentos</p>
-                        <div class="artifacts-grid">
-                            <img src="resources/husk-flower.png" class="artifact-img" alt="Flor">
-                            <img src="resources/husk-feather.png" class="artifact-img" alt="Pena">
-                            <img src="resources/husk-sands.png" class="artifact-img" alt="Areia">
-                            <img src="resources/husk-goblet.png" class="artifact-img" alt="Cálice">
-                            <img src="resources/husk-circlet.png" class="artifact-img" alt="Tiara">
-                        </div>
-                    </div>
-                    <div class="history-content" data-time="passado" style="display: none;">
-                        <p class="build-desc">Força Sobrenatural • Honra Inquebrantável • Orgulho da Raça</p>
-                        <p class="card-text-small" style="margin-top: 15px;">Os oni ancestrais eram uma raça orgulhosa de yokai com força descomunal e chifres característicos. Temidos e incompreendidos pelos humanos, enfrentaram perseguição sistemática. A lenda do Oni Carmesim e Azul simboliza seu trágico destino - amizades perdidas e sacrifícios pela sobrevivência.</p>
+                    <h2>Build Recomendada</h2>
+                    <p class="build-desc">4 Peças: Pavilhão do Deserto</p>
+                    <div class="artifacts-grid">
+                        <img src="resources/scara-flower.png" class="artifact-img" alt="Flor">
+                        <img src="resources/scara-feather.png" class="artifact-img" alt="Pena">
+                        <img src="resources/scara-sands.png" class="artifact-img" alt="Areia">
+                        <img src="resources/scara-goblet.png" class="artifact-img" alt="Cálice">
+                        <img src="resources/scara-circlet.png" class="artifact-img" alt="Tiara">
                     </div>
                     <p class="tap-hint">👆 CLIQUE PARA DETALHES</p>
                 </div>
@@ -398,23 +251,14 @@
                     <div class="card-header">
                         <h1 class="card-title">História</h1>
                     </div>
-                    <div class="history-content" data-time="presente">
-                        <p class="card-text">
-                            Arataki Itto é o líder carismático e barulhento da Gangue Arataki, um oni descendente da linhagem carmesim. Apesar da aparência intimidadora com chifres e marcas vermelhas, o cara tem coração de ouro e um senso de honra inabalável. Conhecido por desafiar todo mundo pra competição de luta de besouro, se orgulha demais da força oni dele e protege ferozmente quem considera amigo. Perdeu a Visão Geo temporariamente durante o Decreto de Caça às Visões, mas recuperou depois.
-                        </p>
-                        <h2>Personalidade</h2>
-                        <p class="card-text-small">Extrovertido, confiante até o ponto da arrogância, mas no fundo é gente fina. Itto leva honra MUITO a sério e nunca quebra promessa. Extremamente leal aos amigos e à Gangue Arataki. Parece bobo e despreocupado, mas tem um senso profundo de justiça. Tem medo de feijões (alergia oni) e é viciado em luta de besouro onikabuto.</p>
-                    </div>
-                    <div class="history-content" data-time="passado" style="display: none;">
-                        <p class="card-text">
-                            Os oni eram uma raça ancestral de yokai que habitava Inazuma há séculos. Força sobrenatural, chifres proeminentes e vida longa eram a marca deles. Tinha duas linhagens principais: Oni Carmesim (chifres vermelhos) e Oni Azuis (chifres azuis). A relação entre oni e humanos sempre foi complicada, admirados pela força mas temidos pela natureza selvagem. A lenda do Oni Carmesim e do Oni Azul conta de dois oni que viraram amigos de uma aldeia humana. Quando os aldeões começaram a ter medo do Carmesim, o Azul fingiu ser vilão pra que o Carmesim pudesse derrotá-lo e ganhar aceitação.
-                        </p>
-                        <h2>Perseguição e Declínio</h2>
-                        <p class="card-text-small">Durante conflitos em Inazuma, os oni foram sendo perseguidos através de decretos que marginalizavam eles. Muitos morreram, outros se esconderam ou vazaram. O preconceito virou parte da sociedade. A maioria dos oni de sangue puro sumiu, sobrando só alguns descendentes mestiços tipo Itto. Os oni são uma parte esquecida e trágica da história de Inazuma: uma raça orgulhosa virou só lenda e preconceito, cultura quase apagada. Itto carrega o legado como um dos últimos oni conhecidos.</p>
-                    </div>
-                    <h2 data-show-in="presente">Trailer</h2>
-                    <div class="video-container" data-show-in="presente">
-                        <iframe src="https://www.youtube.com/embed/4oBpaBEMBIM" allowfullscreen></iframe>
+                    <p class="card-text">
+                        O Andarilho é uma marionete criada por Raiden Ei como protótipo antes de criar a Shogun. Originalmente chamado de Kunikuzushi, foi abandonado por Ei após derramar lágrimas ao nascer. Tornou-se o Sexto dos Onze Mensageiros Fatui com o codinome "O Trovador" e o nome Scaramouche. Após obter a Gnosis Electro, traiu os Fatui e tentou se tornar um deus. Depois de ser derrotado e ter suas memórias apagadas da Irminsul, renasceu como Andarilho com uma Visão Anemo. Atualmente é estudante da Darshan Vahumana na Academia de Sumeru.
+                    </p>
+                    <h2>Personalidade</h2>
+                    <p class="card-text-small">Ácido, arrogante e de língua afiada. Passou séculos acumulando traumas e ressentimento após múltiplas "traições" percebidas. Como Andarilho, está em busca de redenção e propósito, carregando o peso de seu passado. Agora voa livre como o vento, sem mestre, mas guiado por Nahida que o mantém responsável por suas ações enquanto o ajuda em seu novo caminho.</p>
+                    <h2>Trailer</h2>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/NHEE_-87mNE?si=i4o0Cl1prysOnmdy" allowfullscreen></iframe>
                     </div>
                     <p class="tap-hint">👆 CLIQUE PARA VOLTAR</p>
                 </div>
