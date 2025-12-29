@@ -13,7 +13,7 @@
     --pantalone: #7cb9e8;   
     --tartaglia: #e0d88d;   
     
-    --glass-bg: rgba(15, 15, 25, 0.85);
+    --glass-bg: rgba(15, 15, 25, 0.45);
     --glass-border: rgba(255, 255, 255, 0.15);
 }
 
@@ -41,35 +41,51 @@ body { font-family: 'Roboto', sans-serif; background: #050505; color: #fff; over
 
 /* --- AJUSTE DE FOCO E PROFUNDIDADE --- */
 
-/* Estado padrão: Todos os banners ficam bem escuros */
 .overlay { 
     position: absolute; 
     inset: 0; 
-    background: rgba(0, 0, 0, 0.85); /* Bem escuro por padrão */
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.5),
+        transparent 20%,
+        transparent 80%,
+        rgba(0, 0, 0, 0.8)
+    );
     z-index: 1; 
-    transition: background 0.8s ease, backdrop-filter 0.8s ease;
+    transition: all 0.8s ease;
     pointer-events: none;
 }
 
-/* Efeito Spotlight: Quando a seção está ativa/focada */
 section.is-active .overlay {
-    /* Cria o foco claro no centro e escuro nas bordas (Vignette) */
-    background: radial-gradient(circle, transparent 10%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.9) 100%);
-    backdrop-filter: blur(2px); /* Leve desfoque no fundo para destacar o card 3D */
+    background: radial-gradient(
+        circle at center, 
+        transparent 0%, 
+        rgba(0, 0, 0, 0.4) 40%, 
+        rgba(0, 0, 0, 0.9) 100%
+    );
+    backdrop-filter: brightness(60%) contrast(110%) saturate(0.6);
 }
 
-/* Efeito de Elevação no Card quando a seção está ativa */
+section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--tema);
+    opacity: 0.15;
+    mix-blend-mode: color;
+    z-index: 1;
+    pointer-events: none;
+}
+
 section.is-active .card-wrapper {
     transform: scale(1.02);
     transition: transform 0.8s ease;
 }
 
-/* Mantém as sobreposições específicas mas permite o efeito de foco */
 .scara-overlay, .yae-overlay, .raiden-overlay, .kokomi-overlay {
-    mix-blend-mode: multiply; /* Ajuda a manter a cor do tema mesmo no escuro */
+    mix-blend-mode: multiply;
 }
 
-/* Estilo para a Grid de Gameplay no Verso */
 .gameplay-grid {
     display: flex;
     flex-direction: column;
@@ -81,7 +97,7 @@ section.is-active .card-wrapper {
 .skill-item strong {
     display: block;
     font-size: 0.9rem;
-    color: var(--cor-tema); /* Usa a cor definida no data-theme */
+    color: var(--cor-tema);
     margin-bottom: 2px;
     text-transform: uppercase;
     border-left: 3px solid var(--cor-tema);
@@ -99,7 +115,7 @@ section.is-active .card-wrapper {
     justify-content: space-between;
     font-size: 0.75rem;
     font-weight: bold;
-    color: #ffd700; /* Dourado para as estrelas */
+    color: #ffd700;
     border-top: 1px solid rgba(255,255,255,0.1);
     padding-top: 8px;
 }
@@ -172,7 +188,6 @@ section.is-active .card-wrapper {
 
 .btn-nav-mod::before { content: attr(data-rank); }
 
-/* NOME NO HOVER (TOOLTIP) */
 .btn-nav-mod span { 
     position: absolute; 
     right: 45px; 
@@ -190,16 +205,13 @@ section.is-active .card-wrapper {
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-/* CORES DINÂMICAS NO NAV AO PASSAR O MOUSE */
-/* Seleciona o tema baseado no link para aplicar a cor certa no círculo */
 .btn-nav-mod:hover { 
     transform: scale(1.15);
     background: var(--glass-bg);
-    border-color: currentColor; /* Usa a cor definida no inline ou via herança se houver */
+    border-color: currentColor; 
     box-shadow: 0 0 15px currentColor;
 }
 
-/* Aplicação manual das cores para cada rank no hover da sidebar */
 .btn-nav-mod[href="#pierro"]:hover { color: var(--pierro) !important; border-color: var(--pierro); box-shadow: 0 0 15px var(--pierro-gold); }
 .btn-nav-mod[href="#capitano"]:hover { color: var(--capitano) !important; border-color: var(--capitano); box-shadow: 0 0 15px var(--capitano); }
 .btn-nav-mod[href="#dottore"]:hover { color: var(--dottore) !important; border-color: var(--dottore); box-shadow: 0 0 15px var(--dottore); }
@@ -217,12 +229,31 @@ section.is-active .card-wrapper {
 /* SEÇÕES */
 section { position: relative; width: 100%; min-height: 100vh; display: flex; align-items: center; padding-left: clamp(20px, 10vw, 150px); opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
 section.visible { opacity: 1; transform: translateY(0); }
-.video-fundo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.video-fundo { 
+    position: absolute; 
+    inset: 0; 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    z-index: 0;
+    filter: brightness(0.8) contrast(1.2) saturate(1.5);
+}
 
-/* CORREÇÃO SOLICITADA: ESPELHAMENTO SCARAMOUCHE */
 #scaramouche .video-fundo { transform: scaleX(-1); }
 
 .overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, transparent 50%, rgba(0,0,0,0.85) 100%); z-index: 1; }
+.overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        rgba(0, 0, 0, 0) 50%, 
+        rgba(0, 0, 0, 0.15) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    opacity: 0.3;
+}
 
 /* CARDS */
 .card-wrapper { position: relative; z-index: 10; width: min(90vw, 440px); height: 560px; perspective: 1500px; }
@@ -231,10 +262,19 @@ section.visible { opacity: 1; transform: translateY(0); }
 .flip-checkbox:checked + .card-wrapper .card-inner { transform: rotateY(180deg); }
 
 .card-face { 
-    position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 24px; padding: 30px; 
-    background: rgba(15, 15, 25, 0.85); backdrop-filter: blur(25px); 
+    background: rgba(15, 15, 25, 0.45); 
+    backdrop-filter: blur(15px); 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    backface-visibility: hidden; 
+    border-radius: 24px; 
+    padding: 30px; 
     border: 2px solid var(--tema); 
-    display: flex; flex-direction: column; gap: 12px; overflow-y: auto; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+    overflow-y: auto; 
 }
 .card-face:hover { 
     box-shadow: 0 0 30px var(--glow); 
@@ -242,7 +282,6 @@ section.visible { opacity: 1; transform: translateY(0); }
 }
 .card-verso { transform: rotateY(180deg); }
 
-/* TEXTOS COM GLOW */
 .card-title { color: var(--tema); text-shadow: 0 0 15px var(--glow); font-size: 1.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
 .card-face h2 { color: var(--tema); text-shadow: 0 0 10px var(--glow); font-size: 1.1rem; display: flex; align-items: center; gap: 8px; margin-top: 10px; }
 .card-face h2::before { content: ''; width: 4px; height: 18px; background: var(--tema); box-shadow: 0 0 8px var(--glow); border-radius: 2px; }
@@ -255,8 +294,10 @@ section.visible { opacity: 1; transform: translateY(0); }
 
 /* RESPONSIVIDADE MOBILE */
 @media (max-width: 768px) {
-    section { padding-left: 20px; padding-right: 20px; justify-content: center; }
+    section { padding-left: 10px; padding-right: 20px; justify-content: flex-start; }
     
+    .card-wrapper { width: 340px; }
+
     .nav-lateral { 
         top: auto; 
         bottom: 15px; 
@@ -267,6 +308,7 @@ section.visible { opacity: 1; transform: translateY(0); }
         width: 100%; 
         padding: 0 10px;
         max-height: 60px;
+        display: none;
     }
     
     .nav-container { 
