@@ -6,24 +6,24 @@
     <title>Santuário Grand Narukami</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- NAVEGAÇÃO -->
+    <!-- Navegação -->
     <nav id="barra-nav">
         <div class="nav-content">
-            <a href="#intro" class="btn-nav">Início</a>
-            <a href="#raiden" class="btn-nav" data-color="raiden">Raiden</a>
-            <a href="#kokomi" class="btn-nav" data-color="kokomi">Kokomi</a>
-            <a href="#yae" class="btn-nav" data-color="yae">Yae Miko</a>
-            <a href="#scara" class="btn-nav" data-color="scara">Scaramouche</a>
-            <a href="#galeria" class="btn-nav">Galeria</a>
+            <a href="#intro" class="btn-nav" id="intro-btn">Início</a>
+            <a href="#raiden" class="btn-nav" id="raiden-btn">Raiden</a>
+            <a href="#kokomi" class="btn-nav" id="kokomi-btn">Kokomi</a>
+            <a href="#yae" class="btn-nav" id="yae-btn">Yae Miko</a>
+            <a href="#scara" class="btn-nav" id="scara-btn">Scaramouche</a>
+            <a href="#galeria" class="btn-nav" id="galeria-btn">Galeria</a>
         </div>
     </nav>
 
-    <!-- SEÇÃO INTRO -->
+    <!-- Intro -->
     <section id="intro">
         <video autoplay loop muted playsinline class="video-fundo">
             <source src="resources/inazuma_castle.mp4" type="video/mp4">
@@ -39,17 +39,17 @@
         </div>
     </section>
 
-    <!-- SEÇÃO RAIDEN -->
+    <!-- Raiden -->
     <section id="raiden" data-theme="raiden">
-        <video loop muted playsinline class="video-fundo" data-video="raiden">
+        <video autoplay loop muted playsinline class="video-fundo">
             <source src="resources/raiden-video.mp4" type="video/mp4">
         </video>
-        <div class="overlay raiden-overlay"></div>
+        <div class="overlay" style="background: linear-gradient(to right, rgba(148, 87, 235, 0.3), rgba(0,0,0,0.8));"></div>
         
         <input type="checkbox" id="flip-raiden" class="flip-checkbox">
         <label for="flip-raiden" class="card-wrapper">
             <div class="card-inner">
-                <!-- Frente do Card -->
+                <!-- Frente -->
                 <div class="card-face card-frente">
                     <div class="card-header">
                         <h1 class="card-title">Raiden Shogun</h1>
@@ -60,14 +60,9 @@
                         <li><strong>Skill:</strong> Transcendência: Presságio Maléfico</li>
                         <li><strong>Burst:</strong> Musou no Hitotachi</li>
                     </ul>
-                    <div class="info-grid">
-                        <span>⚡ Electro</span>
-                        <span>🗡️ Lança</span>
-                        <span>🏯 Inazuma</span>
-                        <span>⭐⭐⭐⭐⭐</span>
-                    </div>
+                    <img class="demo-media" src="resources/raiden-showcase.gif" alt="Raiden Gameplay">
                     <h2>Build Recomendada</h2>
-                    <p class="build-desc">4 Peças: Emblema do Destino Cortado</p>
+                    <p style="font-size: 0.9rem; margin-bottom: 5px;">4 Peças: Emblema do Destino Cortado</p>
                     <div class="artifacts-grid">
                         <img src="resources/emblem-flower.png" class="artifact-img" alt="Flor">
                         <img src="resources/emblem-feather.png" class="artifact-img" alt="Pena">
@@ -77,17 +72,22 @@
                     </div>
                     <p class="tap-hint">👆 CLIQUE PARA DETALHES</p>
                 </div>
-                
-                <!-- Verso do Card -->
+                <!-- Verso -->
                 <div class="card-face card-verso">
                     <div class="card-header">
                         <h1 class="card-title">História</h1>
                     </div>
-                    <p class="card-text">
+                    <p style="line-height: 1.6; margin-bottom: 20px;">
                         A Raiden Shogun é composta por dois seres: Ei (Beelzebul), a atual Arconte Electro de Inazuma, e a Shogun, uma marionete criada por Ei para governar em seu lugar. Ei medita dentro do Plano de Euthymia, localizado na espada Musou Isshin guardada no corpo da marionete. Após a morte de sua irmã gêmea Makoto há 500 anos, Ei assumiu o título de Shogun e instituiu políticas como o Decreto Sakoku para preservar a Eternidade.
                     </p>
+                    <div class="info-grid">
+                        <span>⚡ Electro</span>
+                        <span>🗡️ Lança</span>
+                        <span>🏯 Inazuma</span>
+                        <span>⭐⭐⭐⭐⭐</span>
+                    </div>
                     <h2>Personalidade</h2>
-                    <p class="card-text-small">Firme em sua crença na Eternidade, Ei deseja preservar Inazuma em um estado imutável. A marionete Shogun segue diretrizes programadas e é fria e calculista. Ei demonstra cuidado genuíno por Inazuma, mas inicialmente tinha baixa opinião sobre ambições humanas devido às perdas sofridas.</p>
+                    <p style="font-size: 0.9rem; line-height: 1.5;">Firme em sua crença na Eternidade, Ei deseja preservar Inazuma em um estado imutável. A marionete Shogun segue diretrizes programadas e é fria e calculista. Ei demonstra cuidado genuíno por Inazuma, mas inicialmente tinha baixa opinião sobre ambições humanas devido às perdas sofridas.</p>
                     <h2>Trailer</h2>
                     <div class="video-container">
                         <iframe src="https://www.youtube.com/embed/mvrW4aKwAXw?si=rj_aF7Am2jazmASt" allowfullscreen></iframe>
@@ -98,12 +98,12 @@
         </label>
     </section>
 
-    <!-- SEÇÃO KOKOMI -->
+    <!-- Kokomi -->
     <section id="kokomi" data-theme="kokomi">
-        <video loop muted playsinline class="video-fundo" data-video="kokomi">
+        <video autoplay loop muted playsinline class="video-fundo">
             <source src="resources/kokomi-video.mp4" type="video/mp4">
         </video>
-        <div class="overlay kokomi-overlay"></div>
+        <div class="overlay" style="background: linear-gradient(to right, rgba(87, 199, 235, 0.3), rgba(0,0,0,0.8));"></div>
         
         <input type="checkbox" id="flip-kokomi" class="flip-checkbox">
         <label for="flip-kokomi" class="card-wrapper">
@@ -118,14 +118,9 @@
                         <li><strong>Skill:</strong> Juramento da Água-Viva</li>
                         <li><strong>Burst:</strong> Ascensão da Nereida</li>
                     </ul>
-                    <div class="info-grid">
-                        <span>💧 Hydro</span>
-                        <span>📖 Catalisador</span>
-                        <span>🌊 Watatsumi</span>
-                        <span>⭐⭐⭐⭐⭐</span>
-                    </div>
+                    <img class="demo-media" src="resources/kokomi-showcase.gif" alt="Kokomi Gameplay">
                     <h2>Build Recomendada</h2>
-                    <p class="build-desc">4 Peças: Concha Matizada</p>
+                    <p style="font-size: 0.9rem; margin-bottom: 5px;">4 Peças: Concha Matizada</p>
                     <div class="artifacts-grid">
                         <img src="resources/ocean-flower.png" class="artifact-img" alt="Flor">
                         <img src="resources/ocean-feather.png" class="artifact-img" alt="Pena">
@@ -139,11 +134,17 @@
                     <div class="card-header">
                         <h1 class="card-title">História</h1>
                     </div>
-                    <p class="card-text">
+                    <p style="line-height: 1.6; margin-bottom: 20px;">
                         Kokomi é a jovem Sacerdotisa Divina da Ilha Watatsumi e descendente do Clã Sangonomiya. Carrega a responsabilidade de proteger seu povo e liderar os assuntos da ilha, incluindo estratégias militares. Apesar de sua aparência delicada e serena, é uma estrategista brilhante versada na arte da guerra, tendo liderado a resistência contra o Decreto de Caça às Visões com inúmeras vitórias táticas.
                     </p>
+                    <div class="info-grid">
+                        <span>💧 Hydro</span>
+                        <span>📖 Catalisador</span>
+                        <span>🌊 Watatsumi</span>
+                        <span>⭐⭐⭐⭐⭐</span>
+                    </div>
                     <h2>Personalidade</h2>
-                    <p class="card-text-small">Calma e enigmática com um sorriso tranquilo. Apesar de seu talento para estratégia, Kokomi é introvertida e socializar a esgota profundamente. Suas mãos tremem antes de discursos. Ela usa um sistema de "energia" interno e seu maior desejo seria apenas ser uma conselheira nos bastidores, perdida em seus livros de estratégia militar.</p>
+                    <p style="font-size: 0.9rem; line-height: 1.5;">Calma e enigmática com um sorriso tranquilo. Apesar de seu talento para estratégia, Kokomi é introvertida e socializar a esgota profundamente. Suas mãos tremem antes de discursos. Ela usa um sistema de "energia" interno e seu maior desejo seria apenas ser uma conselheira nos bastidores, perdida em seus livros de estratégia militar.</p>
                     <h2>Trailer</h2>
                     <div class="video-container">
                         <iframe src="https://www.youtube.com/embed/fVf0RB3nvOU?si=K3JdqhkwaWXU4use" allowfullscreen></iframe>
@@ -154,12 +155,12 @@
         </label>
     </section>
 
-    <!-- SEÇÃO YAE MIKO -->
+    <!-- Yae Miko -->
     <section id="yae" data-theme="yae">
-        <video loop muted playsinline class="video-fundo" data-video="yae">
+        <video autoplay loop muted playsinline class="video-fundo">
             <source src="resources/yae-showcase.mp4" type="video/mp4">
         </video>
-        <div class="overlay yae-overlay"></div>
+        <div class="overlay" style="background: linear-gradient(to right, rgba(235, 87, 137, 0.3), rgba(0,0,0,0.8));"></div>
         
         <input type="checkbox" id="flip-yae" class="flip-checkbox">
         <label for="flip-yae" class="card-wrapper">
@@ -174,14 +175,9 @@
                         <li><strong>Skill:</strong> Evocação Yakan: Sesshou Sakura</li>
                         <li><strong>Burst:</strong> Grande Arte Secreta: Tenko Kenshin</li>
                     </ul>
-                    <div class="info-grid">
-                        <span>⚡ Electro</span>
-                        <span>📖 Catalisador</span>
-                        <span>🌸 Inazuma</span>
-                        <span>⭐⭐⭐⭐⭐</span>
-                    </div>
+                    <img class="demo-media" src="resources/yae-demo.gif" alt="Yae Gameplay">
                     <h2>Build Recomendada</h2>
-                    <p class="build-desc">4 Peças: Sonhos Dourados / Fúria</p>
+                    <p style="font-size: 0.9rem; margin-bottom: 5px;">4 Peças: Sonhos Dourados / Fúria</p>
                     <div class="artifacts-grid">
                         <img src="resources/fury-flower.png" class="artifact-img" alt="Flor">
                         <img src="resources/fury-feather.png" class="artifact-img" alt="Pena">
@@ -195,11 +191,17 @@
                     <div class="card-header">
                         <h1 class="card-title">História</h1>
                     </div>
-                    <p class="card-text">
+                    <p style="line-height: 1.6; margin-bottom: 20px;">
                         Yae Miko é a Guuji (sacerdotisa suprema) do Grande Santuário Narukami e editora-chefe da Editora Yae. Uma kitsune ancestral e youkai com inteligência inimaginável escondida sob sua bela aparência. Ela é serva e amiga da Eternidade, uma das poucas amigas próximas de Ei que sobreviveu às ravagens do tempo. Observa os humanos com diversão e curiosidade, frequentemente os provocando com elaborados truques e brincadeiras.
                     </p>
+                    <div class="info-grid">
+                        <span>⚡ Electro</span>
+                        <span>📖 Catalisador</span>
+                        <span>🌸 Inazuma</span>
+                        <span>⭐⭐⭐⭐⭐</span>
+                    </div>
                     <h2>Personalidade</h2>
-                    <p class="card-text-small">Misteriosa e travessa com um lado enigmático. Como kitsune, adora provocar e manipular outros através de estratagemas elaborados que faz por pura diversão. Não mede palavras, mesmo com sua amiga e mestre Ei. Apesar de sua personalidade travessa, demonstra um lado emocional e se importa genuinamente com aqueles em sua vida. Adora tofu frito e detesta conservas.</p>
+                    <p style="font-size: 0.9rem; line-height: 1.5;">Misteriosa e travessa com um lado enigmático. Como kitsune, adora provocar e manipular outros através de estratagemas elaborados que faz por pura diversão. Não mede palavras, mesmo com sua amiga e mestre Ei. Apesar de sua personalidade travessa, demonstra um lado emocional e se importa genuinamente com aqueles em sua vida. Adora tofu frito e detesta conservas.</p>
                     <h2>Trailer</h2>
                     <div class="video-container">
                         <iframe src="https://www.youtube.com/embed/4yFiBhNIWYo?si=pDRoDMtDL7k9gBXo" allowfullscreen></iframe>
@@ -210,12 +212,12 @@
         </label>
     </section>
 
-    <!-- SEÇÃO SCARAMOUCHE -->
+    <!-- Scaramouche -->
     <section id="scara" data-theme="scara">
-        <video loop muted playsinline class="video-fundo scara-video" data-video="scara">
+        <video autoplay loop muted playsinline class="video-fundo" id="scara-video">
             <source src="resources/scara-slide.mp4" type="video/mp4">
         </video>
-        <div class="overlay scara-overlay"></div>
+        <div class="overlay" style="background: linear-gradient(to right, rgba(8, 124, 145, 0.3), rgba(0,0,0,0.8));"></div>
         
         <input type="checkbox" id="flip-scara" class="flip-checkbox">
         <label for="flip-scara" class="card-wrapper">
@@ -230,14 +232,9 @@
                         <li><strong>Skill:</strong> Hanega: Canção do Vento</li>
                         <li><strong>Burst:</strong> Kyougen: Cinco Farças</li>
                     </ul>
-                    <div class="info-grid">
-                        <span>🍃 Anemo</span>
-                        <span>📖 Catalisador</span>
-                        <span>🌏 Sumeru</span>
-                        <span>⭐⭐⭐⭐⭐</span>
-                    </div>
+                    <img class="demo-media" src="resources/scara-demo.gif" alt="Scara Gameplay">
                     <h2>Build Recomendada</h2>
-                    <p class="build-desc">4 Peças: Pavilhão do Deserto</p>
+                    <p style="font-size: 0.9rem; margin-bottom: 5px;">4 Peças: Pavilhão do Deserto</p>
                     <div class="artifacts-grid">
                         <img src="resources/scara-flower.png" class="artifact-img" alt="Flor">
                         <img src="resources/scara-feather.png" class="artifact-img" alt="Pena">
@@ -251,11 +248,17 @@
                     <div class="card-header">
                         <h1 class="card-title">História</h1>
                     </div>
-                    <p class="card-text">
+                    <p style="line-height: 1.6; margin-bottom: 20px;">
                         O Andarilho é uma marionete criada por Raiden Ei como protótipo antes de criar a Shogun. Originalmente chamado de Kunikuzushi, foi abandonado por Ei após derramar lágrimas ao nascer. Tornou-se o Sexto dos Onze Mensageiros Fatui com o codinome "O Trovador" e o nome Scaramouche. Após obter a Gnosis Electro, traiu os Fatui e tentou se tornar um deus. Depois de ser derrotado e ter suas memórias apagadas da Irminsul, renasceu como Andarilho com uma Visão Anemo. Atualmente é estudante da Darshan Vahumana na Academia de Sumeru.
                     </p>
+                    <div class="info-grid">
+                        <span>🍃 Anemo</span>
+                        <span>📖 Catalisador</span>
+                        <span>🌏 Sumeru</span>
+                        <span>⭐⭐⭐⭐⭐</span>
+                    </div>
                     <h2>Personalidade</h2>
-                    <p class="card-text-small">Ácido, arrogante e de língua afiada. Passou séculos acumulando traumas e ressentimento após múltiplas "traições" percebidas. Como Andarilho, está em busca de redenção e propósito, carregando o peso de seu passado. Agora voa livre como o vento, sem mestre, mas guiado por Nahida que o mantém responsável por suas ações enquanto o ajuda em seu novo caminho.</p>
+                    <p style="font-size: 0.9rem; line-height: 1.5;">Ácido, arrogante e de língua afiada. Passou séculos acumulando traumas e ressentimento após múltiplas "traições" percebidas. Como Andarilho, está em busca de redenção e propósito, carregando o peso de seu passado. Agora voa livre como o vento, sem mestre, mas guiado por Nahida que o mantém responsável por suas ações enquanto o ajuda em seu novo caminho.</p>
                     <h2>Trailer</h2>
                     <div class="video-container">
                         <iframe src="https://www.youtube.com/embed/NHEE_-87mNE?si=i4o0Cl1prysOnmdy" allowfullscreen></iframe>
@@ -266,11 +269,11 @@
         </label>
     </section>
 
-    <!-- SEÇÃO GALERIA -->
+    <!-- Galeria -->
     <section id="galeria">
         <div class="galeria-header">
             <h1>Paisagens Imortais</h1>
-            <p class="galeria-subtitle">A beleza eterna do trovão e da tranquilidade.</p>
+            <p style="color: #aaa; margin-top: 10px;">A beleza eterna do trovão e da tranquilidade.</p>
         </div>
         <div class="grid-galeria">
             <div class="grid-item" data-title="Castelo Shogun">
@@ -298,8 +301,10 @@
                 <img src="resources/mt_yugou.webp" alt="Monte Yougou">
             </div>
         </div>
+        <footer>
+            <p>© 2024 Santuário Grand Narukami - Fan Project</p>
+        </footer>
     </section>
 
-    <script src="script.js"></script>
 </body>
 </html>
