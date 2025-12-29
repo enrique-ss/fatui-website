@@ -1,57 +1,107 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const videos = document.querySelectorAll('[data-video]');
+    // Seletores Principais
+    const navLogo = document.querySelector('.nav-logo');
+    const navLateral = document.querySelector('.nav-lateral');
+    const navLinks = document.querySelectorAll('.btn-nav-mod');
+    const videos = document.querySelectorAll('.video-fundo');
     const sections = document.querySelectorAll('section');
-    const characterSections = document.querySelectorAll('section[data-theme]');
-    
-    // Observer de vídeos
-    const videoObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            const v = e.target.querySelector('[data-video]');
-            if (v) {
-                e.isIntersecting ? v.play().catch(() => {}) : v.pause();
+    const characterSections = document.querySelectorAll('section[id]:not(#intro)');
+
+    // 1. LÓGICA DA SIDEBAR (ABRIR/FECHAR)
+    if (navLogo) {
+        navLogo.addEventListener('click', () => {
+            navLateral.classList.toggle('active');
+        });
+    }
+
+    // Fechar a sidebar ao clicar em um link (útil para mobile)
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth < 900) {
+                navLateral.classList.remove('active');
             }
         });
-    }, { threshold: 0.5 });
-    
-    // Observer de animações
+    });
+
+    // 2. OBSERVER DE VÍDEOS (DESEMPENHO)
+    // Dá play apenas no vídeo da seção que está na tela e pausa os outros
+    const videoObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            const v = e.target.querySelector('.video-fundo');
+            if (v) {
+                if (e.isIntersecting) {
+                    v.play().catch(() => {}); // O catch evita erros de política de autoplay
+                } else {
+                    v.pause();
+                }
+            }
+        });
+    }, { threshold: 0.4 }); // Só ativa quando 40% da seção estiver visível
+
+    // 3. OBSERVER DE ANIMAÇÕES (REVELAR CARDS)
     const animObs = new IntersectionObserver((entries) => {
         entries.forEach(e => {
-            if (e.isIntersecting) e.target.classList.add('visible');
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+            }
         });
-    }, { rootMargin: '0px 0px -100px 0px', threshold: 0.1 });
-    
-    // Observer de seção ativa
+    }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
+
+    // 4. OBSERVER DE SEÇÃO ATIVA (DESTACAR RANK NA SIDEBAR)
     const activeObs = new IntersectionObserver((entries) => {
         entries.forEach(e => {
             if (e.isIntersecting) {
-                characterSections.forEach(s => s.classList.remove('active'));
-                e.target.classList.add('active');
+                const id = e.target.getAttribute('id');
+                // Remove destaque de todos os links
+                navLinks.forEach(link => {
+                    link.style.borderColor = 'rgba(255,255,255,0.1)';
+                    link.style.background = 'rgba(255,255,255,0.05)';
+                    
+                    // Se o link apontar para a seção atual, destaca ele
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.style.borderColor = '#fff';
+                        link.style.background = 'rgba(255,255,255,0.2)';
+                    }
+                });
             }
         });
     }, { rootMargin: '-40% 0px -40% 0px' });
-    
-    // Aplicar observers
+
+    // Aplicar todos os Observers
     sections.forEach(s => {
         videoObs.observe(s);
         animObs.observe(s);
     });
     
     characterSections.forEach(s => activeObs.observe(s));
+
+    // 5. COMPORTAMENTOS EXTRAS
     
-    // Primeira seção visível
-    if (sections.length > 0) sections[0].classList.add('visible');
-    
-    // Pausar vídeos quando aba perde foco
+    // Pausar tudo se o usuário mudar de aba no navegador
     document.addEventListener('visibilitychange', () => {
-        if (document.hidden) videos.forEach(v => v.pause());
+        if (document.hidden) {
+            videos.forEach(v => v.pause());
+        } else {
+            // Ao voltar, tenta dar play no vídeo da seção visível
+            const activeSection = document.querySelector('section.visible');
+            if (activeSection) {
+                const v = activeSection.querySelector('.video-fundo');
+                if (v) v.play().catch(() => {});
+            }
+        }
     });
-    
-    // Smooth scroll
+
+    // Smooth Scroll Ajustado (considerando o centro da tela)
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', (e) => {
             e.preventDefault();
             const target = document.querySelector(a.getAttribute('href'));
-            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (target) {
+                target.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+            }
         });
     });
 });
