@@ -1,14 +1,14 @@
-/* VARIÁVEIS E RESET */
+/* ==================== VARIÁVEIS ==================== */
 :root {
     --raiden-color: #9457eb;
     --kokomi-color: #57c7eb;
     --yae-color: #eb5789;
     --scara-color: #087c91;
-    --glass-bg: rgba(20, 20, 35, 0.65);
-    --glass-border: rgba(255, 255, 255, 0.15);
-    --neon-shadow: 0 0 15px;
+    --glass-bg: rgba(20, 20, 35, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.2);
 }
 
+/* ==================== RESET E BASE ==================== */
 * {
     margin: 0;
     padding: 0;
@@ -17,7 +17,7 @@
 
 html {
     scroll-behavior: smooth;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 body {
@@ -27,7 +27,7 @@ body {
     overflow-x: hidden;
 }
 
-/* CUSTOM SCROLLBAR */
+/* Scrollbar customizada */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -42,7 +42,7 @@ body {
     background: #6b7280;
 }
 
-/* NAVEGAÇÃO */
+/* ==================== NAVEGAÇÃO ==================== */
 #barra-nav {
     position: fixed;
     top: 0;
@@ -101,36 +101,32 @@ body {
     color: #fff;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-color: white;
 }
 
-/* Cores específicas no hover da nav */
-#raiden-btn:hover { 
+/* Cores dos botões por personagem */
+.btn-nav[data-color="raiden"]:hover { 
     border-color: var(--raiden-color); 
     box-shadow: 0 0 15px var(--raiden-color); 
     text-shadow: 0 0 5px var(--raiden-color); 
 }
-#kokomi-btn:hover { 
+.btn-nav[data-color="kokomi"]:hover { 
     border-color: var(--kokomi-color); 
     box-shadow: 0 0 15px var(--kokomi-color); 
     text-shadow: 0 0 5px var(--kokomi-color); 
 }
-#yae-btn:hover { 
+.btn-nav[data-color="yae"]:hover { 
     border-color: var(--yae-color); 
     box-shadow: 0 0 15px var(--yae-color); 
     text-shadow: 0 0 5px var(--yae-color); 
 }
-#scara-btn:hover { 
+.btn-nav[data-color="scara"]:hover { 
     border-color: var(--scara-color); 
     box-shadow: 0 0 15px var(--scara-color); 
     text-shadow: 0 0 5px var(--scara-color); 
 }
-#intro-btn:hover, 
-#galeria-btn:hover { 
-    border-color: white; 
-    box-shadow: 0 0 10px white; 
-}
 
-/* SEÇÕES GERAIS */
+/* ==================== SEÇÕES ==================== */
 section {
     position: relative;
     width: 100%;
@@ -140,8 +136,30 @@ section {
     align-items: center;
     justify-content: flex-start;
     padding-left: 10%;
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+section.active {
+    z-index: 50;
+}
+
+section.active .card-wrapper {
+    transform: translateY(-10px) scale(1.02);
+    filter: drop-shadow(0 30px 80px rgba(0,0,0,0.8));
+}
+
+section.active .overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%, rgba(0,0,0,0.5) 100%);
+}
+
+/* Vídeos de fundo */
 .video-fundo {
     position: absolute;
     top: 0;
@@ -152,14 +170,36 @@ section {
     z-index: 0;
 }
 
+.scara-video {
+    transform: scaleX(1);
+}
+
+/* Overlays coloridos */
 .overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(to top, #000 0%, transparent 50%, rgba(0,0,0,0.4) 100%);
     z-index: 1;
+    transition: background 0.4s ease;
 }
 
-/* INTRO */
+.raiden-overlay {
+    background: linear-gradient(to right, rgba(148, 87, 235, 0.3), rgba(0,0,0,0.8));
+}
+
+.kokomi-overlay {
+    background: linear-gradient(to right, rgba(87, 199, 235, 0.3), rgba(0,0,0,0.8));
+}
+
+.yae-overlay {
+    background: linear-gradient(to right, rgba(235, 87, 137, 0.3), rgba(0,0,0,0.8));
+}
+
+.scara-overlay {
+    background: linear-gradient(to right, rgba(8, 124, 145, 0.3), rgba(0,0,0,0.8));
+}
+
+/* ==================== SEÇÃO INTRO ==================== */
 #intro {
     justify-content: center;
     padding-left: 0;
@@ -172,11 +212,19 @@ section {
     max-width: 900px;
     padding: 40px;
     background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px) saturate(130%);
     border-radius: 30px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(148, 87, 235, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     margin: 20px;
+    transition: transform 0.3s ease;
+}
+
+.intro-content:hover {
+    transform: translateY(-3px);
 }
 
 .citacao {
@@ -191,18 +239,23 @@ section {
     text-shadow: 0 0 10px currentColor;
 }
 
-/* FLIP CARDS */
+/* ==================== CARDS ==================== */
 .card-wrapper {
     position: relative;
     z-index: 10;
     width: 100%;
-    max-width: 450px;
-    height: 700px;
-    max-height: 700px;
+    max-width: 650px;
+    height: 85vh;
+    max-height: 820px;
     perspective: 1500px;
+    filter: drop-shadow(0 20px 60px rgba(0,0,0,0.6));
+    transition: all 0.5s ease;
 }
 
-/* Checkbox Hack */
+.card-wrapper:hover {
+    transform: translateY(-5px);
+}
+
 .flip-checkbox { 
     display: none; 
 }
@@ -221,21 +274,39 @@ section {
     transform: rotateY(180deg);
 }
 
+/* Faces do card */
 .card-face {
     position: absolute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
     border-radius: 30px;
-    padding: 30px;
+    padding: 40px;
     color: white;
     background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(15px) saturate(150%);
+    -webkit-backdrop-filter: blur(15px) saturate(150%);
+    border: 2px solid var(--glass-border);
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     overflow-y: auto;
     scrollbar-width: none;
+    font-size: 1.1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-face::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+    pointer-events: none;
+    border-radius: 30px 30px 0 0;
 }
 
 .card-face::-webkit-scrollbar { 
@@ -246,7 +317,7 @@ section {
     transform: rotateY(180deg); 
 }
 
-/* Estilos Internos do Card */
+/* Header do card */
 .card-header {
     border-bottom: 1px solid rgba(255,255,255,0.1);
     padding-bottom: 15px;
@@ -254,19 +325,19 @@ section {
 }
 
 .card-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .card-face h2 {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     color: #ddd;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin: 20px 0 10px;
+    margin: 25px 0 15px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -282,31 +353,24 @@ section {
     box-shadow: 0 0 8px currentColor;
 }
 
+/* Skills */
 .card-skills {
     margin: 15px 0;
 }
 
 .card-skills li {
     list-style: none;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
     padding-left: 15px;
-    border-left: 2px solid rgba(255,255,255,0.2);
+    border-left: 3px solid rgba(255,255,255,0.3);
+    line-height: 1.6;
 }
 
-.demo-media {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 15px;
-    border: 1px solid rgba(255,255,255,0.2);
-    margin: 15px 0;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-    transition: transform 0.3s;
-}
-
-.demo-media:hover {
-    transform: scale(1.02);
+/* Build e artefatos */
+.build-desc {
+    font-size: 1.05rem;
+    margin-bottom: 10px;
 }
 
 .artifacts-grid {
@@ -317,32 +381,46 @@ section {
 }
 
 .artifact-img {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     object-fit: contain;
-    filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
-    transition: transform 0.3s;
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.4));
+    transition: transform 0.3s ease;
 }
 
 .artifact-img:hover { 
-    transform: scale(1.2) rotate(5deg); 
+    transform: scale(1.2) rotate(5deg);
 }
 
+/* Textos do card */
+.card-text {
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+}
+
+.card-text-small {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Info grid (elemento, arma, região, estrelas) */
 .info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 12px;
     background: rgba(0,0,0,0.3);
-    padding: 15px;
+    padding: 20px;
     border-radius: 15px;
-    font-size: 0.9rem;
-    margin: 15px 0;
+    font-size: 1.05rem;
+    margin: 20px 0;
 }
 
+/* Container de vídeo do YouTube */
 .video-container {
     position: relative;
     width: 100%;
-    padding-bottom: 56.25%; /* 16:9 */
+    padding-bottom: 56.25%;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -359,65 +437,86 @@ section {
     border: none;
 }
 
+/* Dica de clique */
 .tap-hint {
     text-align: center;
-    font-size: 0.8rem;
-    opacity: 0.6;
-    margin-top: 20px;
+    font-size: 0.95rem;
+    opacity: 0.7;
+    margin-top: auto;
+    padding-top: 20px;
     animation: pulse 2s infinite;
+    flex-shrink: 0;
 }
 
 @keyframes pulse {
-    0% { opacity: 0.4; }
+    0%, 100% { opacity: 0.4; }
     50% { opacity: 0.8; }
-    100% { opacity: 0.4; }
 }
 
-/* TEMAS ESPECÍFICOS POR PERSONAGEM */
-/* Raiden */
-[data-theme="raiden"] .card-face { 
-    border-color: rgba(148, 87, 235, 0.5); 
+/* ==================== TEMAS POR PERSONAGEM ==================== */
+/* Bordas e glows quando a seção está ativa */
+section.active[data-theme="raiden"] .card-face { 
+    border-color: rgba(148, 87, 235, 0.6);
+    box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(148, 87, 235, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
+
+section.active[data-theme="kokomi"] .card-face { 
+    border-color: rgba(87, 199, 235, 0.6);
+    box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(87, 199, 235, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+section.active[data-theme="yae"] .card-face { 
+    border-color: rgba(235, 87, 137, 0.6);
+    box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(235, 87, 137, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+section.active[data-theme="scara"] .card-face { 
+    border-color: rgba(8, 124, 145, 0.6);
+    box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(8, 124, 145, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Cores dos títulos por tema */
 [data-theme="raiden"] .card-title, 
 [data-theme="raiden"] h2 { 
     color: var(--raiden-color); 
-    text-shadow: 0 0 10px rgba(148, 87, 235, 0.4); 
+    text-shadow: 0 0 12px rgba(148, 87, 235, 0.5),
+                 0 2px 4px rgba(0,0,0,0.5); 
 }
 
-/* Kokomi */
-[data-theme="kokomi"] .card-face { 
-    border-color: rgba(87, 199, 235, 0.5); 
-}
 [data-theme="kokomi"] .card-title, 
 [data-theme="kokomi"] h2 { 
     color: var(--kokomi-color); 
-    text-shadow: 0 0 10px rgba(87, 199, 235, 0.4); 
+    text-shadow: 0 0 12px rgba(87, 199, 235, 0.5),
+                 0 2px 4px rgba(0,0,0,0.5); 
 }
 
-/* Yae */
-[data-theme="yae"] .card-face { 
-    border-color: rgba(235, 87, 137, 0.5); 
-}
 [data-theme="yae"] .card-title, 
 [data-theme="yae"] h2 { 
     color: var(--yae-color); 
-    text-shadow: 0 0 10px rgba(235, 87, 137, 0.4); 
+    text-shadow: 0 0 12px rgba(235, 87, 137, 0.5),
+                 0 2px 4px rgba(0,0,0,0.5); 
 }
 
-/* Scara */
-[data-theme="scara"] .card-face { 
-    border-color: rgba(8, 124, 145, 0.5); 
-}
 [data-theme="scara"] .card-title, 
 [data-theme="scara"] h2 { 
     color: var(--scara-color); 
-    text-shadow: 0 0 10px rgba(8, 124, 145, 0.4); 
-}
-#scara-video { 
-    transform: scaleX(-1); 
+    text-shadow: 0 0 12px rgba(8, 124, 145, 0.5),
+                 0 2px 4px rgba(0,0,0,0.5); 
 }
 
-/* GALERIA */
+/* ==================== GALERIA ==================== */
 #galeria {
     background: #0a0a0c;
     flex-direction: column;
@@ -442,6 +541,11 @@ section {
     letter-spacing: 3px;
 }
 
+.galeria-subtitle {
+    color: #aaa;
+    margin-top: 10px;
+}
+
 .grid-galeria {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -457,6 +561,14 @@ section {
     overflow: hidden;
     border: 1px solid rgba(255,255,255,0.1);
     cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.grid-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    border-color: rgba(255,255,255,0.2);
 }
 
 .grid-item img {
@@ -488,19 +600,23 @@ section {
     transform: translateY(0);
 }
 
-footer {
-    padding: 40px;
-    text-align: center;
-    color: #666;
-    font-size: 0.8rem;
-    width: 100%;
-}
-
-/* RESPONSIVO */
+/* ==================== RESPONSIVO ==================== */
 @media (max-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+    
     section {
         justify-content: center;
         padding-left: 0;
+    }
+    
+    section.active {
+        z-index: 50;
+    }
+    
+    section.active .card-wrapper {
+        transform: translateY(-5px);
     }
     
     .nav-content { 
@@ -514,17 +630,17 @@ footer {
     
     .card-wrapper {
         width: 90vw;
-        max-width: 450px;
+        max-width: 550px;
         height: 80vh;
-        max-height: 700px;
+        max-height: 750px;
+    }
+    
+    .card-wrapper:hover {
+        transform: none;
     }
     
     .card-title { 
-        font-size: 1.5rem; 
-    }
-    
-    .demo-media { 
-        height: 180px; 
+        font-size: 1.8rem; 
     }
     
     .grid-galeria { 
@@ -537,26 +653,32 @@ footer {
 }
 
 @media (max-width: 480px) {
+    html {
+        font-size: 15px;
+    }
+    
     .card-wrapper {
         width: 90vw;
         height: 75vh;
-        max-height: 650px;
+        max-height: 680px;
     }
     
     .card-face {
-        padding: 20px;
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
     }
     
     .card-title {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
     
     .artifacts-grid {
-        gap: 5px;
+        gap: 8px;
     }
     
     .artifact-img {
-        width: 40px;
-        height: 40px;
+        width: 55px;
+        height: 55px;
     }
 }
