@@ -193,7 +193,7 @@ body {
 .harbinger-card.active {
     opacity: 1;
     transform: scale(1);
-    filter: brightness(1);
+    filter: brightness(1.2);
 }
 
 .card-inner-gothic {
