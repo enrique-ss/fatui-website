@@ -1,6 +1,4 @@
-/* ============================================
-   VARIÁVEIS E CONFIGURAÇÕES GLOBAIS
-   ============================================ */
+/* VARIÁVEIS GLOBAIS */
 :root {
     /* Cores dos Personagens */
     --pierro: #9bbad1;      
@@ -20,15 +18,13 @@
     --glass-bg: rgba(15, 15, 25, 0.25);
     --glass-border: rgba(255, 255, 255, 0.15);
     
-    /* ⚙️ DIMENSÕES DOS CARDS - AJUSTE AQUI! */
+    /* Dimensões dos Cards */
     --card-width: 440px;
-    --card-height: 520px;  /* ← MUDE AQUI A ALTURA DOS CARDS */
+    --card-height: 520px;
     --card-padding: 30px;
     --card-border-radius: 24px;
     --card-border-width: 2px;
-    
-    /* ⚙️ EFEITOS VISUAIS DOS CARDS */
-    --card-blur: 8px;  /* ← BLUR DOS CARDS */
+    --card-blur: 8px;
     
     /* Dimensões da Navegação */
     --nav-button-size: 32px;
@@ -36,9 +32,7 @@
     --nav-border-radius: 30px;
 }
 
-/* ============================================
-   RESET E BASE
-   ============================================ */
+/* RESET E BASE */
 * { 
     margin: 0; 
     padding: 0; 
@@ -58,9 +52,7 @@ body {
     line-height: 1.6; 
 }
 
-/* ============================================
-   TEMAS (ATRIBUIÇÃO DE CORES)
-   ============================================ */
+/* TEMAS */
 [data-theme="pierro"]      { --tema: var(--pierro); --glow: var(--pierro-gold); }
 [data-theme="capitano"]    { --tema: var(--capitano); --glow: var(--capitano); }
 [data-theme="dottore"]     { --tema: var(--dottore); --glow: var(--dottore); }
@@ -73,9 +65,7 @@ body {
 [data-theme="pantalone"]   { --tema: var(--pantalone); --glow: var(--pantalone); }
 [data-theme="tartaglia"]   { --tema: var(--tartaglia); --glow: var(--tartaglia); }
 
-/* ============================================
-   SCROLLBAR PERSONALIZADA
-   ============================================ */
+/* SCROLLBAR */
 ::-webkit-scrollbar { 
     width: 4px; 
     height: 4px; 
@@ -90,74 +80,165 @@ body {
     border-radius: 10px; 
 }
 
-/* ============================================
-   SEÇÃO INTRO (PÁGINA INICIAL)
-   ============================================ */
+/* SEÇÃO INTRO */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@200;400&display=swap');
+
 #intro {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    overflow: hidden;
+    background-color: #02050a;
+    font-family: 'Cinzel', serif;
+    padding: 0;
+    margin: 0;
 }
 
 #intro .video-fundo {
-    filter: brightness(0.5) contrast(1) saturate(1);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.4) contrast(1.2) saturate(0.5);
+    z-index: 1;
+}
+
+.overlay-dark {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.9) 100%);
+    z-index: 2;
+}
+
+.overlay-ice {
+    position: absolute;
+    inset: 0;
+    background: url('https://www.transparenttextures.com/patterns/frozen-wall.png');
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 3;
 }
 
 .intro-content {
     position: relative;
     z-index: 10;
-    max-width: 1200px;
-    padding: 60px 40px;
+    padding: 50px 80px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(0, 5, 15, 0.3);
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    text-align: center;
+    max-width: 1100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.moldura-fatuus {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tagline {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 8px;
+    font-size: 0.8rem;
+    color: #a3d6ff;
+    margin-bottom: 20px;
+    opacity: 0.8;
 }
 
 .citacao {
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 700;
-    line-height: 1.2;
-    color: #fff;
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: #f0f0f0;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    text-shadow: 
-        0 0 30px rgba(0, 0, 0, 1),
-        0 0 60px rgba(0, 0, 0, 0.8),
-        0 5px 15px rgba(0, 0, 0, 0.9);
-    margin-bottom: 30px;
+    letter-spacing: 2px;
 }
 
-.citacao .destaque-cryo {
+.destaque-cryo {
+    color: #ffffff;
+    text-shadow: 
+        0 0 10px rgba(163, 214, 255, 0.8),
+        0 0 30px rgba(163, 214, 255, 0.4);
+}
+
+.destaque-cryo-glow {
     color: #a3d6ff;
-    text-shadow: 
-        0 0 20px rgba(163, 214, 255, 0.8),
-        0 0 40px rgba(163, 214, 255, 0.5),
-        0 0 60px rgba(163, 214, 255, 0.3);
+    font-style: italic;
+    text-shadow: 0 0 20px rgba(163, 214, 255, 0.6);
+    background: linear-gradient(90deg, #fff, #a3d6ff, #fff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: shine 4s linear infinite;
 }
 
-.citacao .destaque-fire {
-    color: #ff6b6b;
-    text-shadow: 
-        0 0 20px rgba(255, 107, 107, 0.8),
-        0 0 40px rgba(255, 107, 107, 0.5);
+.destaque-fire {
+    color: #ff3c3c;
+    text-shadow: 0 0 15px rgba(255, 60, 60, 0.5);
+    filter: drop-shadow(0 0 5px black);
 }
 
-.citacao .destaque-gold {
-    color: #ffd700;
-    text-shadow: 
-        0 0 20px rgba(255, 215, 0, 0.8),
-        0 0 40px rgba(255, 215, 0, 0.5);
+.divisor-gótico {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.divisor-gótico::before, .divisor-gótico::after {
+    content: "";
+    height: 1px;
+    width: 100px;
+    background: linear-gradient(90deg, transparent, #a3d6ff, transparent);
+}
+
+.diamante {
+    width: 12px;
+    height: 12px;
+    background: #a3d6ff;
+    transform: rotate(45deg);
+    margin: 0 20px;
+    box-shadow: 0 0 15px #a3d6ff;
+    border: 1px solid #fff;
 }
 
 .subtexto-intro {
-    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.8);
-    letter-spacing: 2px;
-    text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    color: #cbd5e0;
+    letter-spacing: 5px;
 }
 
-/* ============================================
-   SEÇÕES (FULLSCREEN)
-   ============================================ */
+.separador {
+    color: #ff3c3c;
+    margin: 0 10px;
+}
+
+@keyframes shine {
+    to { background-position: 200% center; }
+}
+
+#intro::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 150px rgba(0,10,30,0.9);
+    pointer-events: none;
+    z-index: 4;
+}
+
+/* SEÇÕES */
 section { 
     position: relative; 
     width: 100%; 
@@ -165,8 +246,6 @@ section {
     display: flex; 
     align-items: center; 
     padding-left: clamp(20px, 10vw, 150px); 
-    
-    /* Animação de entrada */
     opacity: 0; 
     transform: translateY(30px); 
     transition: all 0.8s ease-out; 
@@ -182,7 +261,6 @@ section.is-active .card-wrapper {
     transition: transform 0.8s ease;
 }
 
-/* Efeito de cor temática */
 section::before {
     content: "";
     position: absolute;
@@ -194,9 +272,7 @@ section::before {
     pointer-events: none;
 }
 
-/* ============================================
-   VÍDEO DE FUNDO
-   ============================================ */
+/* VÍDEO DE FUNDO */
 .video-fundo { 
     position: absolute; 
     inset: 0; 
@@ -216,9 +292,7 @@ section:not(.is-active) .video-fundo {
     transform: scaleX(-1); 
 }
 
-/* ============================================
-   OVERLAY (EFEITOS DE PROFUNDIDADE)
-   ============================================ */
+/* OVERLAY */
 .overlay { 
     position: absolute; 
     inset: 0; 
@@ -257,22 +331,15 @@ section.is-active .overlay {
     backdrop-filter: brightness(60%) contrast(110%) saturate(0.6);
 }
 
-.scara-overlay, .yae-overlay, .raiden-overlay, .kokomi-overlay {
-    mix-blend-mode: multiply;
-}
-
-/* ============================================
-   CARDS - ESTRUTURA PRINCIPAL
-   ============================================ */
+/* CARDS - ESTRUTURA */
 .card-wrapper { 
     position: relative; 
     z-index: 10; 
     width: min(90vw, var(--card-width)); 
-    height: var(--card-height);  /* ← ALTURA CONTROLADA PELA VARIÁVEL */
+    height: var(--card-height);
     perspective: 1500px; 
 }
 
-/* Sistema de flip */
 .flip-checkbox { 
     display: none; 
 }
@@ -290,9 +357,7 @@ section.is-active .overlay {
     transform: rotateY(180deg); 
 }
 
-/* ============================================
-   CARDS - FACES (FRENTE E VERSO)
-   ============================================ */
+/* CARDS - FACES */
 .card-face { 
     background: var(--glass-bg); 
     backdrop-filter: blur(var(--card-blur)); 
@@ -318,9 +383,7 @@ section.is-active .overlay {
     transform: rotateY(180deg); 
 }
 
-/* ============================================
-   CARDS - TIPOGRAFIA
-   ============================================ */
+/* CARDS - TIPOGRAFIA */
 .card-title { 
     color: var(--tema); 
     text-shadow: 0 0 15px var(--glow); 
@@ -368,9 +431,7 @@ section.is-active .overlay {
     text-transform: uppercase; 
 }
 
-/* ============================================
-   CARDS - CONTEÚDO (SKILLS, STATS, BUILD)
-   ============================================ */
+/* CARDS - CONTEÚDO */
 .card-skills { 
     list-style: none; 
     display: flex; 
@@ -395,10 +456,10 @@ section.is-active .overlay {
 .skill-item strong {
     display: block;
     font-size: 0.9rem;
-    color: var(--cor-tema);
+    color: var(--tema);
     margin-bottom: 2px;
     text-transform: uppercase;
-    border-left: 3px solid var(--cor-tema);
+    border-left: 3px solid var(--tema);
     padding-left: 8px;
 }
 
@@ -444,9 +505,7 @@ section.is-active .overlay {
     color: #ddd;
 }
 
-/* ============================================
-   NAVEGAÇÃO LATERAL (SIDEBAR)
-   ============================================ */
+/* NAVEGAÇÃO */
 .nav-lateral { 
     position: fixed; 
     right: 15px; 
@@ -464,7 +523,7 @@ section.is-active .overlay {
     align-items: center; 
     padding: 10px 6px; 
     background: rgba(0, 0, 0, 0.8); 
-    backdrop-filter: blur(20px); 
+    backdrop-filter: blur(10px); 
     border: 1px solid var(--glass-border); 
     border-radius: var(--nav-border-radius);
     width: fit-content;
@@ -503,9 +562,7 @@ section.is-active .overlay {
     margin-top: 10px; 
 }
 
-/* ============================================
-   NAVEGAÇÃO - BOTÕES
-   ============================================ */
+/* NAVEGAÇÃO - BOTÕES */
 .btn-nav-mod { 
     position: relative; 
     width: var(--nav-button-size); 
@@ -528,7 +585,6 @@ section.is-active .overlay {
     content: attr(data-rank); 
 }
 
-/* Tooltip ao passar o mouse */
 .btn-nav-mod span { 
     position: absolute; 
     right: 45px; 
@@ -559,7 +615,7 @@ section.is-active .overlay {
     color: #fff; 
 }
 
-/* Cores específicas por personagem */
+/* Cores de hover por personagem */
 .btn-nav-mod[href="#pierro"]:hover { color: var(--pierro) !important; border-color: var(--pierro); box-shadow: 0 0 15px var(--pierro-gold); }
 .btn-nav-mod[href="#capitano"]:hover { color: var(--capitano) !important; border-color: var(--capitano); box-shadow: 0 0 15px var(--capitano); }
 .btn-nav-mod[href="#dottore"]:hover { color: var(--dottore) !important; border-color: var(--dottore); box-shadow: 0 0 15px var(--dottore); }
@@ -572,12 +628,10 @@ section.is-active .overlay {
 .btn-nav-mod[href="#pantalone"]:hover { color: var(--pantalone) !important; border-color: var(--pantalone); box-shadow: 0 0 15px var(--pantalone); }
 .btn-nav-mod[href="#tartaglia"]:hover { color: var(--tartaglia) !important; border-color: var(--tartaglia); box-shadow: 0 0 15px var(--tartaglia); }
 
-/* ============================================
-   RESPONSIVIDADE MOBILE
-   ============================================ */
+/* RESPONSIVIDADE MOBILE */
 @media (max-width: 768px) {
     :root {
-        --card-width: 340px;  /* Cards menores no mobile */
+        --card-width: 340px;
     }
     
     section { 
@@ -586,7 +640,6 @@ section.is-active .overlay {
         justify-content: flex-start; 
     }
 
-    /* Navegação vira horizontal na parte inferior */
     .nav-lateral { 
         top: auto; 
         bottom: 15px; 
