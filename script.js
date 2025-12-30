@@ -119,28 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // AUTO-PLAY (OPCIONAL - DESCOMENTE SE QUISER)
-    /*
-    let autoplayInterval;
-    
-    function startAutoplay() {
-        autoplayInterval = setInterval(nextSlide, 5000);
-    }
-    
-    function stopAutoplay() {
-        clearInterval(autoplayInterval);
-    }
-    
-    // Pausar autoplay ao passar mouse
-    carouselTrack.addEventListener('mouseenter', stopAutoplay);
-    carouselTrack.addEventListener('mouseleave', startAutoplay);
-    
-    // Iniciar autoplay
-    startAutoplay();
-    */
-    
-    // SCROLL WHEEL - REMOVIDO para permitir scroll interno nos cards
-    
     // OBSERVER DE VÍDEO (para pausar quando não visível)
     const videoObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
