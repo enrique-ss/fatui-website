@@ -1,153 +1,196 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Seletores Principais
-    const navLogo = document.querySelector('.nav-logo');
-    const navLateral = document.querySelector('.nav-lateral');
-    const navLinks = document.querySelectorAll('.btn-nav-mod');
-    const videos = document.querySelectorAll('.video-fundo');
-    const sections = document.querySelectorAll('section');
-    const characterSections = document.querySelectorAll('section[id]:not(#intro)');
-
-    // SISTEMA DE "ÍMÃ" - SEMPRE ALINHA NA SEÇÃO MAIS PRÓXIMA
-    let scrollTimeout;
-    let isScrolling = false;
-
-    window.addEventListener('scroll', () => {
-        if (isScrolling) return;
+    // SELETORES
+    const carouselTrack = document.querySelector('.carousel-track');
+    const cards = document.querySelectorAll('.harbinger-card');
+    const indicators = document.querySelectorAll('.indicator-dot');
+    const bgVideo = document.querySelector('.carousel-bg-video');
+    
+    let currentIndex = 0;
+    const totalCards = cards.length;
+    
+    // INICIALIZAÇÃO
+    function init() {
+        updateCarousel();
+        createIndicators();
+    }
+    
+    // ATUALIZAR CARROSSEL
+    function updateCarousel() {
+        // Calcular deslocamento
+        const cardWidth = cards[0].offsetWidth;
+        const gap = parseInt(getComputedStyle(carouselTrack).gap) || 40;
+        const offset = -(currentIndex * (cardWidth + gap));
         
-        clearTimeout(scrollTimeout);
+        carouselTrack.style.transform = `translateX(calc(50% - ${cardWidth / 2}px + ${offset}px))`;
         
-        scrollTimeout = setTimeout(() => {
-            snapToNearestSection();
-        }, 150);
-    });
-
-    function snapToNearestSection() {
-        const scrollTop = window.scrollY;
-        let closestSection = sections[0];
-        let minDistance = Math.abs(scrollTop - sections[0].offsetTop);
-
-        // Encontra a seção mais próxima do topo da tela
-        sections.forEach(section => {
-            const distance = Math.abs(scrollTop - section.offsetTop);
-            if (distance < minDistance) {
-                minDistance = distance;
-                closestSection = section;
-            }
+        // Atualizar classes ativas
+        cards.forEach((card, index) => {
+            card.classList.toggle('active', index === currentIndex);
         });
-
-        // Se não tá exatamente no topo da seção, alinha
-        if (Math.abs(scrollTop - closestSection.offsetTop) > 10) {
-            isScrolling = true;
-            window.scrollTo({
-                top: closestSection.offsetTop,
-                behavior: 'smooth'
-            });
-            
-            setTimeout(() => {
-                isScrolling = false;
-            }, 700);
+        
+        // Atualizar indicadores
+        indicators.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+        
+        // Atualizar vídeo de fundo
+        updateBackgroundVideo();
+    }
+    
+    // ATUALIZAR VÍDEO DE FUNDO
+    function updateBackgroundVideo() {
+        const activeCard = cards[currentIndex];
+        const videoSource = activeCard.dataset.video;
+        
+        if (videoSource && bgVideo && bgVideo.src !== videoSource) {
+            bgVideo.src = videoSource;
+            bgVideo.load();
+            bgVideo.play().catch(() => {});
         }
     }
-
-    // 1. LÓGICA DA SIDEBAR (ABRIR/FECHAR)
-    if (navLogo) {
-        navLogo.addEventListener('click', () => {
-            navLateral.classList.toggle('active');
+    
+    // CRIAR INDICADORES
+    function createIndicators() {
+        indicators.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+            });
         });
     }
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth < 900) {
-                navLateral.classList.remove('active');
+    
+    // NAVEGAÇÃO - PRÓXIMO
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalCards;
+        updateCarousel();
+    }
+    
+    // NAVEGAÇÃO - ANTERIOR
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+        updateCarousel();
+    }
+    
+    // EVENT LISTENERS - REMOVIDO (sem botões)
+    
+    // NAVEGAÇÃO POR TECLADO
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            prevSlide();
+        } else if (e.key === 'ArrowRight') {
+            nextSlide();
+        }
+    });
+    
+    // TOUCH SWIPE (MOBILE)
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    carouselTrack.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    
+    carouselTrack.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].clientX;
+        handleSwipe();
+    }, { passive: true });
+    
+    function handleSwipe() {
+        const diff = touchStartX - touchEndX;
+        const threshold = 50;
+        
+        if (Math.abs(diff) > threshold) {
+            if (diff > 0) {
+                nextSlide(); // Swipe left
+            } else {
+                prevSlide(); // Swipe right
+            }
+        }
+    }
+    
+    // CLICK NOS CARDS PARA NAVEGAR
+    cards.forEach((card, index) => {
+        card.addEventListener('click', (e) => {
+            // Se não é o card ativo, navega para ele
+            if (index !== currentIndex) {
+                currentIndex = index;
+                updateCarousel();
             }
         });
     });
-
-    // 2. OBSERVER DE VÍDEOS
-    const videoObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            const v = e.target.querySelector('.video-fundo');
-            if (v && v.tagName === 'VIDEO') {
-                if (e.isIntersecting) {
-                    v.play().catch(() => {});
+    
+    // AUTO-PLAY (OPCIONAL - DESCOMENTE SE QUISER)
+    /*
+    let autoplayInterval;
+    
+    function startAutoplay() {
+        autoplayInterval = setInterval(nextSlide, 5000);
+    }
+    
+    function stopAutoplay() {
+        clearInterval(autoplayInterval);
+    }
+    
+    // Pausar autoplay ao passar mouse
+    carouselTrack.addEventListener('mouseenter', stopAutoplay);
+    carouselTrack.addEventListener('mouseleave', startAutoplay);
+    
+    // Iniciar autoplay
+    startAutoplay();
+    */
+    
+    // SCROLL WHEEL - REMOVIDO para permitir scroll interno nos cards
+    
+    // OBSERVER DE VÍDEO (para pausar quando não visível)
+    const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (bgVideo) {
+                if (entry.isIntersecting) {
+                    bgVideo.play().catch(() => {});
                 } else {
-                    v.pause();
+                    bgVideo.pause();
                 }
             }
         });
-    }, { threshold: 0.4 });
-
-    // 3. OBSERVER DE ANIMAÇÕES
-    const animObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.classList.add('visible');
-            }
-        });
-    }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
-
-    // 4. OBSERVER DE SEÇÃO ATIVA (ATUALIZADO - ESCURECE VÍDEOS INATIVOS)
-    const activeObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                // Remove is-active de todas as seções
-                sections.forEach(s => s.classList.remove('is-active'));
-                
-                // Adiciona is-active na seção atual
-                e.target.classList.add('is-active');
-                
-                const id = e.target.getAttribute('id');
-                navLinks.forEach(link => {
-                    link.style.borderColor = 'rgba(255,255,255,0.1)';
-                    link.style.background = 'rgba(255,255,255,0.05)';
-                    
-                    if (link.getAttribute('href') === `#${id}`) {
-                        link.style.borderColor = '#fff';
-                        link.style.background = 'rgba(255,255,255,0.2)';
-                    }
-                });
-            }
-        });
-    }, { rootMargin: '-40% 0px -40% 0px' });
-
-    sections.forEach(s => {
-        videoObs.observe(s);
-        animObs.observe(s);
-        activeObs.observe(s);
-    });
-
-    // 5. COMPORTAMENTOS EXTRAS
+    }, { threshold: 0.5 });
+    
+    const carouselSection = document.querySelector('.carousel-section');
+    if (carouselSection) {
+        videoObserver.observe(carouselSection);
+    }
+    
+    // PAUSAR VÍDEO QUANDO ABA INATIVA
     document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-            videos.forEach(v => {
-                if (v.tagName === 'VIDEO') v.pause();
-            });
-        } else {
-            const activeSection = document.querySelector('section.is-active');
-            if (activeSection) {
-                const v = activeSection.querySelector('.video-fundo');
-                if (v && v.tagName === 'VIDEO') v.play().catch(() => {});
+        if (bgVideo) {
+            if (document.hidden) {
+                bgVideo.pause();
+            } else {
+                bgVideo.play().catch(() => {});
             }
         }
     });
-
-    // Scroll direto pra posição exata da seção
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', (e) => {
-            e.preventDefault();
-            const target = document.querySelector(a.getAttribute('href'));
-            if (target) {
-                isScrolling = true;
-                const posicao = target.offsetTop;
-                window.scrollTo({
-                    top: posicao,
-                    behavior: 'auto'
-                });
-                setTimeout(() => {
-                    isScrolling = false;
-                }, 100);
-            }
-        });
+    
+    // REDIMENSIONAMENTO
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            updateCarousel();
+        }, 250);
     });
+    
+    // ANIMAÇÃO DE ENTRADA
+    cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        
+        setTimeout(() => {
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            card.style.opacity = '';
+            card.style.transform = '';
+        }, index * 100);
+    });
+    
+    // INICIALIZAR
+    init();
 });

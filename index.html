@@ -6,40 +6,18 @@
     <title>Os Onze Mensageiros Fatui</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav id="barra-nav" class="nav-lateral">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <img src="resources/fatui.webp" alt="Fatui Logo">
-            </div>
-            <div class="nav-links">
-                <a href="#pierro" class="btn-nav-mod" data-rank="0"><span>Pierro</span></a>
-                <a href="#capitano" class="btn-nav-mod" data-rank="1"><span>Capitano</span></a>
-                <a href="#dottore" class="btn-nav-mod" data-rank="2"><span>Dottore</span></a>
-                <a href="#columbina" class="btn-nav-mod" data-rank="3"><span>Columbina</span></a>
-                <a href="#arlecchino" class="btn-nav-mod" data-rank="4"><span>Arlecchino</span></a>
-                <a href="#pulcinella" class="btn-nav-mod" data-rank="5"><span>Pulcinella</span></a>
-                <a href="#scaramouche" class="btn-nav-mod" data-rank="6"><span>Scaramouche</span></a>
-                <a href="#sandrone" class="btn-nav-mod" data-rank="7"><span>Sandrone</span></a>
-                <a href="#signora" class="btn-nav-mod" data-rank="8"><span>Signora</span></a>
-                <a href="#pantalone" class="btn-nav-mod" data-rank="9"><span>Pantalone</span></a>
-                <a href="#tartaglia" class="btn-nav-mod" data-rank="11"><span>Tartaglia</span></a>
-            </div>
-        </div>
-    </nav>
-
-    <section id="intro" class="visible active">
+    <!-- INTRO -->
+    <section id="intro">
         <video autoplay loop muted playsinline class="video-fundo">
             <source src="resources/snezhnaya-main.mp4" type="video/mp4">
         </video>
         
-        <!-- Camadas de atmosfera -->
         <div class="overlay-dark"></div>
-        <div class="overlay-ice"></div>
 
         <div class="intro-content">
             <div class="moldura-fatuus">
@@ -58,478 +36,387 @@
         </div>
     </section>
 
-    <!-- Pierro -->
-    <section id="pierro" data-theme="pierro">
-        <video autoplay loop muted playsinline class="video-fundo">
-            <source src="resources/pierro-bg.mp4" type="video/mp4">
+    <!-- CARROSSEL -->
+    <section class="carousel-section">
+        <video autoplay loop muted playsinline class="carousel-bg-video">
+            <source src="resources/snezhnaya-main.mp4" type="video/mp4">
         </video>
-        <div class="overlay"></div>
-        <input type="checkbox" id="flip-p" class="flip-checkbox">
-        <label for="flip-p" class="card-wrapper">
-            <div class="card-inner">
-                <div class="card-face card-frente">
-                    <div class="card-header">
-                        <h1 class="card-title">Pierro</h1>
-                        <p class="subtitle">"O Bobo"</p>
-                    </div>
-                    <ul class="card-skills">
-                        <li><strong>Rank:</strong> Nº 0 / Líder</li>
-                        <li><strong>Status:</strong> Ativo</li>
-                        <li><strong>Origem:</strong> Khaenri'ah</li>
-                    </ul>
-                    <h2>História</h2>
-                    <p class="card-text">O primeiro Fatui. Ex-mago de Khaenri'ah que falhou em impedir o cataclisma, agora busca reescrever o destino.</p>
-                    <h2>Personalidade</h2>
-                    <p class="card-text">Estrategista melancólico e supremo. Vê o mundo como um tabuleiro onde sacrifícios são necessários.</p>
-                    <h2>Motivação</h2>
-                    <p class="card-text">Vingar-se dos deuses de Celestia por terem destruído sua terra natal e provar que a humanidade pode superar o destino.</p>
-                    <p class="tap-hint">→ Ver mais</p>
-                </div>
-                <div class="card-face card-verso">
-                    <div class="card-header">
-                        <h1 class="card-title">Confidencial</h1>
-                    </div>
-                    <p class="card-text" style="text-align:center; margin-top:50px">DADOS DE COMBATE OCULTOS.</p>
-                    <p class="tap-hint">← Voltar</p>
-                </div>
-            </div>
-        </label>
-    </section>
+        <div class="carousel-overlay"></div>
 
-    <!-- Capitano -->
-    <section id="capitano" data-theme="capitano">
-        <video autoplay loop muted playsinline class="video-fundo">
-            <source src="resources/capitano-bg.mp4" type="video/mp4">
-        </video>
-        <div class="overlay"></div>
-        <input type="checkbox" id="flip-1" class="flip-checkbox">
-        <label for="flip-1" class="card-wrapper">
-            <div class="card-inner">
-                <div class="card-face card-frente">
-                    <div class="card-header">
-                        <h1 class="card-title">Capitano</h1>
-                        <p class="subtitle">"O Capitão"</p>
-                    </div>
-                    <ul class="card-skills">
-                        <li><strong>Rank:</strong> Nº 1</li>
-                        <li><strong>Status:</strong> Ativo</li>
-                        <li><strong>Origem:</strong> Desconhecida</li>
-                    </ul>
-                    <h2>História</h2>
-                    <p class="card-text">O mortal mais forte de Teyvat. Lidera as frentes de batalha de Snezhnaya com força que desafia os deuses.</p>
-                    <h2>Personalidade</h2>
-                    <p class="card-text">Honrado e disciplinado. Respeitado por seu código de ética inabalável e coragem extrema.</p>
-                    <h2>Motivação</h2>
-                    <p class="card-text">Busca a verdadeira justiça através da força militar e o cumprimento da promessa feita à Tsaritsa.</p>
-                    <p class="tap-hint">→ Ver mais</p>
-                </div>
-                <div class="card-face card-verso">
-                    <div class="card-header">
-                        <h1 class="card-title">Confidencial</h1>
-                    </div>
-                    <p class="card-text" style="text-align:center; margin-top:50px">DADOS DE COMBATE OCULTOS.</p>
-                    <p class="tap-hint">← Voltar</p>
-                </div>
-            </div>
-        </label>
-    </section>
+        <!-- Indicadores -->
+        <div class="carousel-indicators">
+            <div class="indicator-dot active"></div>
+            <div class="indicator-dot"></div>
+            <div class="indicator-dot"></div>
+            <div class="indicator-dot"></div>
+            <div class="indicator-dot"></div>
+            <div class="indicator-dot"></div>
+            <div class="indicator-dot"></div>
+            <div class="indicator-dot"></div>
+            <div class="indicator-dot"></div>
+            <div class="indicator-dot"></div>
+            <div class="indicator-dot"></div>
+        </div>
 
-    <!-- Dottore -->
-    <section id="dottore" data-theme="dottore">
-        <video autoplay loop muted playsinline class="video-fundo">
-            <source src="resources/dottore-bg.mp4" type="video/mp4">
-        </video>
-        <div class="overlay"></div>
-        <input type="checkbox" id="flip-2" class="flip-checkbox">
-        <label for="flip-2" class="card-wrapper">
-            <div class="card-inner">
-                <div class="card-face card-frente">
-                    <div class="card-header">
-                        <h1 class="card-title">Dottore</h1>
-                        <p class="subtitle">"O Doutor"</p>
-                    </div>
-                    <ul class="card-skills">
-                        <li><strong>Rank:</strong> Nº 2</li>
-                        <li><strong>Status:</strong> Ativo</li>
-                        <li><strong>Origem:</strong> Sumeru</li>
-                    </ul>
-                    <h2>História</h2>
-                    <p class="card-text">Expulso da Academia por ideias heréticas. Criou clones de si mesmo para realizar pesquisas proibidas.</p>
-                    <h2>Personalidade</h2>
-                    <p class="card-text">Frio e amoral. Vê a humanidade e os deuses como meros objetos de estudo para suas experiências.</p>
-                    <h2>Motivação</h2>
-                    <p class="card-text">Transcender os limites humanos e criar um "deus" através da ciência, provando que o conhecimento não conhece ética.</p>
-                    <p class="tap-hint">→ Ver mais</p>
-                </div>
-                <div class="card-face card-verso">
-                    <div class="card-header">
-                        <h1 class="card-title">Confidencial</h1>
-                    </div>
-                    <p class="card-text" style="text-align:center; margin-top:50px">DADOS DE COMBATE OCULTOS.</p>
-                    <p class="tap-hint">← Voltar</p>
-                </div>
-            </div>
-        </label>
-    </section>
+        <div class="carousel-wrapper">
+            <div class="carousel-container">
+                <div class="carousel-track">
 
-    <!-- Columbina -->
-    <section id="columbina" data-theme="columbina">
-        <video autoplay loop muted playsinline class="video-fundo">
-            <source src="resources/columbina-bg.mp4" type="video/mp4">
-        </video>
-        <div class="overlay"></div>
-        <input type="checkbox" id="flip-3" class="flip-checkbox">
-        <label for="flip-3" class="card-wrapper">
-            <div class="card-inner">
-                <div class="card-face card-frente">
-                    <div class="card-header">
-                        <h1 class="card-title">Columbina</h1>
-                        <p class="subtitle">"A Damisela"</p>
+                    <!-- PIERRO -->
+                    <div class="harbinger-card active" data-character="pierro" data-video="resources/pierro-bg.mp4">
+                        <div class="card-inner-gothic">
+                            <div class="card-header-gothic">
+                                <p class="card-rank">HARBINGER Nº 0</p>
+                                <h1 class="card-title-gothic">Pierro</h1>
+                                <p class="card-subtitle-gothic">"O Bobo"</p>
+                            </div>
+                            
+                            <div class="gothic-divider">
+                                <div class="gothic-ornament"></div>
+                            </div>
+                            
+                            <div class="card-content-gothic">
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">História</h3>
+                                    <p class="card-text-gothic">O primeiro Fatui. Ex-mago de Khaenri'ah que falhou em impedir o cataclisma, agora busca reescrever o destino.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Personalidade</h3>
+                                    <p class="card-text-gothic">Estrategista melancólico e supremo. Vê o mundo como um tabuleiro onde sacrifícios são necessários.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Motivação</h3>
+                                    <p class="card-text-gothic">Vingar-se dos deuses de Celestia por terem destruído sua terra natal e provar que a humanidade pode superar o destino.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <ul class="card-skills">
-                        <li><strong>Rank:</strong> Nº 3</li>
-                        <li><strong>Status:</strong> Ativa</li>
-                        <li><strong>Origem:</strong> Desconhecida</li>
-                    </ul>
-                    <h2>História</h2>
-                    <p class="card-text">Ocupa o terceiro posto dos Fatui. Possui um poder transcendental que intimida até os guerreiros mais experientes.</p>
-                    <h2>Personalidade</h2>
-                    <p class="card-text">Calma e misteriosa. Exala uma aura de perigo sobrenatural, agindo com uma delicadeza mortal.</p>
-                    <h2>Motivação</h2>
-                    <p class="card-text">Suas intenções permanecem ocultas, mas sua lealdade parece estar ligada à pureza do objetivo da Tsaritsa.</p>
-                    <p class="tap-hint">→ Ver mais</p>
-                </div>
-                <div class="card-face card-verso">
-                    <div class="card-header">
-                        <h1 class="card-title">Confidencial</h1>
-                    </div>
-                    <p class="card-text" style="text-align:center; margin-top:50px">DADOS DE COMBATE OCULTOS.</p>
-                    <p class="tap-hint">← Voltar</p>
-                </div>
-            </div>
-        </label>
-    </section>
 
-    <!-- Arlecchino -->
-    <section id="arlecchino" data-theme="arlecchino">
-        <video autoplay loop muted playsinline class="video-fundo">
-            <source src="resources/arlecchino-bg.mp4" type="video/mp4">
-        </video>
-        <div class="overlay"></div>
-        <input type="checkbox" id="flip-4" class="flip-checkbox">
-        <label for="flip-4" class="card-wrapper">
-            <div class="card-inner">
-                <div class="card-face card-frente">
-                    <div class="card-header">
-                        <h1 class="card-title">Arlecchino</h1>
-                        <p class="subtitle">"A Serva"</p>
+                    <!-- CAPITANO -->
+                    <div class="harbinger-card" data-character="capitano" data-video="resources/capitano-bg.mp4">
+                        <div class="card-inner-gothic">
+                            <div class="card-header-gothic">
+                                <p class="card-rank">HARBINGER Nº 1</p>
+                                <h1 class="card-title-gothic">Capitano</h1>
+                                <p class="card-subtitle-gothic">"O Capitão"</p>
+                            </div>
+                            
+                            <div class="gothic-divider">
+                                <div class="gothic-ornament"></div>
+                            </div>
+                            
+                            <div class="card-content-gothic">
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">História</h3>
+                                    <p class="card-text-gothic">O mortal mais forte de Teyvat. Lidera as frentes de batalha de Snezhnaya com força que desafia os deuses.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Personalidade</h3>
+                                    <p class="card-text-gothic">Honrado e disciplinado. Respeitado por seu código de ética inabalável e coragem extrema.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Motivação</h3>
+                                    <p class="card-text-gothic">Busca a verdadeira justiça através da força militar e o cumprimento da promessa feita à Tsaritsa.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <ul class="card-skills">
-                        <li><strong>Rank:</strong> Nº 4</li>
-                        <li><strong>Status:</strong> Ativa</li>
-                        <li><strong>Origem:</strong> Fontaine</li>
-                    </ul>
-                    <h2>História</h2>
-                    <p class="card-text">A "Pai" da Casa das Lareiras. Transformou o orfanato em uma rede de elite para servir à Tsaritsa.</p>
-                    <h2>Personalidade</h2>
-                    <p class="card-text">Elegante e implacável. Protege seus "filhos" com um código de honra letal e exige lealdade.</p>
-                    <h2>Motivação</h2>
-                    <p class="card-text">Garantir um futuro seguro para os órfãos da Casa das Lareiras e libertar o mundo das garras do destino distorcido.</p>
-                    <p class="tap-hint">→ Ver mais</p>
-                </div>
-                <div class="card-face card-verso">
-                    <div class="card-header">
-                        <h1 class="card-title">Info. Combat</h1>
-                    </div>
-                    <div class="info-grid">
-                        <span>🔥 Pyro</span>
-                        <span>🗡️ Lança</span>
-                        <span>⭐ 5 Estrelas</span>
-                        <span>💥 DPS</span>
-                    </div>
-                    <h2>Artefatos</h2>
-                    <p class="build-desc"><strong>4p Fragmento de Harmonia</strong></p>
-                    <p class="card-text-small">ATQ% / Pyro DMG / CRIT DMG ou CRIT Rate</p>
-                    
-                    <h2>Arma</h2>
-                    <p class="build-desc"><strong>Foice Carmesim</strong> (Assinatura)</p>
-                    <p class="card-text-small">Aumenta Taxa de CRIT e Bônus de Vida</p>
-                    
-                    <h2>Habilidades</h2>
-                    <p class="card-text-small"><strong>Elemental:</strong> Todos os Anseios</p>
-                    <p class="card-text-small"><strong>Suprema:</strong> Dança Balemoon</p>
-                    <p class="card-text-small"><strong>Passiva:</strong> Graça do Lar</p>
-                    
-                    <h2>Time Recomendado</h2>
-                    <p class="card-text-small">Arlecchino • Bennett • Kazuha • Zhongli</p>
-                    <p class="tap-hint">← Voltar</p>
-                </div>
-            </div>
-        </label>
-    </section>
 
-    <!-- Pulcinella -->
-    <section id="pulcinella" data-theme="pulcinella">
-        <video autoplay loop muted playsinline class="video-fundo">
-            <source src="resources/pulcinella-bg.mp4" type="video/mp4">
-        </video>
-        <div class="overlay"></div>
-        <input type="checkbox" id="flip-5" class="flip-checkbox">
-        <label for="flip-5" class="card-wrapper">
-            <div class="card-inner">
-                <div class="card-face card-frente">
-                    <div class="card-header">
-                        <h1 class="card-title">Pulcinella</h1>
-                        <p class="subtitle">"O Galo"</p>
+                    <!-- DOTTORE -->
+                    <div class="harbinger-card" data-character="dottore" data-video="resources/dottore-bg.mp4">
+                        <div class="card-inner-gothic">
+                            <div class="card-header-gothic">
+                                <p class="card-rank">HARBINGER Nº 2</p>
+                                <h1 class="card-title-gothic">Dottore</h1>
+                                <p class="card-subtitle-gothic">"O Doutor"</p>
+                            </div>
+                            
+                            <div class="gothic-divider">
+                                <div class="gothic-ornament"></div>
+                            </div>
+                            
+                            <div class="card-content-gothic">
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">História</h3>
+                                    <p class="card-text-gothic">Expulso da Academia por ideias heréticas. Criou clones de si mesmo para realizar pesquisas proibidas.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Personalidade</h3>
+                                    <p class="card-text-gothic">Frio e amoral. Vê a humanidade e os deuses como meros objetos de estudo para suas experiências.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Motivação</h3>
+                                    <p class="card-text-gothic">Transcender os limites humanos e criar um "deus" através da ciência, provando que o conhecimento não conhece ética.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <ul class="card-skills">
-                        <li><strong>Rank:</strong> Nº 5</li>
-                        <li><strong>Status:</strong> Ativo</li>
-                        <li><strong>Origem:</strong> Snezhnaya</li>
-                    </ul>
-                    <h2>História</h2>
-                    <p class="card-text">Prefeito de Snezhnaya e mentor burocrático. Foi quem integrou Childe à organização Fatui.</p>
-                    <h2>Personalidade</h2>
-                    <p class="card-text">Político astuto. Sob a fachada de gentil, esconde um estrategista que usa favores para controle.</p>
-                    <h2>Motivação</h2>
-                    <p class="card-text">Prosperidade absoluta de Snezhnaya e a expansão da influência política da Tsaritsa sobre as outras nações.</p>
-                    <p class="tap-hint">→ Ver mais</p>
-                </div>
-                <div class="card-face card-verso">
-                    <div class="card-header">
-                        <h1 class="card-title">Confidencial</h1>
-                    </div>
-                    <p class="card-text" style="text-align:center; margin-top:50px">DADOS DE COMBATE OCULTOS.</p>
-                    <p class="tap-hint">← Voltar</p>
-                </div>
-            </div>
-        </label>
-    </section>
 
-    <!-- Scaramouche -->
-    <section id="scaramouche" data-theme="scaramouche">
-        <video autoplay loop muted playsinline class="video-fundo">
-            <source src="resources/scara-bg.mp4" type="video/mp4">
-        </video>
-        <div class="overlay"></div>
-        <input type="checkbox" id="flip-6" class="flip-checkbox">
-        <label for="flip-6" class="card-wrapper">
-            <div class="card-inner">
-                <div class="card-face card-frente">
-                    <div class="card-header">
-                        <h1 class="card-title">Scaramouche</h1>
-                        <p class="subtitle">"O Baladeiro"</p>
+                    <!-- COLUMBINA -->
+                    <div class="harbinger-card" data-character="columbina" data-video="resources/columbina-bg.mp4">
+                        <div class="card-inner-gothic">
+                            <div class="card-header-gothic">
+                                <p class="card-rank">HARBINGER Nº 3</p>
+                                <h1 class="card-title-gothic">Columbina</h1>
+                                <p class="card-subtitle-gothic">"A Damisela"</p>
+                            </div>
+                            
+                            <div class="gothic-divider">
+                                <div class="gothic-ornament"></div>
+                            </div>
+                            
+                            <div class="card-content-gothic">
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">História</h3>
+                                    <p class="card-text-gothic">Ocupa o terceiro posto dos Fatui. Possui um poder transcendental que intimida até os guerreiros mais experientes.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Personalidade</h3>
+                                    <p class="card-text-gothic">Calma e misteriosa. Exala uma aura de perigo sobrenatural, agindo com uma delicadeza mortal.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Motivação</h3>
+                                    <p class="card-text-gothic">Suas intenções permanecem ocultas, mas sua lealdade parece estar ligada à pureza do objetivo da Tsaritsa.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <ul class="card-skills">
-                        <li><strong>Rank:</strong> Nº 6</li>
-                        <li><strong>Status:</strong> Desertor</li>
-                        <li><strong>Origem:</strong> Inazuma</li>
-                    </ul>
-                    <h2>História</h2>
-                    <p class="card-text">Marionete criada pela Shogun Raiden e descartada. Vagou séculos antes de apagar sua existência.</p>
-                    <h2>Personalidade</h2>
-                    <p class="card-text">Cínico e orgulhoso. Atualmente busca redenção solitária como o Andarilho.</p>
-                    <h2>Motivação</h2>
-                    <p class="card-text">Anteriormente, desejava um "coração" e poder divino. Atualmente, busca a verdade sobre seu passado e redenção.</p>
-                    <p class="tap-hint">→ Ver mais</p>
-                </div>
-                <div class="card-face card-verso">
-                    <div class="card-header">
-                        <h1 class="card-title">Info. Combat</h1>
-                    </div>
-                    <div class="info-grid">
-                        <span>🍃 Anemo</span>
-                        <span>📖 Catalisador</span>
-                        <span>⭐ 5 Estrelas</span>
-                        <span>💥 DPS</span>
-                    </div>
-                    <h2>Artefatos</h2>
-                    <p class="build-desc"><strong>4p Pavilhão do Deserto</strong></p>
-                    <p class="card-text-small">ATQ% / Anemo DMG / CRIT DMG ou CRIT Rate</p>
-                    
-                    <h2>Arma</h2>
-                    <p class="build-desc"><strong>Tulaytullah's Remembrance</strong> (Assinatura)</p>
-                    <p class="card-text-small">Aumenta Dano Normal e Taxa de CRIT</p>
-                    
-                    <h2>Habilidades</h2>
-                    <p class="card-text-small"><strong>Elemental:</strong> Hanega: Canção do Vento</p>
-                    <p class="card-text-small"><strong>Suprema:</strong> Kyougen: Cinco Danmaku Cerimoniais</p>
-                    <p class="card-text-small"><strong>Passiva:</strong> Gales da Revelação</p>
-                    
-                    <h2>Time Recomendado</h2>
-                    <p class="card-text-small">Wanderer • Faruzan • Bennett • Zhongli</p>
-                    <p class="tap-hint">← Voltar</p>
-                </div>
-            </div>
-        </label>
-    </section>
 
-    <!-- Sandrone -->
-    <section id="sandrone" data-theme="sandrone">
-        <img src="resources/sandrone-bg.webp" class="video-fundo" alt="Background Sandrone">
-        <div class="overlay"></div>
-        <input type="checkbox" id="flip-7" class="flip-checkbox">
-        <label for="flip-7" class="card-wrapper">
-            <div class="card-inner">
-                <div class="card-face card-frente">
-                    <div class="card-header">
-                        <h1 class="card-title">Sandrone</h1>
-                        <p class="subtitle">"A Marionete"</p>
+                    <!-- ARLECCHINO -->
+                    <div class="harbinger-card" data-character="arlecchino" data-video="resources/arlecchino-bg.mp4">
+                        <div class="card-inner-gothic">
+                            <div class="card-header-gothic">
+                                <p class="card-rank">HARBINGER Nº 4</p>
+                                <h1 class="card-title-gothic">Arlecchino</h1>
+                                <p class="card-subtitle-gothic">"A Serva"</p>
+                            </div>
+                            
+                            <div class="gothic-divider">
+                                <div class="gothic-ornament"></div>
+                            </div>
+                            
+                            <div class="card-content-gothic">
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">História</h3>
+                                    <p class="card-text-gothic">A "Pai" da Casa das Lareiras. Transformou o orfanato em uma rede de elite para servir à Tsaritsa.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Personalidade</h3>
+                                    <p class="card-text-gothic">Elegante e implacável. Protege seus "filhos" com um código de honra letal e exige lealdade.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Motivação</h3>
+                                    <p class="card-text-gothic">Garantir um futuro seguro para os órfãos da Casa das Lareiras e libertar o mundo das garras do destino distorcido.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <ul class="card-skills">
-                        <li><strong>Rank:</strong> Nº 7</li>
-                        <li><strong>Status:</strong> Ativa</li>
-                        <li><strong>Origem:</strong> Fontaine (?)</li>
-                    </ul>
-                    <h2>História</h2>
-                    <p class="card-text">Gênio da engenharia mecânica. Sempre acompanhada por uma máquina colossal com vínculo mente-máquina.</p>
-                    <h2>Personalidade</h2>
-                    <p class="card-text">Taciturna e antissocial. Despreza aqueles sem conhecimento técnico.</p>
-                    <h2>Motivação</h2>
-                    <p class="card-text">Perfeiçoar a tecnologia de autômatos e possivelmente replicar a consciência humana em máquinas puras.</p>
-                    <p class="tap-hint">→ Ver mais</p>
-                </div>
-                <div class="card-face card-verso">
-                    <div class="card-header">
-                        <h1 class="card-title">Confidencial</h1>
-                    </div>
-                    <p class="card-text" style="text-align:center; margin-top:50px">DADOS DE COMBATE OCULTOS.</p>
-                    <p class="tap-hint">← Voltar</p>
-                </div>
-            </div>
-        </label>
-    </section>
 
-    <!-- Signora -->
-    <section id="signora" data-theme="signora">
-        <img src="resources/signora-bg.jpg" class="video-fundo" alt="Background Signora">
-        <div class="overlay"></div>
-        <input type="checkbox" id="flip-8" class="flip-checkbox">
-        <label for="flip-8" class="card-wrapper">
-            <div class="card-inner">
-                <div class="card-face card-frente">
-                    <div class="card-header">
-                        <h1 class="card-title">Signora</h1>
-                        <p class="subtitle">"A Senhora"</p>
+                    <!-- PULCINELLA -->
+                    <div class="harbinger-card" data-character="pulcinella" data-video="resources/pulcinella-bg.mp4">
+                        <div class="card-inner-gothic">
+                            <div class="card-header-gothic">
+                                <p class="card-rank">HARBINGER Nº 5</p>
+                                <h1 class="card-title-gothic">Pulcinella</h1>
+                                <p class="card-subtitle-gothic">"O Galo"</p>
+                            </div>
+                            
+                            <div class="gothic-divider">
+                                <div class="gothic-ornament"></div>
+                            </div>
+                            
+                            <div class="card-content-gothic">
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">História</h3>
+                                    <p class="card-text-gothic">Prefeito de Snezhnaya e mentor burocrático. Foi quem integrou Childe à organização Fatui.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Personalidade</h3>
+                                    <p class="card-text-gothic">Político astuto. Sob a fachada de gentil, esconde um estrategista que usa favores para controle.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Motivação</h3>
+                                    <p class="card-text-gothic">Prosperidade absoluta de Snezhnaya e a expansão da influência política da Tsaritsa sobre as outras nações.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <ul class="card-skills">
-                        <li><strong>Rank:</strong> Nº 8</li>
-                        <li><strong>Status:</strong> Falecida</li>
-                        <li><strong>Origem:</strong> Mondstadt</li>
-                    </ul>
-                    <h2>História</h2>
-                    <p class="card-text">A Bruxa das Chamas Carmesim. Teve seu fogo selado por um Delírio após perder seu amor no cataclisma.</p>
-                    <h2>Personalidade</h2>
-                    <p class="card-text">Arrogante e cruel. Movida por uma fúria eterna contra o mundo e os deuses negligentes.</p>
-                    <h2>Motivação</h2>
-                    <p class="card-text">Limpar o "mundo distorcido" através do gelo da Tsaritsa, queimando tudo o que restou de sua dor passada.</p>
-                    <p class="tap-hint">→ Ver mais</p>
-                </div>
-                <div class="card-face card-verso">
-                    <div class="card-header">
-                        <h1 class="card-title">Confidencial</h1>
-                    </div>
-                    <p class="card-text" style="text-align:center; margin-top:50px">DADOS DE COMBATE OCULTOS.</p>
-                    <p class="tap-hint">← Voltar</p>
-                </div>
-            </div>
-        </label>
-    </section>
 
-    <!-- Pantalone -->
-    <section id="pantalone" data-theme="pantalone">
-        <video autoplay loop muted playsinline class="video-fundo">
-            <source src="resources/pantalone-bg.mp4" type="video/mp4">
-        </video>
-        <div class="overlay"></div>
-        <input type="checkbox" id="flip-9" class="flip-checkbox">
-        <label for="flip-9" class="card-wrapper">
-            <div class="card-inner">
-                <div class="card-face card-frente">
-                    <div class="card-header">
-                        <h1 class="card-title">Pantalone</h1>
-                        <p class="subtitle">"O Regrator"</p>
+                    <!-- SCARAMOUCHE -->
+                    <div class="harbinger-card" data-character="scaramouche" data-video="resources/scara-bg.mp4">
+                        <div class="card-inner-gothic">
+                            <div class="card-header-gothic">
+                                <p class="card-rank">HARBINGER Nº 6</p>
+                                <h1 class="card-title-gothic">Scaramouche</h1>
+                                <p class="card-subtitle-gothic">"O Baladeiro"</p>
+                            </div>
+                            
+                            <div class="gothic-divider">
+                                <div class="gothic-ornament"></div>
+                            </div>
+                            
+                            <div class="card-content-gothic">
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">História</h3>
+                                    <p class="card-text-gothic">Marionete criada pela Shogun Raiden e descartada. Vagou séculos antes de apagar sua existência.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Personalidade</h3>
+                                    <p class="card-text-gothic">Cínico e orgulhoso. Atualmente busca redenção solitária como o Andarilho.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Motivação</h3>
+                                    <p class="card-text-gothic">Anteriormente, desejava um "coração" e poder divino. Atualmente, busca a verdade sobre seu passado e redenção.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <ul class="card-skills">
-                        <li><strong>Rank:</strong> Nº 9</li>
-                        <li><strong>Status:</strong> Ativo</li>
-                        <li><strong>Origem:</strong> Liyue</li>
-                    </ul>
-                    <h2>História</h2>
-                    <p class="card-text">Nascido na pobreza e sem Visão. Jurou dominar o mundo pelo controle econômico e financeiro.</p>
-                    <h2>Personalidade</h2>
-                    <p class="card-text">Ambicioso e calculista. Vê Teyvat como uma balança comercial movida por dívidas.</p>
-                    <h2>Motivação</h2>
-                    <p class="card-text">Tornar Snezhnaya o coração econômico do mundo, provando que o capital humano supera o poder dos deuses.</p>
-                    <p class="tap-hint">→ Ver mais</p>
-                </div>
-                <div class="card-face card-verso">
-                    <div class="card-header">
-                        <h1 class="card-title">Confidencial</h1>
-                    </div>
-                    <p class="card-text" style="text-align:center; margin-top:50px">DADOS DE COMBATE OCULTOS.</p>
-                    <p class="tap-hint">← Voltar</p>
-                </div>
-            </div>
-        </label>
-    </section>
 
-    <!-- Tartaglia -->
-    <section id="tartaglia" data-theme="tartaglia">
-        <video autoplay loop muted playsinline class="video-fundo">
-            <source src="resources/tartaglia-bg.mp4" type="video/mp4">
-        </video>
-        <div class="overlay"></div>
-        <input type="checkbox" id="flip-11" class="flip-checkbox">
-        <label for="flip-11" class="card-wrapper">
-            <div class="card-inner">
-                <div class="card-face card-frente">
-                    <div class="card-header">
-                        <h1 class="card-title">Tartaglia</h1>
-                        <p class="subtitle">"Childe"</p>
+                    <!-- SANDRONE -->
+                    <div class="harbinger-card" data-character="sandrone" data-video="resources/sandrone-bg.mp4">
+                        <div class="card-inner-gothic">
+                            <div class="card-header-gothic">
+                                <p class="card-rank">HARBINGER Nº 7</p>
+                                <h1 class="card-title-gothic">Sandrone</h1>
+                                <p class="card-subtitle-gothic">"A Marionete"</p>
+                            </div>
+                            
+                            <div class="gothic-divider">
+                                <div class="gothic-ornament"></div>
+                            </div>
+                            
+                            <div class="card-content-gothic">
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">História</h3>
+                                    <p class="card-text-gothic">Gênio da engenharia mecânica. Sempre acompanhada por uma máquina colossal com vínculo mente-máquina.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Personalidade</h3>
+                                    <p class="card-text-gothic">Taciturna e antissocial. Despreza aqueles sem conhecimento técnico.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Motivação</h3>
+                                    <p class="card-text-gothic">Perfeiçoar a tecnologia de autômatos e possivelmente replicar a consciência humana em máquinas puras.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <ul class="card-skills">
-                        <li><strong>Rank:</strong> Nº 11</li>
-                        <li><strong>Status:</strong> Ativo</li>
-                        <li><strong>Origem:</strong> Snezhnaya</li>
-                    </ul>
-                    <h2>História</h2>
-                    <p class="card-text">Caiu no Abismo aos 14 anos e foi treinado por Skirk. O mais jovem e letal dos Mensageiros.</p>
-                    <h2>Personalidade</h2>
-                    <p class="card-text">Aventureiro e leal à família. Vê o combate como a única linguagem pura de evolução.</p>
-                    <h2>Motivação</h2>
-                    <p class="card-text">Tornar-se o guerreiro mais forte do mundo e proteger a inocência de seus irmãos em Snezhnaya.</p>
-                    <p class="tap-hint">→ Ver mais</p>
-                </div>
-                <div class="card-face card-verso">
-                    <div class="card-header">
-                        <h1 class="card-title">Info. Combat</h1>
+
+                    <!-- SIGNORA -->
+                    <div class="harbinger-card" data-character="signora" data-video="resources/signora-bg.mp4">
+                        <div class="card-inner-gothic">
+                            <div class="card-header-gothic">
+                                <p class="card-rank">HARBINGER Nº 8</p>
+                                <h1 class="card-title-gothic">Signora</h1>
+                                <p class="card-subtitle-gothic">"A Senhora"</p>
+                            </div>
+                            
+                            <div class="gothic-divider">
+                                <div class="gothic-ornament"></div>
+                            </div>
+                            
+                            <div class="card-content-gothic">
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">História</h3>
+                                    <p class="card-text-gothic">A Bruxa das Chamas Carmesim. Teve seu fogo selado por um Delírio após perder seu amor no cataclisma.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Personalidade</h3>
+                                    <p class="card-text-gothic">Arrogante e cruel. Movida por uma fúria eterna contra o mundo e os deuses negligentes.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Motivação</h3>
+                                    <p class="card-text-gothic">Limpar o "mundo distorcido" através do gelo da Tsaritsa, queimando tudo o que restou de sua dor passada.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-grid">
-                        <span>💧 Hydro</span>
-                        <span>🏹 Arco</span>
-                        <span>⭐ 5 Estrelas</span>
-                        <span>💥 DPS</span>
+
+                    <!-- PANTALONE -->
+                    <div class="harbinger-card" data-character="pantalone" data-video="resources/pantalone-bg.mp4">
+                        <div class="card-inner-gothic">
+                            <div class="card-header-gothic">
+                                <p class="card-rank">HARBINGER Nº 9</p>
+                                <h1 class="card-title-gothic">Pantalone</h1>
+                                <p class="card-subtitle-gothic">"O Regrator"</p>
+                            </div>
+                            
+                            <div class="gothic-divider">
+                                <div class="gothic-ornament"></div>
+                            </div>
+                            
+                            <div class="card-content-gothic">
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">História</h3>
+                                    <p class="card-text-gothic">Nascido na pobreza e sem Visão. Jurou dominar o mundo pelo controle econômico e financeiro.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Personalidade</h3>
+                                    <p class="card-text-gothic">Ambicioso e calculista. Vê Teyvat como uma balança comercial movida por dívidas.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Motivação</h3>
+                                    <p class="card-text-gothic">Tornar Snezhnaya o coração econômico do mundo, provando que o capital humano supera o poder dos deuses.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h2>Artefatos</h2>
-                    <p class="build-desc"><strong>4p Sonho da Ninfa</strong></p>
-                    <p class="card-text-small">ATQ% / Hydro DMG / CRIT DMG ou CRIT Rate</p>
-                    
-                    <h2>Arma</h2>
-                    <p class="build-desc"><strong>Arco Polar</strong> (Assinatura)</p>
-                    <p class="card-text-small">Aumenta Taxa de CRIT e ATQ progressivamente</p>
-                    
-                    <h2>Habilidades</h2>
-                    <p class="card-text-small"><strong>Elemental:</strong> Flecha Riptide</p>
-                    <p class="card-text-small"><strong>Suprema:</strong> Devastação: Obliteração</p>
-                    <p class="card-text-small"><strong>Passiva:</strong> Mestre das Armas</p>
-                    
-                    <h2>Time Recomendado</h2>
-                    <p class="card-text-small">Tartaglia • Xiangling • Bennett • Kazuha</p>
-                    <p class="tap-hint">← Voltar</p>
+
+                    <!-- TARTAGLIA -->
+                    <div class="harbinger-card" data-character="tartaglia" data-video="resources/tartaglia-bg.mp4">
+                        <div class="card-inner-gothic">
+                            <div class="card-header-gothic">
+                                <p class="card-rank">HARBINGER Nº 11</p>
+                                <h1 class="card-title-gothic">Tartaglia</h1>
+                                <p class="card-subtitle-gothic">"Childe"</p>
+                            </div>
+                            
+                            <div class="gothic-divider">
+                                <div class="gothic-ornament"></div>
+                            </div>
+                            
+                            <div class="card-content-gothic">
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">História</h3>
+                                    <p class="card-text-gothic">Caiu no Abismo aos 14 anos e foi treinado por Skirk. O mais jovem e letal dos Mensageiros.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Personalidade</h3>
+                                    <p class="card-text-gothic">Aventureiro e leal à família. Vê o combate como a única linguagem pura de evolução.</p>
+                                </div>
+                                
+                                <div class="card-section">
+                                    <h3 class="section-title-gothic">Motivação</h3>
+                                    <p class="card-text-gothic">Tornar-se o guerreiro mais forte do mundo e proteger a inocência de seus irmãos em Snezhnaya.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </label>
+        </div>
     </section>
 
     <script src="script.js"></script>
