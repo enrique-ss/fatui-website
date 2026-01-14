@@ -1,4 +1,4 @@
-# ⚔️ Fatui Website - Os Onze Mensageiros
+# ⚔️ Fatui Website
 
 Site interativo dedicado aos Onze Mensageiros Fatui de Genshin Impact. Carrossel gótico com vídeos dinâmicos que muda automaticamente conforme você navega pelos personagens.
 
