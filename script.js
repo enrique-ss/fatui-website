@@ -4,9 +4,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.harbinger-card');
     const indicators = document.querySelectorAll('.indicator-dot');
     const bgVideo = document.querySelector('.carousel-bg-video');
+    const btnPrev = document.querySelector('.carousel-btn-prev');
+    const btnNext = document.querySelector('.carousel-btn-next');
 
     let currentIndex = 0;
     const totalCards = cards.length;
+
+    // Criar clones para efeito infinito
+    const firstClone = cards[0].cloneNode(true);
+    const lastClone = cards[totalCards - 1].cloneNode(true);
+
+    firstClone.classList.remove('active');
+    lastClone.classList.remove('active');
+
+    carouselTrack.appendChild(firstClone);
+    carouselTrack.insertBefore(lastClone, cards[0]);
+
+    // Atualizar referências após adicionar clones
+    const allCards = document.querySelectorAll('.harbinger-card');
+    let isTransitioning = false;
 
     // SEARCH HEADER
     const searchInput = document.getElementById('searchInput');
@@ -16,52 +32,73 @@ document.addEventListener('DOMContentLoaded', () => {
         const value = searchInput.value.toLowerCase();
 
         harbingerCards.forEach(card => {
-            const name = card.querySelector('.card-title-gothic')
-                .textContent.toLowerCase();
-
-            card.style.display = name.includes(value) ? '' : 'none';
+            const titleElement = card.querySelector('.card-title-gothic');
+            if (titleElement) {
+                const name = titleElement.textContent.toLowerCase();
+                card.style.display = name.includes(value) ? '' : 'none';
+            }
         });
     });
 
-
     // INICIALIZAÇÃO
     function init() {
-        updateCarousel();
+        // Posicionar no primeiro card real (índice 1 por causa do clone)
+        currentIndex = 1;
+        updateCarousel(false);
         createIndicators();
     }
 
     // ATUALIZAR CARROSSEL
-    function updateCarousel() {
-        // Calcular deslocamento
-        const cardWidth = cards[0].offsetWidth;
+    function updateCarousel(animate = true) {
+        const cardWidth = allCards[0].offsetWidth;
         const gap = parseInt(getComputedStyle(carouselTrack).gap) || 40;
         const offset = -(currentIndex * (cardWidth + gap));
 
+        if (!animate) {
+            carouselTrack.style.transition = 'none';
+        } else {
+            carouselTrack.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        }
+
         carouselTrack.style.transform = `translateX(calc(50% - ${cardWidth / 2}px + ${offset}px))`;
 
-        // Atualizar classes ativas
-        cards.forEach((card, index) => {
-            card.classList.toggle('active', index === currentIndex);
+        // Atualizar classes ativas (apenas nos cards originais)
+        const realIndex = getRealIndex();
+        allCards.forEach((card, index) => {
+            card.classList.remove('active');
         });
+        allCards[currentIndex].classList.add('active');
 
         // Atualizar indicadores
         indicators.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentIndex);
+            dot.classList.toggle('active', index === realIndex);
         });
 
         // Atualizar vídeo de fundo
         updateBackgroundVideo();
     }
 
+    // OBTER ÍNDICE REAL (sem contar clones)
+    function getRealIndex() {
+        if (currentIndex === 0) return totalCards - 1; // Clone do último
+        if (currentIndex === totalCards + 1) return 0; // Clone do primeiro
+        return currentIndex - 1; // Índice real
+    }
+
     // ATUALIZAR VÍDEO DE FUNDO
     function updateBackgroundVideo() {
-        const activeCard = cards[currentIndex];
+        const activeCard = allCards[currentIndex];
         const videoSource = activeCard.dataset.video;
 
-        if (videoSource && bgVideo && bgVideo.src !== videoSource) {
-            bgVideo.src = videoSource;
-            bgVideo.load();
-            bgVideo.play().catch(() => { });
+        if (videoSource && bgVideo) {
+            const currentSrc = bgVideo.src;
+            const newSrc = videoSource.startsWith('http') ? videoSource : window.location.origin + '/' + videoSource;
+
+            if (!currentSrc.includes(videoSource)) {
+                bgVideo.src = videoSource;
+                bgVideo.load();
+                bgVideo.play().catch(() => { });
+            }
         }
     }
 
@@ -69,7 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function createIndicators() {
         indicators.forEach((dot, index) => {
             dot.addEventListener('click', () => {
-                currentIndex = index;
+                if (isTransitioning) return;
+                currentIndex = index + 1; // +1 por causa do clone no início
                 updateCarousel();
             });
         });
@@ -77,15 +115,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // NAVEGAÇÃO - PRÓXIMO
     function nextSlide() {
-        currentIndex = (currentIndex + 1) % totalCards;
+        if (isTransitioning) return;
+        isTransitioning = true;
+        currentIndex++;
         updateCarousel();
+
+        // Verificar se chegou no clone
+        if (currentIndex === totalCards + 1) {
+            setTimeout(() => {
+                currentIndex = 1;
+                updateCarousel(false);
+                isTransitioning = false;
+            }, 600);
+        } else {
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 600);
+        }
     }
 
     // NAVEGAÇÃO - ANTERIOR
     function prevSlide() {
-        currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+        if (isTransitioning) return;
+        isTransitioning = true;
+        currentIndex--;
         updateCarousel();
+
+        // Verificar se chegou no clone
+        if (currentIndex === 0) {
+            setTimeout(() => {
+                currentIndex = totalCards;
+                updateCarousel(false);
+                isTransitioning = false;
+            }, 600);
+        } else {
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 600);
+        }
     }
+
+    // EVENT LISTENERS - BOTÕES
+    btnPrev.addEventListener('click', prevSlide);
+    btnNext.addEventListener('click', nextSlide);
 
     // NAVEGAÇÃO POR TECLADO
     document.addEventListener('keydown', (e) => {
@@ -115,17 +187,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (Math.abs(diff) > threshold) {
             if (diff > 0) {
-                nextSlide(); // Swipe left
+                nextSlide();
             } else {
-                prevSlide(); // Swipe right
+                prevSlide();
             }
         }
     }
 
     // CLICK NOS CARDS PARA NAVEGAR
-    cards.forEach((card, index) => {
+    allCards.forEach((card, index) => {
         card.addEventListener('click', (e) => {
-            // Se não é o card ativo, navega para ele
+            if (isTransitioning) return;
             if (index !== currentIndex) {
                 currentIndex = index;
                 updateCarousel();
@@ -167,11 +239,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
-            updateCarousel();
+            updateCarousel(false);
         }, 250);
     });
 
-    // ANIMAÇÃO DE ENTRADA
+    // ANIMAÇÃO DE ENTRADA (apenas cards originais)
     cards.forEach((card, index) => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
