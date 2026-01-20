@@ -1,15 +1,23 @@
-/* VARIÁVEIS */
 :root {
-    --pierro: #9bbad1; --pierro-gold: #e6d5a7;
-    --capitano: #7c8ea0; --dottore: #f2c7b1;
-    --columbina: #ff8a8a; --arlecchino: #9e1b1b;
-    --pulcinella: #5c7ee6; --scaramouche: #9d78e6;
-    --sandrone: #b34d65; --signora: #ff3d40;
-    --pantalone: #7cb9e8; --tartaglia: #e0d88d;
+    --pierro: #9bbad1;
+    --pierro-gold: #e6d5a7;
+    --capitano: #7c8ea0;
+    --dottore: #f2c7b1;
+    --columbina: #ff8a8a;
+    --arlecchino: #9e1b1b;
+    --pulcinella: #5c7ee6;
+    --scaramouche: #9d78e6;
+    --sandrone: #b34d65;
+    --signora: #ff3d40;
+    --pantalone: #7cb9e8;
+    --tartaglia: #e0d88d;
 }
 
-/* RESET */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
     font-family: 'Montserrat', sans-serif;
@@ -18,7 +26,88 @@ body {
     overflow-x: hidden;
 }
 
-/* INTRO */
+/* ===== HEADER ===== */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    background: rgba(2, 5, 10, 0.75);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.header-left,
+.header-right {
+    flex: 0 0 auto;
+}
+
+.header-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.logo {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    letter-spacing: 4px;
+    font-size: 1.2rem;
+    color: #a3d6ff;
+    text-shadow: 0 0 15px rgba(163, 214, 255, 0.6);
+}
+
+#searchInput {
+    width: 100%;
+    max-width: 360px;
+    height: 38px;
+    padding: 10px 16px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 1px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#searchInput::placeholder {
+    color: #aaa;
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: #a3d6ff;
+    box-shadow: 0 0 10px rgba(163, 214, 255, 0.3);
+}
+
+.header-right {
+    display: flex;
+    gap: 25px;
+}
+
+.header-right a {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: #ddd;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.header-right a:hover {
+    opacity: 1;
+    color: #a3d6ff;
+}
+
+/* ===== INTRO SECTION ===== */
 #intro {
     position: relative;
     height: 100vh;
@@ -39,7 +128,7 @@ body {
 .overlay-dark {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.9) 100%);
+    background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.9) 100%);
     z-index: 2;
 }
 
@@ -92,7 +181,8 @@ body {
     margin: 40px 0;
 }
 
-.divisor-gótico::before, .divisor-gótico::after {
+.divisor-gótico::before,
+.divisor-gótico::after {
     content: "";
     height: 1px;
     width: 100px;
@@ -117,7 +207,7 @@ body {
     letter-spacing: 5px;
 }
 
-/* CARROSSEL CONTAINER */
+/* ===== CAROUSEL SECTION ===== */
 .carousel-section {
     position: relative;
     height: 100vh;
@@ -134,25 +224,17 @@ body {
     height: 100%;
     object-fit: cover;
     filter: brightness(0.4) contrast(1.1) saturate(0.8);
-    transition: filter 0.8s ease;
 }
 
 .carousel-overlay {
     position: absolute;
     inset: 0;
-    background: 
-        repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(0, 0, 0, 0.05) 2px,
-            rgba(0, 0, 0, 0.05) 4px
-        ),
+    background:
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.05) 2px, rgba(0, 0, 0, 0.05) 4px),
         radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.85) 100%);
     pointer-events: none;
 }
 
-/* CARROSSEL */
 .carousel-wrapper {
     position: relative;
     width: 100%;
@@ -178,7 +260,6 @@ body {
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* CARD GÓTICO */
 .harbinger-card {
     flex-shrink: 0;
     width: 380px;
@@ -188,6 +269,7 @@ body {
     opacity: 0.4;
     transform: scale(0.85);
     filter: brightness(0.6);
+    cursor: pointer;
 }
 
 .harbinger-card.active {
@@ -206,10 +288,7 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    clip-path: polygon(
-        0 0, 100% 0, 100% calc(100% - 30px),
-        calc(100% - 30px) 100%, 0 100%
-    );
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
 }
 
 .card-inner-gothic::before {
@@ -233,11 +312,9 @@ body {
     clip-path: polygon(100% 0, 100% 100%, 0 100%);
 }
 
-/* HEADER GÓTICO */
 .card-header-gothic {
     padding: 30px 30px 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    position: relative;
 }
 
 .card-rank {
@@ -258,25 +335,22 @@ body {
     text-transform: uppercase;
     letter-spacing: 2px;
     text-shadow: 0 0 20px var(--card-color);
-    margin-bottom: 5px;
 }
 
 .card-subtitle-gothic {
     font-family: 'Montserrat', sans-serif;
     font-size: 0.85rem;
-    font-weight: 300;
-    color: #aaa;
+    color: rgba(255, 255, 255, 0.6);
     font-style: italic;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
+    margin-top: 5px;
 }
 
-/* DECORAÇÃO GÓTICA */
 .gothic-divider {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin: 15px 0;
     padding: 0 30px;
+    margin: 15px 0;
 }
 
 .gothic-divider::before,
@@ -285,7 +359,6 @@ body {
     flex: 1;
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--card-color), transparent);
-    opacity: 0.5;
 }
 
 .gothic-ornament {
@@ -295,16 +368,12 @@ body {
     transform: rotate(45deg);
     margin: 0 15px;
     box-shadow: 0 0 10px var(--card-color);
-    opacity: 0.8;
 }
 
-/* CONTEÚDO DO CARD */
 .card-content-gothic {
     flex: 1;
     padding: 20px 30px;
     overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--card-color) transparent;
 }
 
 .card-content-gothic::-webkit-scrollbar {
@@ -337,49 +406,13 @@ body {
     width: 3px;
     height: 14px;
     background: var(--card-color);
-    box-shadow: 0 0 5px var(--card-color);
 }
 
 .card-text-gothic {
     font-size: 0.9rem;
     line-height: 1.6;
     color: #ddd;
-    font-weight: 300;
 }
-
-.skills-list-gothic {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.skills-list-gothic li {
-    padding-left: 15px;
-    border-left: 2px solid var(--card-color);
-    font-size: 0.85rem;
-    color: #ccc;
-    opacity: 0.9;
-}
-
-.info-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 10px;
-}
-
-.info-tag {
-    padding: 4px 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
-    font-size: 0.75rem;
-    letter-spacing: 1px;
-    color: #bbb;
-}
-
-/* CONTROLES - REMOVIDOS */
 
 .carousel-indicators {
     position: absolute;
@@ -395,63 +428,91 @@ body {
     width: 8px;
     height: 8px;
     background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.3);
     transform: rotate(45deg);
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
+.indicator-dot:hover {
+    background: rgba(163, 214, 255, 0.5);
+}
+
 .indicator-dot.active {
     background: #a3d6ff;
     box-shadow: 0 0 15px #a3d6ff;
-    border-color: #fff;
 }
 
-/* CORES DOS PERSONAGENS */
-[data-character="pierro"] { --card-color: var(--pierro); }
-[data-character="capitano"] { --card-color: var(--capitano); }
-[data-character="dottore"] { --card-color: var(--dottore); }
-[data-character="columbina"] { --card-color: var(--columbina); }
-[data-character="arlecchino"] { --card-color: var(--arlecchino); }
-[data-character="pulcinella"] { --card-color: var(--pulcinella); }
-[data-character="scaramouche"] { --card-color: var(--scaramouche); }
-[data-character="sandrone"] { --card-color: var(--sandrone); }
-[data-character="signora"] { --card-color: var(--signora); }
-[data-character="pantalone"] { --card-color: var(--pantalone); }
-[data-character="tartaglia"] { --card-color: var(--tartaglia); }
+/* ===== CHARACTER COLORS ===== */
+[data-character="pierro"] {
+    --card-color: var(--pierro);
+}
 
-/* RESPONSIVO */
+[data-character="capitano"] {
+    --card-color: var(--capitano);
+}
+
+[data-character="dottore"] {
+    --card-color: var(--dottore);
+}
+
+[data-character="columbina"] {
+    --card-color: var(--columbina);
+}
+
+[data-character="arlecchino"] {
+    --card-color: var(--arlecchino);
+}
+
+[data-character="pulcinella"] {
+    --card-color: var(--pulcinella);
+}
+
+[data-character="scaramouche"] {
+    --card-color: var(--scaramouche);
+}
+
+[data-character="sandrone"] {
+    --card-color: var(--sandrone);
+}
+
+[data-character="signora"] {
+    --card-color: var(--signora);
+}
+
+[data-character="pantalone"] {
+    --card-color: var(--pantalone);
+}
+
+[data-character="tartaglia"] {
+    --card-color: var(--tartaglia);
+}
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
+    .main-header {
+        padding: 0 16px;
+        gap: 10px;
+    }
+
+    .logo {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+    }
+
+    .header-right {
+        gap: 12px;
+    }
+
+    .header-right a {
+        font-size: 0.6rem;
+    }
+
     .intro-content {
-        padding: 40px 30px;
+        padding: 40px 20px;
     }
-    
-    .carousel-wrapper {
-        height: 550px;
-    }
-    
+
     .harbinger-card {
         width: 280px;
         height: 480px;
-    }
-    
-    .carousel-track {
-        gap: 30px;
-    }
-    
-    .card-header-gothic {
-        padding: 25px 25px 15px;
-    }
-    
-    .card-title-gothic {
-        font-size: 1.6rem;
-    }
-    
-    .card-content-gothic {
-        padding: 15px 25px;
-    }
-    
-    .carousel-indicators {
-        bottom: 20px;
     }
 }
