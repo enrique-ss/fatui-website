@@ -21,7 +21,11 @@
         </div>
 
         <div class="header-center">
-            <input type="text" id="searchInput" placeholder="Buscar Harbinger..." autocomplete="off">
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
         </div>
 
         <nav class="header-right">
@@ -29,6 +33,79 @@
             <a href="#carousel-section">Harbingers</a>
         </nav>
     </header>
+
+    <!-- MENU LATERAL -->
+    <aside class="sidebar-menu" id="sidebarMenu">
+        <div class="sidebar-header">
+            <h2 class="sidebar-title">HARBINGERS</h2>
+            <button class="sidebar-close" id="sidebarClose" aria-label="Fechar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#" class="sidebar-item" data-index="0">
+                <span class="sidebar-rank">Nº 0</span>
+                <span class="sidebar-name">Pierro</span>
+                <span class="sidebar-title">"O Bobo"</span>
+            </a>
+            <a href="#" class="sidebar-item" data-index="1">
+                <span class="sidebar-rank">Nº 1</span>
+                <span class="sidebar-name">Il Capitano</span>
+                <span class="sidebar-title">"O Capitão"</span>
+            </a>
+            <a href="#" class="sidebar-item" data-index="2">
+                <span class="sidebar-rank">Nº 2</span>
+                <span class="sidebar-name">Dottore</span>
+                <span class="sidebar-title">"O Doutor"</span>
+            </a>
+            <a href="#" class="sidebar-item" data-index="3">
+                <span class="sidebar-rank">Nº 3</span>
+                <span class="sidebar-name">Columbina</span>
+                <span class="sidebar-title">"A Damisela"</span>
+            </a>
+            <a href="#" class="sidebar-item" data-index="4">
+                <span class="sidebar-rank">Nº 4</span>
+                <span class="sidebar-name">Arlecchino</span>
+                <span class="sidebar-title">"A Serva"</span>
+            </a>
+            <a href="#" class="sidebar-item" data-index="5">
+                <span class="sidebar-rank">Nº 5</span>
+                <span class="sidebar-name">Pulcinella</span>
+                <span class="sidebar-title">"O Galo"</span>
+            </a>
+            <a href="#" class="sidebar-item" data-index="6">
+                <span class="sidebar-rank">Nº 6</span>
+                <span class="sidebar-name">Scaramouche</span>
+                <span class="sidebar-title">"O Baladeiro"</span>
+            </a>
+            <a href="#" class="sidebar-item" data-index="7">
+                <span class="sidebar-rank">Nº 7</span>
+                <span class="sidebar-name">Sandrone</span>
+                <span class="sidebar-title">"A Marionete"</span>
+            </a>
+            <a href="#" class="sidebar-item" data-index="8">
+                <span class="sidebar-rank">Nº 8</span>
+                <span class="sidebar-name">La Signora</span>
+                <span class="sidebar-title">"A Senhora"</span>
+            </a>
+            <a href="#" class="sidebar-item" data-index="9">
+                <span class="sidebar-rank">Nº 9</span>
+                <span class="sidebar-name">Pantalone</span>
+                <span class="sidebar-title">"O Regrator"</span>
+            </a>
+            <a href="#" class="sidebar-item" data-index="10">
+                <span class="sidebar-rank">Nº 11</span>
+                <span class="sidebar-name">Tartaglia</span>
+                <span class="sidebar-title">"Childe"</span>
+            </a>
+        </nav>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 
     <!-- INTRO -->
@@ -129,7 +206,34 @@
                                     <p class="card-text-gothic">Vingar-se dos deuses de Celestia por terem destruído sua
                                         terra natal e provar que a humanidade pode superar o destino.</p>
                                 </div>
+
+                                <div class="card-section card-extra-info">
+                                    <h3 class="section-title-gothic">Habilidades</h3>
+                                    <p class="card-text-gothic">Mestre em manipulação de energia elemental e estratégia
+                                        militar. Possui conhecimento profundo sobre Khaenri'ah e os segredos do Abismo.
+                                    </p>
+                                </div>
+
+                                <div class="card-section card-extra-info">
+                                    <h3 class="section-title-gothic">Relacionamentos</h3>
+                                    <p class="card-text-gothic">Mentor de todos os Harbingers. Mantém uma relação
+                                        próxima com a Tsaritsa e respeita profundamente Il Capitano.</p>
+                                </div>
+
+                                <div class="card-section card-extra-info">
+                                    <h3 class="section-title-gothic">Curiosidades</h3>
+                                    <p class="card-text-gothic">Foi um dos sábios de Khaenri'ah antes da destruição. Usa
+                                        uma máscara para ocultar metade do rosto, simbolizando sua dualidade.</p>
+                                </div>
                             </div>
+
+                            <button class="card-close-btn">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
                         </div>
                     </div>
 
@@ -164,7 +268,33 @@
                                     <p class="card-text-gothic">Busca a verdadeira justiça através da força militar e o
                                         cumprimento da promessa feita à Tsaritsa.</p>
                                 </div>
+
+                                <div class="card-section card-extra-info">
+                                    <h3 class="section-title-gothic">Habilidades</h3>
+                                    <p class="card-text-gothic">Mestre em combate corpo a corpo e tático militar. Sua
+                                        força física rivaliza com a dos deuses, mesmo sendo mortal.</p>
+                                </div>
+
+                                <div class="card-section card-extra-info">
+                                    <h3 class="section-title-gothic">Relacionamentos</h3>
+                                    <p class="card-text-gothic">Respeita profundamente Pierro. Possui rivalidade
+                                        amigável com outros Harbingers. Admirado por todos os soldados de Snezhnaya.</p>
+                                </div>
+
+                                <div class="card-section card-extra-info">
+                                    <h3 class="section-title-gothic">Curiosidades</h3>
+                                    <p class="card-text-gothic">Sempre usa um elmo completo que nunca foi removido em
+                                        público. Sua verdadeira identidade permanece um mistério.</p>
+                                </div>
                             </div>
+
+                            <button class="card-close-btn">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
                         </div>
                     </div>
 
@@ -199,7 +329,33 @@
                                     <p class="card-text-gothic">Transcender os limites humanos e criar um "deus" através
                                         da ciência, provando que o conhecimento não conhece ética.</p>
                                 </div>
+
+                                <div class="card-section card-extra-info">
+                                    <h3 class="section-title-gothic">Habilidades</h3>
+                                    <p class="card-text-gothic">Geneticista e cientista brilhante. Criou segmentos
+                                        (clones) de si mesmo em diferentes idades para maximizar sua pesquisa.</p>
+                                </div>
+
+                                <div class="card-section card-extra-info">
+                                    <h3 class="section-title-gothic">Relacionamentos</h3>
+                                    <p class="card-text-gothic">Expulso da Academia de Sumeru. Mantém relação tensa com
+                                        outros Harbingers devido aos seus métodos controversos.</p>
+                                </div>
+
+                                <div class="card-section card-extra-info">
+                                    <h3 class="section-title-gothic">Curiosidades</h3>
+                                    <p class="card-text-gothic">Seus experimentos são considerados heréticos até mesmo
+                                        pelos Fatui. Possui obsessão com a ideia de superar os deuses.</p>
+                                </div>
                             </div>
+
+                            <button class="card-close-btn">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
                         </div>
                     </div>
 
@@ -479,7 +635,34 @@
                                     <p class="card-text-gothic">Tornar-se o guerreiro mais forte do mundo e proteger a
                                         inocência de seus irmãos em Snezhnaya.</p>
                                 </div>
+
+                                <div class="card-section card-extra-info">
+                                    <h3 class="section-title-gothic">Habilidades</h3>
+                                    <p class="card-text-gothic">Mestre em todas as armas. Pode invocar a Forma Abissal,
+                                        uma transformação que amplifica drasticamente seu poder de combate.</p>
+                                </div>
+
+                                <div class="card-section card-extra-info">
+                                    <h3 class="section-title-gothic">Relacionamentos</h3>
+                                    <p class="card-text-gothic">Extremamente protetor com seus irmãos Teucer, Tonia e
+                                        Anthon. Foi recrutado por Pulcinella. Treinado pela misteriosa Skirk no Abismo.
+                                    </p>
+                                </div>
+
+                                <div class="card-section card-extra-info">
+                                    <h3 class="section-title-gothic">Curiosidades</h3>
+                                    <p class="card-text-gothic">É o mais jovem Harbinger. Mantém sua identidade Fatui em
+                                        segredo da família. Possui uma sede insaciável por batalhas desafiadoras.</p>
+                                </div>
                             </div>
+
+                            <button class="card-close-btn">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
                         </div>
                     </div>
 

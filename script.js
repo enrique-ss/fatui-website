@@ -7,6 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnPrev = document.querySelector('.carousel-btn-prev');
     const btnNext = document.querySelector('.carousel-btn-next');
 
+    // SIDEBAR MENU
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const sidebarMenu = document.getElementById('sidebarMenu');
+    const sidebarClose = document.getElementById('sidebarClose');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const sidebarItems = document.querySelectorAll('.sidebar-item');
+
     let currentIndex = 0;
     const totalCards = cards.length;
 
@@ -23,20 +30,44 @@ document.addEventListener('DOMContentLoaded', () => {
     // Atualizar referências após adicionar clones
     const allCards = document.querySelectorAll('.harbinger-card');
     let isTransitioning = false;
+    let isExpanded = false;
+    let expandedCard = null;
 
-    // SEARCH HEADER
-    const searchInput = document.getElementById('searchInput');
-    const harbingerCards = document.querySelectorAll('.harbinger-card');
+    // FUNÇÕES SIDEBAR
+    function openSidebar() {
+        sidebarMenu.classList.add('active');
+        sidebarOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
 
-    searchInput.addEventListener('input', () => {
-        const value = searchInput.value.toLowerCase();
+    function closeSidebar() {
+        sidebarMenu.classList.remove('active');
+        sidebarOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 
-        harbingerCards.forEach(card => {
-            const titleElement = card.querySelector('.card-title-gothic');
-            if (titleElement) {
-                const name = titleElement.textContent.toLowerCase();
-                card.style.display = name.includes(value) ? '' : 'none';
-            }
+    // EVENT LISTENERS SIDEBAR
+    hamburgerBtn.addEventListener('click', openSidebar);
+    sidebarClose.addEventListener('click', closeSidebar);
+    sidebarOverlay.addEventListener('click', closeSidebar);
+
+    // NAVEGAÇÃO PELO MENU
+    sidebarItems.forEach((item) => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetIndex = parseInt(item.dataset.index);
+
+            // +1 porque temos um clone no início
+            currentIndex = targetIndex + 1;
+            updateCarousel();
+            closeSidebar();
+
+            // Scroll suave para a seção do carrossel
+            setTimeout(() => {
+                document.querySelector('#carousel-section').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }, 100);
         });
     });
 
@@ -115,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // NAVEGAÇÃO - PRÓXIMO
     function nextSlide() {
-        if (isTransitioning) return;
+        if (isTransitioning || isExpanded) return;
         isTransitioning = true;
         currentIndex++;
         updateCarousel();
@@ -136,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // NAVEGAÇÃO - ANTERIOR
     function prevSlide() {
-        if (isTransitioning) return;
+        if (isTransitioning || isExpanded) return;
         isTransitioning = true;
         currentIndex--;
         updateCarousel();
@@ -161,6 +192,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // NAVEGAÇÃO POR TECLADO
     document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isExpanded) {
+            collapseCard();
+            return;
+        }
+
+        if (isExpanded) return;
+
         if (e.key === 'ArrowLeft') {
             prevSlide();
         } else if (e.key === 'ArrowRight') {
@@ -194,15 +232,73 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // CLICK NOS CARDS PARA NAVEGAR
+    // EXPANDIR/RECOLHER CARD
+    function expandCard(card) {
+        if (isExpanded || isTransitioning) return;
+
+        isExpanded = true;
+        expandedCard = card;
+
+        card.classList.add('expanded');
+        carouselSection.classList.add('card-expanded');
+
+        // Desabilitar scroll do body
+        document.body.style.overflow = 'hidden';
+    }
+
+    function collapseCard() {
+        if (!isExpanded || !expandedCard) return;
+
+        expandedCard.classList.remove('expanded');
+        carouselSection.classList.remove('card-expanded');
+
+        isExpanded = false;
+        expandedCard = null;
+
+        // Reabilitar scroll do body
+        document.body.style.overflow = '';
+    }
+
+    // CLICK NOS CARDS PARA NAVEGAR OU EXPANDIR
     allCards.forEach((card, index) => {
         card.addEventListener('click', (e) => {
+            // Se já está expandido, não faz nada (exceto no botão de fechar)
+            if (card.classList.contains('expanded')) return;
+
             if (isTransitioning) return;
-            if (index !== currentIndex) {
+
+            // Se é o card ativo, expande
+            if (index === currentIndex) {
+                expandCard(card);
+            } else {
+                // Se não é o card ativo, navega para ele
                 currentIndex = index;
                 updateCarousel();
             }
         });
+
+        // Botão de fechar
+        const closeBtn = card.querySelector('.card-close-btn');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                collapseCard();
+            });
+        }
+    });
+
+    // Fechar ao clicar no overlay
+    carouselSection.addEventListener('click', (e) => {
+        if (isExpanded && e.target === carouselSection) {
+            collapseCard();
+        }
+    });
+
+    // Fechar com ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isExpanded) {
+            collapseCard();
+        }
     });
 
     // OBSERVER DE VÍDEO (para pausar quando não visível)
