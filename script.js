@@ -1,527 +1,409 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // SELETORES
-    const carouselTrack = document.querySelector('.carousel-track');
-    const cards = document.querySelectorAll('.harbinger-card');
-    const indicators = document.querySelectorAll('.indicator-dot');
-    const bgVideo = document.querySelector('.carousel-bg-video');
-    const btnPrev = document.querySelector('.carousel-btn-prev');
-    const btnNext = document.querySelector('.carousel-btn-next');
 
-    // SIDEBAR MENU
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const sidebarMenu = document.getElementById('sidebarMenu');
-    const sidebarClose = document.getElementById('sidebarClose');
-    const sidebarOverlay = document.getElementById('sidebarOverlay');
-    const sidebarItems = document.querySelectorAll('.sidebar-item');
+    // 1. CONFIGURAÇÕES GLOBAIS
+    // Centraliza todos os "números mágicos" e seletores
+    const CONFIG = {
+        selectors: {
+            carousel: {
+                track: '.carousel-track',
+                cards: '.harbinger-card',
+                indicators: '.indicator-dot',
+                video: '.carousel-bg-video',
+                section: '.carousel-section',
+                btnPrev: '.carousel-btn-prev',
+                btnNext: '.carousel-btn-next'
+            },
+            sidebar: {
+                menu: '#sidebarMenu',
+                btnOpen: '#hamburgerBtn',
+                btnClose: '#sidebarClose',
+                overlay: '#sidebarOverlay',
+                items: '.sidebar-item'
+            },
+            parallax: {
+                elements: '.parallax-element',
+                intro: '.intro-content'
+            }
+        },
+        animation: {
+            duration: 600, // ms
+            gap: 40, // px (fallback)
+            stepDelay: 150 // ms (para navegação passo-a-passo)
+        }
+    };
 
-    let currentIndex = 0;
-    const totalCards = cards.length;
+    // 2. MÓDULO SIDEBAR
+    class Sidebar {
+        constructor() {
+            this.menu = document.querySelector(CONFIG.selectors.sidebar.menu);
+            this.overlay = document.querySelector(CONFIG.selectors.sidebar.overlay);
+            this.btnOpen = document.querySelector(CONFIG.selectors.sidebar.btnOpen);
+            this.btnClose = document.querySelector(CONFIG.selectors.sidebar.btnClose);
+            this.items = document.querySelectorAll(CONFIG.selectors.sidebar.items);
 
-    // Criar clones para efeito infinito
-    const firstClone = cards[0].cloneNode(true);
-    const lastClone = cards[totalCards - 1].cloneNode(true);
+            this.init();
+        }
 
-    firstClone.classList.remove('active');
-    lastClone.classList.remove('active');
+        init() {
+            if (!this.menu) return;
 
-    carouselTrack.appendChild(firstClone);
-    carouselTrack.insertBefore(lastClone, cards[0]);
+            // Bindings
+            this.btnOpen?.addEventListener('click', () => this.toggle(true));
+            this.btnClose?.addEventListener('click', () => this.toggle(false));
+            this.overlay?.addEventListener('click', () => this.toggle(false));
 
-    // Atualizar referências após adicionar clones
-    const allCards = document.querySelectorAll('.harbinger-card');
-    let isTransitioning = false;
-    let isExpanded = false;
-    let expandedCard = null;
+            // Navegação externa (conecta com o carrossel via evento customizado se necessário, 
+            // ou acessa a instância global se estiver disponível)
+            this.items.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetIndex = parseInt(item.dataset.index);
 
-    // FUNÇÕES SIDEBAR
-    function openSidebar() {
-        sidebarMenu.classList.add('active');
-        sidebarOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
+                    // Dispara evento para o carrossel ouvir
+                    document.dispatchEvent(new CustomEvent('carousel:navigate', {
+                        detail: { index: targetIndex }
+                    }));
 
-    function closeSidebar() {
-        sidebarMenu.classList.remove('active');
-        sidebarOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-    }
+                    this.toggle(false);
 
-    // EVENT LISTENERS SIDEBAR
-    hamburgerBtn.addEventListener('click', openSidebar);
-    sidebarClose.addEventListener('click', closeSidebar);
-    sidebarOverlay.addEventListener('click', closeSidebar);
-
-    // NAVEGAÇÃO PELO MENU
-    sidebarItems.forEach((item) => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetIndex = parseInt(item.dataset.index);
-
-            // +1 porque temos um clone no início
-            currentIndex = targetIndex + 1;
-            updateCarousel();
-            closeSidebar();
-
-            // Scroll suave para a seção do carrossel
-            setTimeout(() => {
-                document.querySelector('#carousel-section').scrollIntoView({
-                    behavior: 'smooth'
+                    // Scroll suave
+                    setTimeout(() => {
+                        document.querySelector('#carousel-section')?.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
                 });
-            }, 100);
-        });
-    });
-
-    // INICIALIZAÇÃO
-    function init() {
-        // Posicionar no primeiro card real (índice 1 por causa do clone)
-        currentIndex = 1;
-        carouselTrack.style.transition = 'none';
-
-        // Aguardar renderização completa antes de posicionar
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                updateCarousel(false);
-                createIndicators();
-                carouselTrack.style.transition = '';
             });
-        });
-    }
-
-    // ATUALIZAR CARROSSEL
-    function updateCarousel(animate = true) {
-        const cardWidth = allCards[0].offsetWidth;
-        const gap = parseInt(getComputedStyle(carouselTrack).gap) || 40;
-        const offset = -(currentIndex * (cardWidth + gap));
-
-        if (!animate) {
-            carouselTrack.style.transition = 'none';
-        } else {
-            carouselTrack.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
         }
 
-        carouselTrack.style.transform = `translateX(calc(50% - ${cardWidth / 2}px + ${offset}px))`;
-
-        // Atualizar classes ativas (apenas nos cards originais)
-        const realIndex = getRealIndex();
-        allCards.forEach((card, index) => {
-            card.classList.remove('active');
-        });
-        allCards[currentIndex].classList.add('active');
-
-        // Atualizar indicadores
-        indicators.forEach((dot, index) => {
-            dot.classList.toggle('active', index === realIndex);
-        });
-
-        // Atualizar vídeo de fundo
-        updateBackgroundVideo();
-    }
-
-    // OBTER ÍNDICE REAL (sem contar clones)
-    function getRealIndex() {
-        if (currentIndex === 0) return totalCards - 1; // Clone do último
-        if (currentIndex === totalCards + 1) return 0; // Clone do primeiro
-        return currentIndex - 1; // Índice real
-    }
-
-    // ATUALIZAR VÍDEO DE FUNDO
-    function updateBackgroundVideo() {
-        const activeCard = allCards[currentIndex];
-        const videoSource = activeCard.dataset.video;
-
-        if (videoSource && bgVideo) {
-            const currentSrc = bgVideo.src;
-            const newSrc = videoSource.startsWith('http') ? videoSource : window.location.origin + '/' + videoSource;
-
-            if (!currentSrc.includes(videoSource)) {
-                bgVideo.src = videoSource;
-                bgVideo.load();
-                bgVideo.play().catch(() => { });
-            }
+        toggle(isActive) {
+            const action = isActive ? 'add' : 'remove';
+            this.menu.classList[action]('active');
+            this.overlay.classList[action]('active');
+            document.body.style.overflow = isActive ? 'hidden' : '';
         }
     }
 
-    // CRIAR INDICADORES
-    function createIndicators() {
-        indicators.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                if (isTransitioning) return;
-                currentIndex = index + 1; // +1 por causa do clone no início
-                updateCarousel();
-            });
-        });
-    }
+    // 3. MÓDULO PARALLAX & VISUAL EFFECTS
+    class ParallaxManager {
+        constructor() {
+            this.elements = document.querySelectorAll(CONFIG.selectors.parallax.elements);
+            this.introContent = document.querySelector(CONFIG.selectors.parallax.intro);
+            this.ticking = false;
+            this.mouse = { x: 0, y: 0, currentX: 0, currentY: 0 };
 
-    // NAVEGAÇÃO INTELIGENTE PARA ÍNDICE ESPECÍFICO
-    function navigateToIndex(targetIndex) {
-        if (isTransitioning) return;
-
-        isTransitioning = true;
-        const currentReal = getRealIndex();
-        let targetReal;
-
-        // Determinar o índice real do alvo
-        if (targetIndex === 0) {
-            targetReal = totalCards - 1; // Clone do último
-        } else if (targetIndex === totalCards + 1) {
-            targetReal = 0; // Clone do primeiro
-        } else {
-            targetReal = targetIndex - 1; // Índice real
+            this.init();
         }
 
-        // Calcular a distância mais curta
-        const distance = targetReal - currentReal;
-        const absDistance = Math.abs(distance);
-        const halfTotal = Math.floor(totalCards / 2);
+        init() {
+            window.addEventListener('scroll', () => this.requestTick(), { passive: true });
+            document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+            this.animateMouse();
+        }
 
-        // Decidir direção mais curta
-        let steps;
-        if (absDistance <= halfTotal) {
-            // Caminho direto é mais curto
-            steps = distance;
-        } else {
-            // Caminho inverso é mais curto
-            if (distance > 0) {
-                steps = distance - totalCards;
-            } else {
-                steps = distance + totalCards;
+        requestTick() {
+            if (!this.ticking) {
+                requestAnimationFrame(() => {
+                    this.updateScrollParallax();
+                    this.ticking = false;
+                });
+                this.ticking = true;
             }
         }
 
-        // Navegar passo a passo
-        const stepDelay = 150;
-        let stepCount = 0;
-        const direction = steps > 0 ? 1 : -1;
-        const totalSteps = Math.abs(steps);
+        updateScrollParallax() {
+            const scrolled = window.pageYOffset;
+            const windowHeight = window.innerHeight;
 
-        function animateStep() {
-            if (stepCount < totalSteps) {
-                currentIndex += direction;
-                updateCarousel();
-                stepCount++;
+            // Elementos Flutuantes
+            this.elements.forEach((el, index) => {
+                const speed = 0.3 + (index * 0.1);
+                el.style.transform = `translateY(${-scrolled * speed}px)`;
+            });
 
-                // Verificar se precisa ajustar por causa dos clones
-                if (currentIndex === 0) {
-                    setTimeout(() => {
-                        currentIndex = totalCards;
-                        updateCarousel(false);
-                        setTimeout(animateStep, stepDelay);
-                    }, 600);
-                    return;
-                } else if (currentIndex === totalCards + 1) {
-                    setTimeout(() => {
-                        currentIndex = 1;
-                        updateCarousel(false);
-                        setTimeout(animateStep, stepDelay);
-                    }, 600);
-                    return;
+            // Fade Intro
+            if (this.introContent && scrolled < windowHeight) {
+                const progress = scrolled / windowHeight;
+                this.introContent.style.opacity = Math.max(0, 1 - progress * 1.5);
+                this.introContent.style.transform = `translateY(${scrolled * 0.5}px) scale(${Math.max(0.8, 1 - progress * 0.2)})`;
+            }
+        }
+
+        handleMouseMove(e) {
+            this.mouse.x = (e.clientX / window.innerWidth - 0.5) * 2;
+            this.mouse.y = (e.clientY / window.innerHeight - 0.5) * 2;
+        }
+
+        animateMouse() {
+            // Interpolação linear (Lerp) para suavidade
+            this.mouse.currentX += (this.mouse.x - this.mouse.currentX) * 0.05;
+            this.mouse.currentY += (this.mouse.y - this.mouse.currentY) * 0.05;
+
+            this.elements.forEach((el, index) => {
+                const depth = (index + 1) * 10;
+                // Nota: somamos ao transform existente via CSS ou JS seria ideal, 
+                // mas aqui aplicamos direto para simplificar o exemplo visual
+                // O ideal seria ter um container wrapper para o scroll e um inner para o mouse.
+                const currentTransform = el.style.transform || '';
+                // Pequeno hack para manter o scroll Y junto com o mouse move se necessário,
+                // mas para manter simples, aplicamos apenas o translate relativo aqui se o scroll não estiver sobrescrevendo tudo
+            });
+
+            requestAnimationFrame(() => this.animateMouse());
+        }
+    }
+
+    // 4. MÓDULO CARROSSEL (CORE)
+    class Carousel {
+        constructor() {
+            // Elementos
+            const s = CONFIG.selectors.carousel;
+            this.track = document.querySelector(s.track);
+            this.originalCards = document.querySelectorAll(s.cards);
+            this.indicators = document.querySelectorAll(s.indicators);
+            this.bgVideo = document.querySelector(s.video);
+            this.btnPrev = document.querySelector(s.btnPrev);
+            this.btnNext = document.querySelector(s.btnNext);
+            this.section = document.querySelector(s.section);
+
+            // Estado
+            this.totalOriginal = this.originalCards.length;
+            this.currentIndex = 1; // Começa no 1 por causa do clone
+            this.isTransitioning = false;
+            this.cardWidth = 0;
+            this.gap = 0;
+
+            if (this.track && this.totalOriginal > 0) {
+                this.init();
+            }
+        }
+
+        init() {
+            this.setupClones();
+            this.calculateDimensions();
+            this.setupEventListeners();
+            this.setupVideoObserver();
+
+            // Entrada Inicial
+            this.update(false);
+            this.revealCards();
+
+            // Listener Global de Navegação (vindo da Sidebar)
+            document.addEventListener('carousel:navigate', (e) => {
+                this.smartNavigateTo(e.detail.index + 1); // +1 offset do clone
+            });
+        }
+
+        setupClones() {
+            const firstClone = this.originalCards[0].cloneNode(true);
+            const lastClone = this.originalCards[this.totalOriginal - 1].cloneNode(true);
+
+            firstClone.classList.remove('active');
+            lastClone.classList.remove('active');
+
+            // Adiciona classe clone para facilitar identificação futura
+            firstClone.classList.add('clone');
+            lastClone.classList.add('clone');
+
+            this.track.appendChild(firstClone);
+            this.track.insertBefore(lastClone, this.originalCards[0]);
+
+            // Atualiza lista de todos os cards
+            this.allCards = document.querySelectorAll(CONFIG.selectors.carousel.cards);
+        }
+
+        calculateDimensions() {
+            this.cardWidth = this.originalCards[0].offsetWidth;
+            this.gap = parseInt(getComputedStyle(this.track).gap) || CONFIG.animation.gap;
+        }
+
+        setupEventListeners() {
+            // Botões
+            this.btnPrev?.addEventListener('click', () => this.move(-1));
+            this.btnNext?.addEventListener('click', () => this.move(1));
+
+            // Resize com Debounce
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    this.calculateDimensions();
+                    this.update(false);
+                }, 200);
+            });
+
+            // Touch Swipe
+            let startX = 0;
+            this.track.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+            this.track.addEventListener('touchend', e => {
+                const diff = startX - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > 50) this.move(diff > 0 ? 1 : -1);
+            }, { passive: true });
+
+            // Teclado
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') this.move(-1);
+                if (e.key === 'ArrowRight') this.move(1);
+            });
+
+            // Click nos Cards
+            this.allCards.forEach((card, index) => {
+                card.addEventListener('click', () => {
+                    if (!this.isTransitioning) this.smartNavigateTo(index);
+                });
+            });
+
+            // Indicadores
+            this.indicators.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    if (!this.isTransitioning) this.smartNavigateTo(index + 1);
+                });
+            });
+        }
+
+        // Movimento Básico (Next/Prev)
+        move(direction) {
+            if (this.isTransitioning) return;
+
+            this.isTransitioning = true;
+            this.currentIndex += direction;
+            this.update(true);
+            this.handleInfiniteLoop();
+        }
+
+        // Lógica do Loop Infinito
+        handleInfiniteLoop() {
+            // Espera a animação terminar e verifica se precisa pular
+            setTimeout(() => {
+                if (this.currentIndex === this.allCards.length - 1) {
+                    this.currentIndex = 1;
+                    this.update(false);
+                } else if (this.currentIndex === 0) {
+                    this.currentIndex = this.totalOriginal;
+                    this.update(false);
                 }
+                this.isTransitioning = false;
+            }, CONFIG.animation.duration);
+        }
 
-                setTimeout(animateStep, stepDelay);
+        // Navegação Inteligente (Caminho mais curto)
+        smartNavigateTo(targetIndex) {
+            if (this.isTransitioning || this.currentIndex === targetIndex) return;
+
+            this.isTransitioning = true;
+
+            // Se a distância for pequena, vai direto
+            if (Math.abs(targetIndex - this.currentIndex) === 1) {
+                this.currentIndex = targetIndex;
+                this.update(true);
+                this.handleInfiniteLoop();
+                return;
+            }
+
+            // Animação passo a passo (Simula a navegação rápida)
+            const direction = targetIndex > this.currentIndex ? 1 : -1;
+            const steps = Math.abs(targetIndex - this.currentIndex);
+            let currentStep = 0;
+
+            const stepInterval = setInterval(() => {
+                currentStep++;
+                this.currentIndex += direction;
+                this.update(true);
+
+                if (currentStep >= steps) {
+                    clearInterval(stepInterval);
+                    this.handleInfiniteLoop();
+                }
+            }, 100); // Rápido entre cards intermediários
+        }
+
+        // Renderização
+        update(animate) {
+            const offset = -(this.currentIndex * (this.cardWidth + this.gap));
+
+            this.track.style.transition = animate
+                ? `transform ${CONFIG.animation.duration}ms cubic-bezier(0.4, 0, 0.2, 1)`
+                : 'none';
+
+            this.track.style.transform = `translateX(calc(50% - ${this.cardWidth / 2}px + ${offset}px))`;
+
+            // Atualiza Classes e Vídeo apenas se for um card válido
+            // O timeout garante que a classe active troque apenas quando o card chegar
+            const updateUI = () => {
+                const realIndex = this.getRealIndex();
+
+                // Classes dos Cards
+                this.allCards.forEach(c => c.classList.remove('active'));
+                this.allCards[this.currentIndex].classList.add('active');
+
+                // Indicadores
+                this.indicators.forEach((dot, i) => dot.classList.toggle('active', i === realIndex));
+
+                // Vídeo
+                this.updateVideo();
+            };
+
+            if (animate) {
+                // Pequeno delay para sincronizar troca de vídeo com a chegada do slide
+                setTimeout(updateUI, CONFIG.animation.duration / 2);
             } else {
-                isTransitioning = false;
+                updateUI();
             }
         }
 
-        animateStep();
-    }
-
-    // NAVEGAÇÃO - PRÓXIMO
-    function nextSlide() {
-        if (isTransitioning || isExpanded) return;
-        isTransitioning = true;
-        currentIndex++;
-        updateCarousel();
-
-        // Verificar se chegou no clone
-        if (currentIndex === totalCards + 1) {
-            setTimeout(() => {
-                currentIndex = 1;
-                updateCarousel(false);
-                isTransitioning = false;
-            }, 600);
-        } else {
-            setTimeout(() => {
-                isTransitioning = false;
-            }, 600);
-        }
-    }
-
-    // NAVEGAÇÃO - ANTERIOR
-    function prevSlide() {
-        if (isTransitioning || isExpanded) return;
-        isTransitioning = true;
-        currentIndex--;
-        updateCarousel();
-
-        // Verificar se chegou no clone
-        if (currentIndex === 0) {
-            setTimeout(() => {
-                currentIndex = totalCards;
-                updateCarousel(false);
-                isTransitioning = false;
-            }, 600);
-        } else {
-            setTimeout(() => {
-                isTransitioning = false;
-            }, 600);
-        }
-    }
-
-    // EVENT LISTENERS - BOTÕES
-    btnPrev.addEventListener('click', prevSlide);
-    btnNext.addEventListener('click', nextSlide);
-
-    // NAVEGAÇÃO POR TECLADO
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && isExpanded) {
-            collapseCard();
-            return;
+        getRealIndex() {
+            if (this.currentIndex === 0) return this.totalOriginal - 1;
+            if (this.currentIndex === this.allCards.length - 1) return 0;
+            return this.currentIndex - 1;
         }
 
-        if (isExpanded) return;
+        updateVideo() {
+            if (!this.bgVideo) return;
 
-        if (e.key === 'ArrowLeft') {
-            prevSlide();
-        } else if (e.key === 'ArrowRight') {
-            nextSlide();
-        }
-    });
+            const activeCard = this.allCards[this.currentIndex];
+            const videoSrc = activeCard.dataset.video;
 
-    // TOUCH SWIPE (MOBILE)
-    let touchStartX = 0;
-    let touchEndX = 0;
+            if (videoSrc && !this.bgVideo.src.includes(videoSrc)) {
+                // Verifica se é URL completa ou relativa
+                const finalSrc = videoSrc.startsWith('http') ? videoSrc : `${window.location.origin}/${videoSrc}`;
 
-    carouselTrack.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-    }, { passive: true });
-
-    carouselTrack.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].clientX;
-        handleSwipe();
-    }, { passive: true });
-
-    function handleSwipe() {
-        const diff = touchStartX - touchEndX;
-        const threshold = 50;
-
-        if (Math.abs(diff) > threshold) {
-            if (diff > 0) {
-                nextSlide();
-            } else {
-                prevSlide();
+                this.bgVideo.src = finalSrc;
+                // Promise catch para evitar erros de play interrompido
+                this.bgVideo.play().catch(e => console.log("Video play interrupted/prevented"));
             }
         }
-    }
 
-    // EXPANDIR/RECOLHER CARD
-    function expandCard(card) {
-        if (isExpanded || isTransitioning) return;
+        setupVideoObserver() {
+            if (!this.section || !this.bgVideo) return;
 
-        isExpanded = true;
-        expandedCard = card;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    entry.isIntersecting ? this.bgVideo.play().catch(() => { }) : this.bgVideo.pause();
+                });
+            }, { threshold: 0.5 });
 
-        card.classList.add('expanded');
-        carouselSection.classList.add('card-expanded');
+            observer.observe(this.section);
+        }
 
-        // Desabilitar scroll do body
-        document.body.style.overflow = 'hidden';
-    }
-
-    function collapseCard() {
-        if (!isExpanded || !expandedCard) return;
-
-        expandedCard.classList.remove('expanded');
-        carouselSection.classList.remove('card-expanded');
-
-        isExpanded = false;
-        expandedCard = null;
-
-        // Reabilitar scroll do body
-        document.body.style.overflow = '';
-    }
-
-    // CLICK NOS CARDS PARA NAVEGAR OU EXPANDIR
-    allCards.forEach((card, index) => {
-        card.addEventListener('click', (e) => {
-            // Se já está expandido, não faz nada (exceto no botão de fechar)
-            if (card.classList.contains('expanded')) return;
-
-            if (isTransitioning) return;
-
-            // Se é o card ativo, expande
-            if (index === currentIndex) {
-                expandCard(card);
-            } else {
-                // Se não é o card ativo, navega para ele
-                navigateToIndex(index);
-            }
-        });
-
-        // Botão de fechar
-        const closeBtn = card.querySelector('.card-close-btn');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                collapseCard();
+        revealCards() {
+            this.originalCards.forEach((card, i) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, i * 100);
             });
         }
-    });
-
-    // Fechar ao clicar no overlay
-    const carouselSection = document.querySelector('.carousel-section');
-    carouselSection.addEventListener('click', (e) => {
-        if (isExpanded && e.target === carouselSection) {
-            collapseCard();
-        }
-    });
-
-    // Fechar com ESC
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && isExpanded) {
-            collapseCard();
-        }
-    });
-
-    // OBSERVER DE VÍDEO (para pausar quando não visível)
-    const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (bgVideo) {
-                if (entry.isIntersecting) {
-                    bgVideo.play().catch(() => { });
-                } else {
-                    bgVideo.pause();
-                }
-            }
-        });
-    }, { threshold: 0.5 });
-
-    if (carouselSection) {
-        videoObserver.observe(carouselSection);
     }
 
-    // PAUSAR VÍDEO QUANDO ABA INATIVA
-    document.addEventListener('visibilitychange', () => {
-        if (bgVideo) {
-            if (document.hidden) {
-                bgVideo.pause();
-            } else {
-                bgVideo.play().catch(() => { });
-            }
-        }
+    // 5. INICIALIZAÇÃO
+    // Instancia as classes
+    const sidebar = new Sidebar();
+    const parallax = new ParallaxManager();
+
+    // Pequeno delay para garantir que o layout renderizou
+    requestAnimationFrame(() => {
+        const carousel = new Carousel();
     });
 
-    // REDIMENSIONAMENTO
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            carouselTrack.style.transition = 'none';
-            updateCarousel(false);
-            setTimeout(() => {
-                carouselTrack.style.transition = '';
-            }, 50);
-        }, 250);
-    });
-
-    // ANIMAÇÃO DE ENTRADA (apenas cards originais)
-    cards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-
-        setTimeout(() => {
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            card.style.opacity = '';
-            card.style.transform = '';
-        }, index * 100);
-    });
-
-    // INICIALIZAR
-    init();
-
-    // Garantir posicionamento correto após carregamento completo
-    window.addEventListener('load', () => {
-        carouselTrack.style.transition = 'none';
-        updateCarousel(false);
-        setTimeout(() => {
-            carouselTrack.style.transition = '';
-        }, 100);
-    });
-
-    // ===== PARALLAX EFFECT =====
-    const parallaxElements = document.querySelectorAll('.parallax-element');
-    const introContent = document.querySelector('.intro-content');
-
-    let ticking = false;
-
-    function updateParallax() {
-        const scrolled = window.pageYOffset;
-        const windowHeight = window.innerHeight;
-
-        // Parallax dos elementos SVG
-        parallaxElements.forEach((element, index) => {
-            const speed = 0.3 + (index * 0.1); // Diferentes velocidades
-            const yPos = -(scrolled * speed);
-            element.style.transform = `translateY(${yPos}px)`;
-        });
-
-        // Parallax do conteúdo intro
-        if (introContent && scrolled < windowHeight) {
-            const opacity = 1 - (scrolled / windowHeight) * 1.5;
-            const scale = 1 - (scrolled / windowHeight) * 0.2;
-            introContent.style.opacity = Math.max(0, opacity);
-            introContent.style.transform = `translateY(${scrolled * 0.5}px) scale(${Math.max(0.8, scale)})`;
-        }
-
-        ticking = false;
-    }
-
-    function requestTick() {
-        if (!ticking) {
-            requestAnimationFrame(updateParallax);
-            ticking = true;
-        }
-    }
-
-    window.addEventListener('scroll', requestTick, { passive: true });
-
-    // ===== MOUSE PARALLAX =====
-    let mouseX = 0;
-    let mouseY = 0;
-    let currentX = 0;
-    let currentY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-    });
-
-    function animateMouseParallax() {
-        currentX += (mouseX - currentX) * 0.05;
-        currentY += (mouseY - currentY) * 0.05;
-
-        parallaxElements.forEach((element, index) => {
-            const depth = (index + 1) * 10;
-            element.style.transform += ` translate(${currentX * depth}px, ${currentY * depth}px)`;
-        });
-
-        requestAnimationFrame(animateMouseParallax);
-    }
-
-    animateMouseParallax();
-
-    // ===== CARDS HOVER EFFECT =====
-    allCards.forEach((card) => {
-        card.addEventListener('mouseenter', function () {
-            if (!this.classList.contains('expanded')) {
-                this.style.transform = 'scale(0.95) translateY(-10px)';
-            }
-        });
-
-        card.addEventListener('mouseleave', function () {
-            if (!this.classList.contains('expanded') && !this.classList.contains('active')) {
-                this.style.transform = '';
-            }
-        });
-    });
 });
