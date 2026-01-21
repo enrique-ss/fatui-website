@@ -823,10 +823,8 @@ body {
 .carousel-btn {
     width: 45px;
     height: 45px;
-    background: rgba(0, 5, 15, 0.6);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(163, 214, 255, 0.3);
-    border-radius: 50%;
+    background: rgba(0, 0, 0, 0);
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -836,10 +834,7 @@ body {
 }
 
 .carousel-btn:hover {
-    background: rgba(163, 214, 255, 0.2);
-    border-color: #a3d6ff;
-    box-shadow: 0 0 20px rgba(163, 214, 255, 0.4);
-    transform: scale(1.1);
+    transform: scale(1.4);
 }
 
 .carousel-btn:active {
