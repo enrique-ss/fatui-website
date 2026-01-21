@@ -278,6 +278,146 @@ body {
     z-index: 2;
 }
 
+/* Parallax Elements */
+.parallax-container {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.parallax-element {
+    position: absolute;
+    opacity: 0;
+    animation: fadeInParallax 2s ease-in forwards;
+}
+
+@keyframes fadeInParallax {
+    to {
+        opacity: 1;
+    }
+}
+
+.snowflake {
+    width: 60px;
+    height: 60px;
+    animation: float 15s ease-in-out infinite, rotate 20s linear infinite, fadeInParallax 2s ease-in forwards;
+}
+
+.snowflake:nth-child(1) {
+    top: 10%;
+    left: 15%;
+    animation-delay: 0s, 0s, 0.2s;
+}
+
+.snowflake:nth-child(2) {
+    top: 60%;
+    right: 20%;
+    animation-delay: 3s, 5s, 0.5s;
+    animation-duration: 18s, 25s, 2s;
+}
+
+.snowflake:nth-child(3) {
+    bottom: 20%;
+    left: 25%;
+    animation-delay: 6s, 10s, 0.8s;
+    animation-duration: 20s, 30s, 2s;
+}
+
+.crystal {
+    width: 80px;
+    height: 80px;
+    animation: float 12s ease-in-out infinite, pulse 3s ease-in-out infinite, fadeInParallax 2s ease-in forwards;
+}
+
+.crystal:nth-child(4) {
+    top: 25%;
+    right: 10%;
+    animation-delay: 2s, 1s, 1s;
+}
+
+.crystal:nth-child(5) {
+    bottom: 15%;
+    right: 30%;
+    animation-delay: 5s, 2s, 1.3s;
+    animation-duration: 15s, 4s, 2s;
+}
+
+.star {
+    width: 50px;
+    height: 50px;
+    animation: float 10s ease-in-out infinite, twinkle 2s ease-in-out infinite, fadeInParallax 2s ease-in forwards;
+}
+
+.star:nth-child(6) {
+    top: 15%;
+    right: 40%;
+    animation-delay: 1s, 0.5s, 1.5s;
+}
+
+.star:nth-child(7) {
+    bottom: 30%;
+    left: 10%;
+    animation-delay: 4s, 1.5s, 1.8s;
+    animation-duration: 14s, 3s, 2s;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+
+    25% {
+        transform: translateY(-20px) translateX(10px);
+    }
+
+    50% {
+        transform: translateY(-40px) translateX(-10px);
+    }
+
+    75% {
+        transform: translateY(-20px) translateX(5px);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
 .intro-content {
     position: relative;
     z-index: 10;
@@ -287,6 +427,19 @@ body {
     background: rgba(0, 5, 15, 0.3);
     text-align: center;
     max-width: 1100px;
+    animation: slideUp 1s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .tagline {
@@ -390,7 +543,7 @@ body {
     position: relative;
     width: 100%;
     max-width: 1400px;
-    height: 600px;
+    height: 550px;
     z-index: 10;
     perspective: 2000px;
 }
@@ -413,8 +566,8 @@ body {
 
 .harbinger-card {
     flex-shrink: 0;
-    width: 380px;
-    height: 520px;
+    width: 360px;
+    height: 480px;
     position: relative;
     transition: all 0.6s ease;
     opacity: 0.4;
@@ -651,7 +804,7 @@ body {
 }
 
 .carousel-controls {
-    position: fixed;
+    position: absolute;
     bottom: 5px;
     left: 50%;
     transform: translateX(-50%);
@@ -835,8 +988,8 @@ body {
     }
 
     .harbinger-card {
-        width: 280px;
-        height: 480px;
+        width: 260px;
+        height: 440px;
     }
 
     .indicator-dot {

@@ -447,4 +447,81 @@ document.addEventListener('DOMContentLoaded', () => {
             carouselTrack.style.transition = '';
         }, 100);
     });
+
+    // ===== PARALLAX EFFECT =====
+    const parallaxElements = document.querySelectorAll('.parallax-element');
+    const introContent = document.querySelector('.intro-content');
+
+    let ticking = false;
+
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        const windowHeight = window.innerHeight;
+
+        // Parallax dos elementos SVG
+        parallaxElements.forEach((element, index) => {
+            const speed = 0.3 + (index * 0.1); // Diferentes velocidades
+            const yPos = -(scrolled * speed);
+            element.style.transform = `translateY(${yPos}px)`;
+        });
+
+        // Parallax do conteúdo intro
+        if (introContent && scrolled < windowHeight) {
+            const opacity = 1 - (scrolled / windowHeight) * 1.5;
+            const scale = 1 - (scrolled / windowHeight) * 0.2;
+            introContent.style.opacity = Math.max(0, opacity);
+            introContent.style.transform = `translateY(${scrolled * 0.5}px) scale(${Math.max(0.8, scale)})`;
+        }
+
+        ticking = false;
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }
+
+    window.addEventListener('scroll', requestTick, { passive: true });
+
+    // ===== MOUSE PARALLAX =====
+    let mouseX = 0;
+    let mouseY = 0;
+    let currentX = 0;
+    let currentY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    function animateMouseParallax() {
+        currentX += (mouseX - currentX) * 0.05;
+        currentY += (mouseY - currentY) * 0.05;
+
+        parallaxElements.forEach((element, index) => {
+            const depth = (index + 1) * 10;
+            element.style.transform += ` translate(${currentX * depth}px, ${currentY * depth}px)`;
+        });
+
+        requestAnimationFrame(animateMouseParallax);
+    }
+
+    animateMouseParallax();
+
+    // ===== CARDS HOVER EFFECT =====
+    allCards.forEach((card) => {
+        card.addEventListener('mouseenter', function () {
+            if (!this.classList.contains('expanded')) {
+                this.style.transform = 'scale(0.95) translateY(-10px)';
+            }
+        });
+
+        card.addEventListener('mouseleave', function () {
+            if (!this.classList.contains('expanded') && !this.classList.contains('active')) {
+                this.style.transform = '';
+            }
+        });
+    });
 });
