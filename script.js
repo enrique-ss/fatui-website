@@ -75,8 +75,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function init() {
         // Posicionar no primeiro card real (índice 1 por causa do clone)
         currentIndex = 1;
-        updateCarousel(false);
-        createIndicators();
+        carouselTrack.style.transition = 'none';
+
+        // Aguardar renderização completa antes de posicionar
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                updateCarousel(false);
+                createIndicators();
+                carouselTrack.style.transition = '';
+            });
+        });
     }
 
     // ATUALIZAR CARROSSEL
@@ -142,6 +150,80 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateCarousel();
             });
         });
+    }
+
+    // NAVEGAÇÃO INTELIGENTE PARA ÍNDICE ESPECÍFICO
+    function navigateToIndex(targetIndex) {
+        if (isTransitioning) return;
+
+        isTransitioning = true;
+        const currentReal = getRealIndex();
+        let targetReal;
+
+        // Determinar o índice real do alvo
+        if (targetIndex === 0) {
+            targetReal = totalCards - 1; // Clone do último
+        } else if (targetIndex === totalCards + 1) {
+            targetReal = 0; // Clone do primeiro
+        } else {
+            targetReal = targetIndex - 1; // Índice real
+        }
+
+        // Calcular a distância mais curta
+        const distance = targetReal - currentReal;
+        const absDistance = Math.abs(distance);
+        const halfTotal = Math.floor(totalCards / 2);
+
+        // Decidir direção mais curta
+        let steps;
+        if (absDistance <= halfTotal) {
+            // Caminho direto é mais curto
+            steps = distance;
+        } else {
+            // Caminho inverso é mais curto
+            if (distance > 0) {
+                steps = distance - totalCards;
+            } else {
+                steps = distance + totalCards;
+            }
+        }
+
+        // Navegar passo a passo
+        const stepDelay = 150;
+        let stepCount = 0;
+        const direction = steps > 0 ? 1 : -1;
+        const totalSteps = Math.abs(steps);
+
+        function animateStep() {
+            if (stepCount < totalSteps) {
+                currentIndex += direction;
+                updateCarousel();
+                stepCount++;
+
+                // Verificar se precisa ajustar por causa dos clones
+                if (currentIndex === 0) {
+                    setTimeout(() => {
+                        currentIndex = totalCards;
+                        updateCarousel(false);
+                        setTimeout(animateStep, stepDelay);
+                    }, 600);
+                    return;
+                } else if (currentIndex === totalCards + 1) {
+                    setTimeout(() => {
+                        currentIndex = 1;
+                        updateCarousel(false);
+                        setTimeout(animateStep, stepDelay);
+                    }, 600);
+                    return;
+                }
+
+                setTimeout(animateStep, stepDelay);
+            } else {
+                isTransitioning = false;
+            }
+        }
+
+        animateStep();
     }
 
     // NAVEGAÇÃO - PRÓXIMO
@@ -272,8 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 expandCard(card);
             } else {
                 // Se não é o card ativo, navega para ele
-                currentIndex = index;
-                updateCarousel();
+                navigateToIndex(index);
             }
         });
 
@@ -288,6 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Fechar ao clicar no overlay
+    const carouselSection = document.querySelector('.carousel-section');
     carouselSection.addEventListener('click', (e) => {
         if (isExpanded && e.target === carouselSection) {
             collapseCard();
@@ -314,7 +396,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { threshold: 0.5 });
 
-    const carouselSection = document.querySelector('.carousel-section');
     if (carouselSection) {
         videoObserver.observe(carouselSection);
     }
@@ -335,7 +416,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
+            carouselTrack.style.transition = 'none';
             updateCarousel(false);
+            setTimeout(() => {
+                carouselTrack.style.transition = '';
+            }, 50);
         }, 250);
     });
 
@@ -353,4 +438,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // INICIALIZAR
     init();
+
+    // Garantir posicionamento correto após carregamento completo
+    window.addEventListener('load', () => {
+        carouselTrack.style.transition = 'none';
+        updateCarousel(false);
+        setTimeout(() => {
+            carouselTrack.style.transition = '';
+        }, 100);
+    });
 });
