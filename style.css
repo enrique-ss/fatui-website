@@ -74,15 +74,6 @@ body {
     pointer-events: none;
 }
 
-.logo {
-    font-family: 'Cinzel', serif;
-    font-weight: 900;
-    letter-spacing: clamp(2px, 0.3vw, 4px);
-    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
-    color: #a3d6ff;
-    text-shadow: 0 0 15px rgba(163, 214, 255, 0.6);
-}
-
 .header-right a {
     font-family: 'Cinzel', serif;
     font-size: clamp(0.6rem, 1vw, 0.75rem);
@@ -91,6 +82,7 @@ body {
     text-decoration: none;
     opacity: 0.8;
     transition: all 0.3s ease;
+    padding-left: 20px;
 }
 
 .header-right a:hover {
