@@ -28,7 +28,7 @@ body {
     overflow-x: hidden;
 }
 
-/* ===== ESTILIZAÇÃO GLOBAL DAS BARRAS DE ROLAGEM ===== */
+/* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -56,12 +56,12 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 70px;
+    height: clamp(60px, 8vh, 70px);
     z-index: 999;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    padding: 0 40px;
+    padding: 0 clamp(16px, 3vw, 40px);
     background: rgba(2, 5, 10, 0.75);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -79,22 +79,22 @@ body {
     justify-self: end;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: clamp(12px, 2vw, 20px);
 }
 
 .logo {
     font-family: 'Cinzel', serif;
     font-weight: 900;
-    letter-spacing: 4px;
-    font-size: 1.2rem;
+    letter-spacing: clamp(2px, 0.3vw, 4px);
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
     color: #a3d6ff;
     text-shadow: 0 0 15px rgba(163, 214, 255, 0.6);
 }
 
 .header-right a {
     font-family: 'Cinzel', serif;
-    font-size: 0.75rem;
-    letter-spacing: 3px;
+    font-size: clamp(0.6rem, 1vw, 0.75rem);
+    letter-spacing: clamp(2px, 0.2vw, 3px);
     color: #ddd;
     text-decoration: none;
     opacity: 0.8;
@@ -107,8 +107,8 @@ body {
 }
 
 .hamburger-btn {
-    width: 40px;
-    height: 40px;
+    width: clamp(35px, 5vw, 40px);
+    height: clamp(35px, 5vw, 40px);
     background: transparent;
     border: 1px solid rgba(163, 214, 255, 0.3);
     border-radius: 4px;
@@ -127,7 +127,7 @@ body {
 }
 
 .hamburger-line {
-    width: 20px;
+    width: clamp(16px, 3vw, 20px);
     height: 2px;
     background: #a3d6ff;
     transition: all 0.3s ease;
@@ -137,12 +137,12 @@ body {
     box-shadow: 0 0 8px #a3d6ff;
 }
 
-/* ===== SIDEBAR MENU ===== */
+/* ===== SIDEBAR ===== */
 .sidebar-menu {
     position: fixed;
     top: 0;
     left: -350px;
-    width: 350px;
+    width: min(350px, 85vw);
     height: 100vh;
     background: rgba(2, 5, 10, 0.95);
     backdrop-filter: blur(20px);
@@ -180,15 +180,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 25px 30px;
+    padding: clamp(20px, 3vh, 25px) clamp(20px, 3vw, 30px);
     border-bottom: 1px solid rgba(163, 214, 255, 0.15);
 }
 
 .sidebar-title {
     font-family: 'Cinzel', serif;
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
     font-weight: 900;
-    letter-spacing: 5px;
+    letter-spacing: clamp(3px, 0.5vw, 5px);
     color: #a3d6ff;
     text-shadow: 0 0 15px rgba(163, 214, 255, 0.6);
 }
@@ -219,10 +219,10 @@ body {
 
 .sidebar-item {
     display: grid;
-    grid-template-columns: 50px 60px 1fr;
+    grid-template-columns: clamp(45px, 6vw, 50px) clamp(50px, 7vw, 60px) 1fr;
     grid-template-rows: auto auto;
-    gap: 5px 15px;
-    padding: 18px 30px;
+    gap: 5px clamp(12px, 2vw, 15px);
+    padding: clamp(15px, 2vh, 18px) clamp(20px, 3vw, 30px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     text-decoration: none;
     transition: all 0.3s ease;
@@ -252,8 +252,8 @@ body {
 .sidebar-icon {
     grid-column: 1;
     grid-row: 1 / 3;
-    width: 50px;
-    height: 50px;
+    width: clamp(45px, 6vw, 50px);
+    height: clamp(45px, 6vw, 50px);
     border-radius: 8px;
     object-fit: cover;
     border: 2px solid rgba(163, 214, 255, 0.3);
@@ -271,7 +271,7 @@ body {
     grid-column: 2;
     grid-row: 1 / 3;
     font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
     font-weight: 700;
     color: #a3d6ff;
     display: flex;
@@ -284,7 +284,7 @@ body {
     grid-column: 3;
     grid-row: 1;
     font-family: 'Cinzel', serif;
-    font-size: 1.1rem;
+    font-size: clamp(0.95rem, 1.4vw, 1.1rem);
     font-weight: 700;
     color: #ffffff;
     letter-spacing: 1px;
@@ -293,7 +293,7 @@ body {
 .sidebar-item .sidebar-title {
     grid-column: 3;
     grid-row: 2;
-    font-size: 0.85rem;
+    font-size: clamp(0.75rem, 1.1vw, 0.85rem);
     color: rgba(255, 255, 255, 0.6);
     font-style: italic;
     font-weight: 400;
@@ -317,7 +317,7 @@ body {
     pointer-events: all;
 }
 
-/* ===== INTRO SECTION ===== */
+/* ===== INTRO ===== */
 #intro {
     position: relative;
     height: 100vh;
@@ -345,12 +345,12 @@ body {
 .intro-content {
     position: relative;
     z-index: 10;
-    padding: 60px 100px;
+    padding: clamp(40px, 6vh, 60px) clamp(20px, 8vw, 100px);
     backdrop-filter: blur(4px);
     border: 1px solid rgba(255, 255, 255, 0.05);
     background: rgba(0, 5, 15, 0.3);
     text-align: center;
-    max-width: 1100px;
+    max-width: min(1100px, 90vw);
     animation: slideUp 1s ease-out;
 }
 
@@ -368,10 +368,10 @@ body {
 
 .tagline {
     font-family: 'Montserrat', sans-serif;
-    letter-spacing: 8px;
-    font-size: 0.8rem;
+    letter-spacing: clamp(4px, 0.8vw, 8px);
+    font-size: clamp(0.7rem, 1vw, 0.8rem);
     color: #a3d6ff;
-    margin-bottom: 20px;
+    margin-bottom: clamp(15px, 2vh, 20px);
     opacity: 0.8;
     text-transform: uppercase;
 }
@@ -401,23 +401,23 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 40px 0;
+    margin: clamp(30px, 5vh, 40px) 0;
 }
 
 .divisor-gótico::before,
 .divisor-gótico::after {
     content: "";
     height: 1px;
-    width: 100px;
+    width: clamp(50px, 10vw, 100px);
     background: linear-gradient(90deg, transparent, #a3d6ff, transparent);
 }
 
 .diamante {
-    width: 12px;
-    height: 12px;
+    width: clamp(10px, 1.5vw, 12px);
+    height: clamp(10px, 1.5vw, 12px);
     background: #a3d6ff;
     transform: rotate(45deg);
-    margin: 0 20px;
+    margin: 0 clamp(15px, 2vw, 20px);
     box-shadow: 0 0 15px #a3d6ff;
     border: 1px solid #fff;
 }
@@ -427,12 +427,12 @@ body {
     font-size: clamp(0.9rem, 1.5vw, 1.2rem);
     font-weight: 300;
     color: #cbd5e0;
-    letter-spacing: 5px;
+    letter-spacing: clamp(3px, 0.5vw, 5px);
 }
 
 .vontade {
     display: block;
-    margin-top: 10px;
+    margin-top: clamp(8px, 1vh, 10px);
 }
 
 /* ===== CAROUSEL SECTION ===== */
@@ -452,6 +452,7 @@ body {
     height: 100%;
     object-fit: cover;
     filter: brightness(0.4) contrast(1.1) saturate(0.8);
+    transition: opacity 0.3s ease;
 }
 
 .carousel-overlay {
@@ -467,7 +468,7 @@ body {
     position: relative;
     width: 100%;
     max-width: 1400px;
-    height: 550px;
+    height: clamp(450px, 65vh, 550px);
     z-index: 10;
     perspective: 2000px;
 }
@@ -483,17 +484,20 @@ body {
 
 .carousel-track {
     display: flex;
-    gap: 40px;
+    gap: clamp(20px, 3vw, 40px);
     padding: 0 20px;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
 }
 
 .harbinger-card {
     flex-shrink: 0;
-    width: 360px;
-    height: 480px;
+    width: clamp(240px, 28vw, 360px);
+    height: clamp(320px, 45vh, 480px);
     position: relative;
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+        filter 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+        height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0.3;
     transform: scale(0.75);
     filter: brightness(0.4) saturate(0.5);
@@ -502,17 +506,15 @@ body {
 
 .harbinger-card.active {
     opacity: 1;
-    height: 600px;
-    transform: scale(1.15);
+    height: clamp(400px, 55vh, 600px);
+    transform: scale(clamp(1.05, 1.1, 1.15));
     filter: brightness(1.3) saturate(1.2);
     z-index: 10;
 }
 
 .harbinger-card.expanded {
-    width: 90vw;
-    max-width: 1200px;
-    height: 85vh;
-    max-height: 700px;
+    width: min(1200px, 90vw);
+    height: min(700px, 85vh);
     position: fixed;
     top: 50%;
     left: 50%;
@@ -574,52 +576,55 @@ body {
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 30px;
-    height: 30px;
+    width: clamp(20px, 3vw, 30px);
+    height: clamp(20px, 3vw, 30px);
     background: var(--card-color);
     opacity: 0.5;
     clip-path: polygon(100% 0, 100% 100%, 0 100%);
 }
 
 .card-header-gothic {
-    padding: 30px 30px 20px;
+    padding: clamp(20px, 3vh, 30px) clamp(20px, 3vw, 30px) clamp(15px, 2vh, 20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .card-rank {
     font-family: 'Cinzel', serif;
-    font-size: 0.75rem;
-    letter-spacing: 4px;
+    font-size: clamp(0.65rem, 1vw, 0.75rem);
+    letter-spacing: clamp(3px, 0.4vw, 4px);
     color: var(--card-color);
     text-transform: uppercase;
     opacity: 0.7;
-    margin-bottom: 8px;
+    margin-bottom: clamp(6px, 1vh, 8px);
 }
 
 .card-title-gothic {
     font-family: 'Cinzel', serif;
-    font-size: 2rem;
+    font-size: clamp(1.3rem, 2.5vw, 2rem);
     font-weight: 900;
     color: var(--card-color);
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: clamp(1px, 0.2vw, 2px);
     text-shadow: 0 0 20px var(--card-color);
+    line-height: 1.2;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .card-subtitle-gothic {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.85rem;
+    font-size: clamp(0.75rem, 1.1vw, 0.85rem);
     color: rgba(255, 255, 255, 0.6);
     font-style: italic;
     letter-spacing: 1px;
-    margin-top: 5px;
+    margin-top: clamp(4px, 0.5vh, 5px);
 }
 
 .gothic-divider {
     display: flex;
     align-items: center;
-    padding: 0 30px;
-    margin: 15px 0;
+    padding: 0 clamp(20px, 3vw, 30px);
+    margin: clamp(12px, 2vh, 15px) 0;
 }
 
 .gothic-divider::before,
@@ -631,17 +636,17 @@ body {
 }
 
 .gothic-ornament {
-    width: 8px;
-    height: 8px;
+    width: clamp(6px, 1vw, 8px);
+    height: clamp(6px, 1vw, 8px);
     background: var(--card-color);
     transform: rotate(45deg);
-    margin: 0 15px;
+    margin: 0 clamp(12px, 2vw, 15px);
     box-shadow: 0 0 10px var(--card-color);
 }
 
 .card-content-gothic {
     flex: 1;
-    padding: 20px 30px;
+    padding: clamp(15px, 2.5vh, 20px) clamp(20px, 3vw, 30px);
     overflow-y: auto;
     display: grid;
     grid-template-columns: 1fr;
@@ -650,8 +655,15 @@ body {
 
 .harbinger-card.expanded .card-content-gothic {
     grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    padding: 30px 40px;
+    gap: clamp(20px, 3vw, 30px);
+    padding: clamp(25px, 4vh, 30px) clamp(30px, 4vw, 40px);
+}
+
+@media (max-width: 768px) {
+    .harbinger-card.expanded .card-content-gothic {
+        grid-template-columns: 1fr;
+        gap: clamp(15px, 2vh, 20px);
+    }
 }
 
 .card-content-gothic::-webkit-scrollbar {
@@ -664,30 +676,30 @@ body {
 }
 
 .card-section {
-    margin-bottom: 20px;
+    margin-bottom: clamp(15px, 2.5vh, 20px);
 }
 
 .section-title-gothic {
     font-family: 'Cinzel', serif;
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 1.2vw, 0.9rem);
     color: var(--card-color);
     text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 10px;
+    letter-spacing: clamp(2px, 0.3vw, 3px);
+    margin-bottom: clamp(8px, 1.5vh, 10px);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: clamp(8px, 1vw, 10px);
 }
 
 .section-title-gothic::before {
     content: "";
     width: 3px;
-    height: 14px;
+    height: clamp(12px, 1.8vh, 14px);
     background: var(--card-color);
 }
 
 .card-text-gothic {
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 1.1vw, 0.9rem);
     line-height: 1.6;
     color: #ddd;
 }
@@ -702,10 +714,10 @@ body {
 
 .card-close-btn {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
+    top: clamp(15px, 2vh, 20px);
+    right: clamp(15px, 2vw, 20px);
+    width: clamp(35px, 5vw, 40px);
+    height: clamp(35px, 5vw, 40px);
     background: rgba(0, 5, 15, 0.8);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -731,12 +743,12 @@ body {
 
 .carousel-controls {
     position: absolute;
-    bottom: 5px;
+    bottom: clamp(5px, 1vh, 10px);
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: clamp(20px, 3vw, 30px);
     z-index: 20;
     transition: opacity 0.3s ease;
 }
@@ -747,8 +759,8 @@ body {
 }
 
 .carousel-btn {
-    width: 45px;
-    height: 45px;
+    width: clamp(38px, 5vw, 45px);
+    height: clamp(38px, 5vw, 45px);
     background: rgba(0, 0, 0, 0);
     border: none;
     display: flex;
@@ -768,18 +780,18 @@ body {
 }
 
 .carousel-btn svg {
-    width: 20px;
-    height: 20px;
+    width: clamp(16px, 2.5vw, 20px);
+    height: clamp(16px, 2.5vw, 20px);
 }
 
 .carousel-indicators {
     display: flex;
-    gap: 12px;
+    gap: clamp(8px, 1.5vw, 12px);
 }
 
 .indicator-dot {
-    width: 8px;
-    height: 8px;
+    width: clamp(6px, 1vw, 8px);
+    height: clamp(6px, 1vw, 8px);
     background: rgba(255, 255, 255, 0.2);
     transform: rotate(45deg);
     cursor: pointer;
@@ -838,114 +850,4 @@ body {
 
 [data-character="tartaglia"] {
     --card-color: var(--tartaglia);
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-    .main-header {
-        padding: 0 16px;
-        gap: 10px;
-    }
-
-    .logo {
-        font-size: 0.9rem;
-        letter-spacing: 2px;
-    }
-
-    .header-right {
-        gap: 12px;
-    }
-
-    .header-right a {
-        font-size: 0.6rem;
-    }
-
-    .intro-content {
-        padding: 40px 20px;
-    }
-
-    .sidebar-menu {
-        width: 350px;
-        left: -350px;
-    }
-
-    .sidebar-header {
-        padding: 20px;
-    }
-
-    .sidebar-header .sidebar-title {
-        font-size: 1.2rem;
-        letter-spacing: 3px;
-    }
-
-    .sidebar-item {
-        padding: 15px 20px;
-        grid-template-columns: 45px 50px 1fr;
-    }
-
-    .sidebar-icon {
-        width: 45px;
-        height: 45px;
-    }
-
-    .carousel-controls {
-        bottom: 5px;
-        gap: 15px;
-    }
-
-    .carousel-btn {
-        width: 38px;
-        height: 38px;
-    }
-
-    .carousel-btn svg {
-        width: 16px;
-        height: 16px;
-    }
-
-    .harbinger-card.expanded {
-        width: 95vw;
-        height: 90vh;
-    }
-
-    .harbinger-card.expanded .card-content-gothic {
-        grid-template-columns: 1fr;
-        gap: 15px;
-        padding: 20px 25px;
-    }
-
-    .harbinger-card {
-        width: 280px;
-        height: 420px;
-    }
-
-    .card-title-gothic {
-        font-size: 1.5rem;
-        line-height: 1.2;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        letter-spacing: 1px;
-    }
-
-    .card-header-gothic {
-        padding: 20px 20px 15px;
-    }
-
-    .card-rank {
-        font-size: 0.65rem;
-        letter-spacing: 3px;
-    }
-
-    .card-subtitle-gothic {
-        font-size: 0.75rem;
-    }
-
-    .indicator-dot {
-        width: 6px;
-        height: 6px;
-    }
-
-    .carousel-indicators {
-        gap: 8px;
-    }
 }

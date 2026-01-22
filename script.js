@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // 1. CONFIGURAÇÕES GLOBAIS
-    // Centraliza todos os "números mágicos" e seletores
     const CONFIG = {
         selectors: {
             carousel: {
@@ -26,9 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         animation: {
-            duration: 600, // ms
-            gap: 40, // px (fallback)
-            stepDelay: 150 // ms (para navegação passo-a-passo)
+            duration: 600,
+            gap: 40,
+            stepDelay: 120
+        },
+        carousel: {
+            visibleSides: 2 // Quantos cards visíveis de cada lado
         }
     };
 
@@ -47,26 +49,21 @@ document.addEventListener('DOMContentLoaded', () => {
         init() {
             if (!this.menu) return;
 
-            // Bindings
             this.btnOpen?.addEventListener('click', () => this.toggle(true));
             this.btnClose?.addEventListener('click', () => this.toggle(false));
             this.overlay?.addEventListener('click', () => this.toggle(false));
 
-            // Navegação externa (conecta com o carrossel via evento customizado se necessário, 
-            // ou acessa a instância global se estiver disponível)
             this.items.forEach(item => {
                 item.addEventListener('click', (e) => {
                     e.preventDefault();
                     const targetIndex = parseInt(item.dataset.index);
 
-                    // Dispara evento para o carrossel ouvir
                     document.dispatchEvent(new CustomEvent('carousel:navigate', {
                         detail: { index: targetIndex }
                     }));
 
                     this.toggle(false);
 
-                    // Scroll suave
                     setTimeout(() => {
                         document.querySelector('#carousel-section')?.scrollIntoView({ behavior: 'smooth' });
                     }, 100);
@@ -82,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 3. MÓDULO PARALLAX & VISUAL EFFECTS
+    // 3. MÓDULO PARALLAX
     class ParallaxManager {
         constructor() {
             this.elements = document.querySelectorAll(CONFIG.selectors.parallax.elements);
@@ -113,13 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const scrolled = window.pageYOffset;
             const windowHeight = window.innerHeight;
 
-            // Elementos Flutuantes
             this.elements.forEach((el, index) => {
                 const speed = 0.3 + (index * 0.1);
                 el.style.transform = `translateY(${-scrolled * speed}px)`;
             });
 
-            // Fade Intro
             if (this.introContent && scrolled < windowHeight) {
                 const progress = scrolled / windowHeight;
                 this.introContent.style.opacity = Math.max(0, 1 - progress * 1.5);
@@ -133,28 +128,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         animateMouse() {
-            // Interpolação linear (Lerp) para suavidade
             this.mouse.currentX += (this.mouse.x - this.mouse.currentX) * 0.05;
             this.mouse.currentY += (this.mouse.y - this.mouse.currentY) * 0.05;
-
-            this.elements.forEach((el, index) => {
-                const depth = (index + 1) * 10;
-                // Nota: somamos ao transform existente via CSS ou JS seria ideal, 
-                // mas aqui aplicamos direto para simplificar o exemplo visual
-                // O ideal seria ter um container wrapper para o scroll e um inner para o mouse.
-                const currentTransform = el.style.transform || '';
-                // Pequeno hack para manter o scroll Y junto com o mouse move se necessário,
-                // mas para manter simples, aplicamos apenas o translate relativo aqui se o scroll não estiver sobrescrevendo tudo
-            });
-
             requestAnimationFrame(() => this.animateMouse());
         }
     }
 
-    // 4. MÓDULO CARROSSEL (CORE)
+    // 4. MÓDULO CARROSSEL (OTIMIZADO E MELHORADO)
     class Carousel {
         constructor() {
-            // Elementos
             const s = CONFIG.selectors.carousel;
             this.track = document.querySelector(s.track);
             this.originalCards = document.querySelectorAll(s.cards);
@@ -164,12 +146,13 @@ document.addEventListener('DOMContentLoaded', () => {
             this.btnNext = document.querySelector(s.btnNext);
             this.section = document.querySelector(s.section);
 
-            // Estado
             this.totalOriginal = this.originalCards.length;
-            this.currentIndex = 1; // Começa no 1 por causa do clone
+            this.currentIndex = 0; // Será ajustado após setup dos clones
             this.isTransitioning = false;
             this.cardWidth = 0;
             this.gap = 0;
+            this.rafId = null;
+            this.cloneOffset = 0;
 
             if (this.track && this.totalOriginal > 0) {
                 this.init();
@@ -177,37 +160,46 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         init() {
-            this.setupClones();
+            this.setupMultipleClones();
+            this.currentIndex = this.cloneOffset; // Posição inicial após clones
             this.calculateDimensions();
             this.setupEventListeners();
             this.setupVideoObserver();
-
-            // Entrada Inicial
             this.update(false);
             this.revealCards();
 
-            // Listener Global de Navegação (vindo da Sidebar)
             document.addEventListener('carousel:navigate', (e) => {
-                this.smartNavigateTo(e.detail.index + 1); // +1 offset do clone
+                this.navigateTo(e.detail.index + this.cloneOffset);
             });
         }
 
-        setupClones() {
-            const firstClone = this.originalCards[0].cloneNode(true);
-            const lastClone = this.originalCards[this.totalOriginal - 1].cloneNode(true);
+        setupMultipleClones() {
+            const fragment = document.createDocumentFragment();
+            const cloneCount = CONFIG.carousel.visibleSides + 1; // +1 para garantir buffer extra
 
-            firstClone.classList.remove('active');
-            lastClone.classList.remove('active');
+            // Clones no INÍCIO (últimos cards)
+            for (let i = this.totalOriginal - cloneCount; i < this.totalOriginal; i++) {
+                const clone = this.originalCards[i].cloneNode(true);
+                clone.classList.remove('active');
+                clone.classList.add('clone', 'clone-start');
+                fragment.appendChild(clone);
+            }
 
-            // Adiciona classe clone para facilitar identificação futura
-            firstClone.classList.add('clone');
-            lastClone.classList.add('clone');
+            this.track.insertBefore(fragment, this.track.firstChild);
 
-            this.track.appendChild(firstClone);
-            this.track.insertBefore(lastClone, this.originalCards[0]);
+            // Clones no FINAL (primeiros cards)
+            const fragmentEnd = document.createDocumentFragment();
+            for (let i = 0; i < cloneCount; i++) {
+                const clone = this.originalCards[i].cloneNode(true);
+                clone.classList.remove('active');
+                clone.classList.add('clone', 'clone-end');
+                fragmentEnd.appendChild(clone);
+            }
 
-            // Atualiza lista de todos os cards
+            this.track.appendChild(fragmentEnd);
+
             this.allCards = document.querySelectorAll(CONFIG.selectors.carousel.cards);
+            this.cloneOffset = CONFIG.carousel.visibleSides + 1;
         }
 
         calculateDimensions() {
@@ -216,26 +208,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         setupEventListeners() {
-            // Botões
             this.btnPrev?.addEventListener('click', () => this.move(-1));
             this.btnNext?.addEventListener('click', () => this.move(1));
 
-            // Resize com Debounce
-            let resizeTimer;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(() => {
+            // Resize otimizado
+            let resizeTimeout;
+            const resizeObserver = new ResizeObserver(() => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
                     this.calculateDimensions();
                     this.update(false);
-                }, 200);
+                }, 150);
             });
+            resizeObserver.observe(this.track);
 
-            // Touch Swipe
-            let startX = 0;
-            this.track.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+            // Touch melhorado
+            let startX = 0, startY = 0, isDragging = false;
+
+            this.track.addEventListener('touchstart', e => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                isDragging = true;
+            }, { passive: true });
+
+            this.track.addEventListener('touchmove', e => {
+                if (!isDragging) return;
+                const diffY = Math.abs(e.touches[0].clientY - startY);
+                if (diffY > 10) isDragging = false;
+            }, { passive: true });
+
             this.track.addEventListener('touchend', e => {
+                if (!isDragging) return;
                 const diff = startX - e.changedTouches[0].clientX;
                 if (Math.abs(diff) > 50) this.move(diff > 0 ? 1 : -1);
+                isDragging = false;
             }, { passive: true });
 
             // Teclado
@@ -247,112 +253,168 @@ document.addEventListener('DOMContentLoaded', () => {
             // Click nos Cards
             this.allCards.forEach((card, index) => {
                 card.addEventListener('click', () => {
-                    if (!this.isTransitioning) this.smartNavigateTo(index);
+                    if (!this.isTransitioning && index !== this.currentIndex) {
+                        this.navigateTo(index);
+                    }
                 });
             });
 
             // Indicadores
             this.indicators.forEach((dot, index) => {
                 dot.addEventListener('click', () => {
-                    if (!this.isTransitioning) this.smartNavigateTo(index + 1);
+                    if (!this.isTransitioning) {
+                        this.navigateTo(index + this.cloneOffset);
+                    }
                 });
             });
         }
 
-        // Movimento Básico (Next/Prev)
         move(direction) {
             if (this.isTransitioning) return;
 
             this.isTransitioning = true;
             this.currentIndex += direction;
             this.update(true);
-            this.handleInfiniteLoop();
-        }
 
-        // Lógica do Loop Infinito
-        handleInfiniteLoop() {
-            // Espera a animação terminar e verifica se precisa pular
+            // Aguarda a transição completa antes de verificar loop
             setTimeout(() => {
-                if (this.currentIndex === this.allCards.length - 1) {
-                    this.currentIndex = 1;
-                    this.update(false);
-                } else if (this.currentIndex === 0) {
-                    this.currentIndex = this.totalOriginal;
-                    this.update(false);
-                }
                 this.isTransitioning = false;
             }, CONFIG.animation.duration);
         }
 
-        // Navegação Inteligente (Caminho mais curto)
-        smartNavigateTo(targetIndex) {
+        checkLoop() {
+            const cloneCount = CONFIG.carousel.visibleSides;
+            const lastRealIndex = this.totalOriginal + cloneCount;
+
+            // Se passou do último card real, volta pro início
+            if (this.currentIndex >= lastRealIndex) {
+                this.currentIndex = cloneCount;
+                this.update(false);
+            }
+            // Se passou do primeiro card real, volta pro final
+            else if (this.currentIndex < cloneCount) {
+                this.currentIndex = lastRealIndex - 1;
+                this.update(false);
+            }
+        }
+
+        navigateTo(targetIndex) {
             if (this.isTransitioning || this.currentIndex === targetIndex) return;
 
-            this.isTransitioning = true;
+            const distance = Math.abs(targetIndex - this.currentIndex);
 
-            // Se a distância for pequena, vai direto
-            if (Math.abs(targetIndex - this.currentIndex) === 1) {
-                this.currentIndex = targetIndex;
-                this.update(true);
-                this.handleInfiniteLoop();
+            // Navegação direta para adjacentes
+            if (distance <= 1) {
+                this.move(targetIndex > this.currentIndex ? 1 : -1);
                 return;
             }
 
-            // Animação passo a passo (Simula a navegação rápida)
-            const direction = targetIndex > this.currentIndex ? 1 : -1;
-            const steps = Math.abs(targetIndex - this.currentIndex);
-            let currentStep = 0;
+            // Caminho mais curto considerando loop infinito
+            const directDistance = Math.abs(targetIndex - this.currentIndex);
+            const loopDistance = this.totalOriginal - directDistance;
 
-            const stepInterval = setInterval(() => {
-                currentStep++;
+            let direction, steps;
+
+            if (loopDistance < directDistance) {
+                // Ir pelo outro lado é mais rápido
+                direction = targetIndex > this.currentIndex ? -1 : 1;
+                steps = loopDistance;
+            } else {
+                // Ir direto é mais rápido
+                direction = targetIndex > this.currentIndex ? 1 : -1;
+                steps = directDistance;
+            }
+
+            // Navegação suave passo a passo
+            this.isTransitioning = true;
+            let step = 0;
+
+            const animate = () => {
+                if (step >= steps) {
+                    this.isTransitioning = false;
+                    return;
+                }
+
                 this.currentIndex += direction;
                 this.update(true);
+                step++;
 
-                if (currentStep >= steps) {
-                    clearInterval(stepInterval);
-                    this.handleInfiniteLoop();
-                }
-            }, 100); // Rápido entre cards intermediários
+                setTimeout(animate, CONFIG.animation.stepDelay);
+            };
+
+            animate();
         }
 
-        // Renderização
         update(animate) {
             const offset = -(this.currentIndex * (this.cardWidth + this.gap));
 
-            this.track.style.transition = animate
-                ? `transform ${CONFIG.animation.duration}ms cubic-bezier(0.4, 0, 0.2, 1)`
-                : 'none';
-
-            this.track.style.transform = `translateX(calc(50% - ${this.cardWidth / 2}px + ${offset}px))`;
-
-            // Atualiza Classes e Vídeo apenas se for um card válido
-            // O timeout garante que a classe active troque apenas quando o card chegar
-            const updateUI = () => {
-                const realIndex = this.getRealIndex();
-
-                // Classes dos Cards
-                this.allCards.forEach(c => c.classList.remove('active'));
-                this.allCards[this.currentIndex].classList.add('active');
-
-                // Indicadores
-                this.indicators.forEach((dot, i) => dot.classList.toggle('active', i === realIndex));
-
-                // Vídeo
-                this.updateVideo();
-            };
-
-            if (animate) {
-                // Pequeno delay para sincronizar troca de vídeo com a chegada do slide
-                setTimeout(updateUI, CONFIG.animation.duration / 2);
+            // Desabilita transição para reposicionamentos instantâneos
+            if (!animate) {
+                this.track.style.transition = 'none';
+                this.track.style.willChange = 'auto';
             } else {
-                updateUI();
+                this.track.style.willChange = 'transform';
+                this.track.style.transition = `transform ${CONFIG.animation.duration}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
             }
+
+            if (this.rafId) cancelAnimationFrame(this.rafId);
+
+            this.rafId = requestAnimationFrame(() => {
+                this.track.style.transform = `translateX(calc(50% - ${this.cardWidth / 2}px + ${offset}px))`;
+
+                // Atualiza UI
+                if (animate) {
+                    setTimeout(() => this.updateUI(), CONFIG.animation.duration / 2);
+                } else {
+                    this.updateUI();
+                }
+
+                // Verifica loop após a animação terminar
+                if (animate) {
+                    setTimeout(() => {
+                        const lastRealIndex = this.totalOriginal + this.cloneOffset;
+
+                        if (this.currentIndex >= lastRealIndex) {
+                            // Passou do último: volta pro primeiro real
+                            this.currentIndex = this.cloneOffset;
+                            // Aguarda 1 frame para garantir que a transição anterior terminou
+                            requestAnimationFrame(() => {
+                                requestAnimationFrame(() => {
+                                    this.update(false);
+                                });
+                            });
+                        } else if (this.currentIndex < this.cloneOffset) {
+                            // Passou do primeiro: volta pro último real
+                            this.currentIndex = lastRealIndex - 1;
+                            requestAnimationFrame(() => {
+                                requestAnimationFrame(() => {
+                                    this.update(false);
+                                });
+                            });
+                        }
+                    }, CONFIG.animation.duration);
+                }
+            });
+        }
+
+        updateUI() {
+            const realIndex = this.getRealIndex();
+
+            requestAnimationFrame(() => {
+                this.allCards.forEach((c, i) => {
+                    c.classList.toggle('active', i === this.currentIndex);
+                });
+
+                this.indicators.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === realIndex);
+                });
+
+                this.updateVideo();
+            });
         }
 
         getRealIndex() {
-            if (this.currentIndex === 0) return this.totalOriginal - 1;
-            if (this.currentIndex === this.allCards.length - 1) return 0;
-            return this.currentIndex - 1;
+            return this.currentIndex - this.cloneOffset;
         }
 
         updateVideo() {
@@ -362,12 +424,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const videoSrc = activeCard.dataset.video;
 
             if (videoSrc && !this.bgVideo.src.includes(videoSrc)) {
-                // Verifica se é URL completa ou relativa
-                const finalSrc = videoSrc.startsWith('http') ? videoSrc : `${window.location.origin}/${videoSrc}`;
+                const finalSrc = videoSrc.startsWith('http')
+                    ? videoSrc
+                    : `${window.location.origin}/${videoSrc}`;
 
-                this.bgVideo.src = finalSrc;
-                // Promise catch para evitar erros de play interrompido
-                this.bgVideo.play().catch(e => console.log("Video play interrupted/prevented"));
+                this.bgVideo.style.opacity = '0';
+
+                setTimeout(() => {
+                    this.bgVideo.src = finalSrc;
+                    this.bgVideo.play()
+                        .then(() => {
+                            this.bgVideo.style.transition = 'opacity 0.3s ease';
+                            this.bgVideo.style.opacity = '1';
+                        })
+                        .catch(() => { });
+                }, 150);
             }
         }
 
@@ -376,7 +447,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    entry.isIntersecting ? this.bgVideo.play().catch(() => { }) : this.bgVideo.pause();
+                    if (entry.isIntersecting) {
+                        this.bgVideo.play().catch(() => { });
+                    } else {
+                        this.bgVideo.pause();
+                    }
                 });
             }, { threshold: 0.5 });
 
@@ -384,22 +459,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         revealCards() {
+            // Entrada suave sem movimento vertical
             this.originalCards.forEach((card, i) => {
                 card.style.opacity = '0';
+
                 setTimeout(() => {
-                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                    card.style.opacity = '1';
-                }, i * 100);
+                    requestAnimationFrame(() => {
+                        card.style.transition = 'opacity 0.6s ease';
+                        card.style.opacity = '1';
+                    });
+                }, i * 80);
             });
+        }
+
+        destroy() {
+            if (this.rafId) cancelAnimationFrame(this.rafId);
+            this.track.style.willChange = 'auto';
         }
     }
 
     // 5. INICIALIZAÇÃO
-    // Instancia as classes
     const sidebar = new Sidebar();
     const parallax = new ParallaxManager();
 
-    // Pequeno delay para garantir que o layout renderizou
     requestAnimationFrame(() => {
         const carousel = new Carousel();
     });
