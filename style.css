@@ -248,14 +248,13 @@ body {
     height: clamp(45px, 6vw, 50px);
     border-radius: 8px;
     object-fit: cover;
-    border: 2px solid rgba(163, 214, 255, 0.3);
+    border: none;
     transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(163, 214, 255, 0.2);
+    box-shadow: none;
 }
 
 .sidebar-item:hover .sidebar-icon {
-    border-color: #a3d6ff;
-    box-shadow: 0 0 20px rgba(163, 214, 255, 0.5);
+    box-shadow: none;
     transform: scale(1.05);
 }
 
