@@ -687,11 +687,33 @@ body {
     padding: clamp(25px, 4vh, 30px) clamp(30px, 4vw, 40px);
 }
 
+@media (max-width: 1200px) {
+    .inimigos-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media (max-width: 900px) {
+    .inimigos-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
 @media (max-width: 768px) {
     .harbinger-card.expanded .card-content-gothic {
         grid-template-columns: 1fr;
         gap: clamp(15px, 2vh, 20px);
     }
+}
+
+@media (max-width: 600px) {
+    .inimigos-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+.inimigos-grid {
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .card-content-gothic::-webkit-scrollbar {
@@ -934,4 +956,175 @@ body {
 
 .harbinger-link:hover::after {
     width: 100%;
+}
+
+/* ===== INIMIGOS SECTION ===== */
+#inimigos-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(80px, 12vh, 120px) clamp(20px, 5vw, 60px);
+    overflow: hidden;
+}
+
+.inimigos-content {
+    position: relative;
+    z-index: 10;
+    max-width: min(1400px, 95vw);
+    width: 100%;
+}
+
+.inimigos-header {
+    text-align: center;
+    margin-bottom: clamp(50px, 8vh, 70px);
+}
+
+.inimigos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(20px, 3vw, 30px);
+    padding: 0 clamp(10px, 2vw, 20px);
+}
+
+.inimigo-card {
+    position: relative;
+    background: rgba(0, 5, 15, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+}
+
+.inimigo-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 0%, var(--element-color) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.inimigo-card::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background: var(--element-color);
+    opacity: 0.6;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    transition: opacity 0.4s ease;
+}
+
+.inimigo-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--element-color);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px var(--element-color);
+}
+
+.inimigo-card:hover::before {
+    opacity: 0.15;
+}
+
+.inimigo-card:hover::after {
+    opacity: 1;
+}
+
+.inimigo-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: clamp(360px, 50vh, 500px);
+    overflow: hidden;
+}
+
+.inimigo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.inimigo-card:hover .inimigo-image {
+    transform: scale(1.1);
+}
+
+.inimigo-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 5, 15, 0.9) 100%);
+    pointer-events: none;
+}
+
+.inimigo-info {
+    padding: clamp(20px, 3vh, 25px) clamp(20px, 3vw, 25px);
+}
+
+.inimigo-nome {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    font-weight: 700;
+    color: var(--element-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: clamp(8px, 1vh, 10px);
+    text-shadow: 0 0 15px var(--element-color);
+}
+
+.inimigo-elemento {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.7rem, 1vw, 0.8rem);
+    color: var(--element-color);
+    text-transform: uppercase;
+    letter-spacing: clamp(3px, 0.5vw, 4px);
+    opacity: 0.8;
+    margin-bottom: clamp(12px, 2vh, 15px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.inimigo-elemento::before {
+    content: "";
+    width: 3px;
+    height: 12px;
+    background: var(--element-color);
+}
+
+.inimigo-descricao {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+    line-height: 1.6;
+    color: #ccc;
+}
+
+/* Cores por Elemento */
+[data-element="cryo"] {
+    --element-color: #9bbad1;
+}
+
+[data-element="electro"] {
+    --element-color: #b899ff;
+}
+
+[data-element="pyro"] {
+    --element-color: #ff6b3d;
+}
+
+[data-element="hydro"] {
+    --element-color: #4fc3f7;
+}
+
+[data-element="geo"] {
+    --element-color: #f4a460;
+}
+
+[data-element="anemo"] {
+    --element-color: #74c2a8;
 }
