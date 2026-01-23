@@ -486,4 +486,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const carousel = new Carousel();
     });
 
+    // Link dos Harbingers na história para o carrossel
+    document.querySelectorAll('.harbinger-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetIndex = parseInt(link.dataset.index);
+
+            // Scroll para a seção do carrossel
+            document.querySelector('#carousel-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+
+            // Aguarda o scroll e depois muda para o card usando o evento customizado
+            setTimeout(() => {
+                document.dispatchEvent(new CustomEvent('carousel:navigate', {
+                    detail: { index: targetIndex }
+                }));
+            }, 800);
+        });
+    });
+
 });

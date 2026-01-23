@@ -13,6 +13,51 @@
     --tartaglia: #e0d88d;
 }
 
+/* ===== CHARACTER COLORS ===== */
+[data-character="pierro"] {
+    --card-color: var(--pierro);
+}
+
+[data-character="capitano"] {
+    --card-color: var(--capitano);
+}
+
+[data-character="dottore"] {
+    --card-color: var(--dottore);
+}
+
+[data-character="columbina"] {
+    --card-color: var(--columbina);
+}
+
+[data-character="arlecchino"] {
+    --card-color: var(--arlecchino);
+}
+
+[data-character="pulcinella"] {
+    --card-color: var(--pulcinella);
+}
+
+[data-character="scaramouche"] {
+    --card-color: var(--scaramouche);
+}
+
+[data-character="sandrone"] {
+    --card-color: var(--sandrone);
+}
+
+[data-character="signora"] {
+    --card-color: var(--signora);
+}
+
+[data-character="pantalone"] {
+    --card-color: var(--pantalone);
+}
+
+[data-character="tartaglia"] {
+    --card-color: var(--tartaglia);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -790,47 +835,103 @@ body {
     box-shadow: 0 0 15px #a3d6ff;
 }
 
-/* ===== CHARACTER COLORS ===== */
-[data-character="pierro"] {
-    --card-color: var(--pierro);
+/* ===== HISTÓRIA SECTION ===== */
+#historia-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(80px, 12vh, 120px) clamp(20px, 5vw, 60px);
+    overflow: hidden;
 }
 
-[data-character="capitano"] {
-    --card-color: var(--capitano);
+.historia-content {
+    position: relative;
+    z-index: 10;
+    max-width: min(900px, 90vw);
+    background: rgba(0, 5, 15, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(163, 214, 255, 0.15);
+    padding: clamp(40px, 6vh, 60px) clamp(30px, 5vw, 50px);
+    animation: slideUp 1s ease-out;
 }
 
-[data-character="dottore"] {
-    --card-color: var(--dottore);
+.historia-header {
+    text-align: center;
+    margin-bottom: clamp(40px, 6vh, 50px);
 }
 
-[data-character="columbina"] {
-    --card-color: var(--columbina);
+.historia-tagline {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: clamp(4px, 0.8vw, 8px);
+    font-size: clamp(0.7rem, 1vw, 0.8rem);
+    color: #a3d6ff;
+    margin-bottom: clamp(15px, 2vh, 20px);
+    opacity: 0.8;
+    text-transform: uppercase;
 }
 
-[data-character="arlecchino"] {
-    --card-color: var(--arlecchino);
+.historia-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: #f0f0f0;
+    text-transform: uppercase;
+    letter-spacing: clamp(2px, 0.3vw, 3px);
+    text-shadow: 0 0 20px rgba(163, 214, 255, 0.5);
 }
 
-[data-character="pulcinella"] {
-    --card-color: var(--pulcinella);
+.historia-texto {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+    line-height: 1.9;
+    color: #ddd;
+    text-align: justify;
 }
 
-[data-character="scaramouche"] {
-    --card-color: var(--scaramouche);
+.historia-texto p {
+    margin-bottom: clamp(20px, 3vh, 25px);
 }
 
-[data-character="sandrone"] {
-    --card-color: var(--sandrone);
+.historia-texto p:last-child {
+    margin-bottom: 0;
 }
 
-[data-character="signora"] {
-    --card-color: var(--signora);
+.historia-final {
+    margin-top: clamp(30px, 4vh, 40px);
+    padding-top: clamp(25px, 3vh, 30px);
+    border-top: 1px solid rgba(163, 214, 255, 0.2);
+    font-size: clamp(1rem, 1.3vw, 1.1rem);
+    font-weight: 500;
+    text-align: center;
 }
 
-[data-character="pantalone"] {
-    --card-color: var(--pantalone);
+.harbinger-link {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
 }
 
-[data-character="tartaglia"] {
-    --card-color: var(--tartaglia);
+.harbinger-link::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.3s ease;
+}
+
+.harbinger-link:hover {
+    text-shadow: 0 0 15px currentColor;
+    filter: brightness(1.3);
+}
+
+.harbinger-link:hover::after {
+    width: 100%;
 }
