@@ -70,8 +70,8 @@
     --card-width-max: 320px;
     --card-height-inactive-min: 280px;
     --card-height-inactive-max: 420px;
-    --card-height-active-min: 350px;
-    --card-height-active-max: 530px;
+    --card-height-active-min: 380px;
+    --card-height-active-max: 600px;
 
     /* TAMANHOS - CONTROLES */
     --control-btn-size: 45px;
@@ -81,7 +81,7 @@
 
     /* TAMANHOS - WRAPPER */
     --carousel-wrapper-height-min: 350px;
-    --carousel-wrapper-height-max: 550px;
+    --carousel-wrapper-height-max: 600px;
 
     /* BORDAS */
     --border-radius-sm: 4px;
@@ -110,7 +110,7 @@
 
     /* SCALES */
     --scale-inactive: 0.75;
-    --scale-active: 1.1;
+    --scale-active: 1.15;
     --scale-hover: 1.3;
 }
 
@@ -644,7 +644,7 @@ body {
     position: relative;
     width: 100%;
     max-width: 1400px;
-    min-height: clamp(var(--carousel-wrapper-height-min), 45vh, var(--carousel-wrapper-height-max));
+    min-height: clamp(var(--carousel-wrapper-height-min), 50vh, var(--carousel-wrapper-height-max));
     z-index: 10;
     display: flex;
     align-items: center;
@@ -679,7 +679,7 @@ body {
 
 .harbinger-card.active {
     opacity: var(--opacity-hover);
-    height: clamp(var(--card-height-active-min), 48vh, var(--card-height-active-max));
+    height: clamp(var(--card-height-active-min), 52vh, var(--card-height-active-max));
     transform: scale(var(--scale-active));
     filter: var(--card-filter-active);
     z-index: 10;
@@ -709,9 +709,9 @@ body {
 .card-inner-gothic {
     width: 100%;
     height: 100%;
-    background: rgba(0, 5, 15, 0.4);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 5, 15, 0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     position: relative;
     display: flex;
     flex-direction: column;
@@ -723,7 +723,7 @@ body {
     position: absolute;
     inset: 0;
     background: linear-gradient(135deg, transparent 0%, var(--card-color) 100%);
-    opacity: 0.25;
+    opacity: 0.12;
     pointer-events: none;
 }
 
@@ -740,41 +740,44 @@ body {
 }
 
 .card-header-gothic {
-    padding: 30px 30px 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: clamp(18px, 3vh, 25px) clamp(18px, 3vw, 25px) clamp(12px, 2vh, 16px);
+    border-bottom: 1px solid var(--border-light);
 }
 
 .card-rank {
     font-family: 'Cinzel', serif;
-    font-size: 0.75rem;
-    letter-spacing: 4px;
+    font-size: clamp(0.65rem, 1vw, 0.75rem);
+    letter-spacing: 3px;
     color: var(--card-color);
     text-transform: uppercase;
-    opacity: 0.7;
-    margin-bottom: 8px;
+    opacity: 0.8;
+    margin-bottom: clamp(6px, 1vh, 8px);
+    font-weight: 600;
 }
 
 .card-title-gothic {
     font-family: 'Cinzel', serif;
-    font-size: 2rem;
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
     font-weight: 900;
     color: var(--card-color);
     text-transform: uppercase;
     text-shadow: 0 0 20px var(--card-color);
+    line-height: 1;
 }
 
 .card-subtitle-gothic {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.6);
+    font-size: clamp(0.75rem, 1.1vw, 0.85rem);
+    color: rgba(255, 255, 255, 0.85);
     font-style: italic;
-    margin-top: 5px;
+    margin-top: clamp(5px, 1vh, 6px);
+    font-weight: 300;
 }
 
 .gothic-divider {
     display: flex;
     align-items: center;
-    padding: 0 30px;
-    margin: 15px 0;
+    padding: 0 clamp(18px, 3vw, 25px);
+    margin: clamp(8px, 1.5vh, 12px) 0;
 }
 
 .gothic-divider::before,
@@ -786,54 +789,76 @@ body {
 }
 
 .gothic-ornament {
-    width: 8px;
-    height: 8px;
+    width: clamp(6px, 1vw, 8px);
+    height: clamp(6px, 1vw, 8px);
     background: var(--card-color);
     transform: rotate(45deg);
-    margin: 0 15px;
+    margin: 0 clamp(10px, 1.5vw, 14px);
     box-shadow: 0 0 10px var(--card-color);
 }
 
 .card-content-gothic {
     flex: 1;
-    padding: 20px 30px;
+    padding: clamp(15px, 2.5vh, 20px) clamp(18px, 3vw, 25px);
     overflow-y: auto;
+}
+
+.card-content-gothic::-webkit-scrollbar {
+    width: 5px;
+}
+
+.card-content-gothic::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.card-content-gothic::-webkit-scrollbar-thumb {
+    background: var(--card-color);
+    border-radius: 3px;
+    opacity: 0.8;
+}
+
+.card-content-gothic::-webkit-scrollbar-thumb:hover {
+    background: var(--card-color);
+    opacity: 1;
 }
 
 .harbinger-card.expanded .card-content-gothic {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    padding: 30px 40px;
+    gap: clamp(20px, 3.5vw, 30px);
+    padding: clamp(20px, 3.5vh, 30px) clamp(25px, 4vw, 35px);
 }
 
 .card-section {
-    margin-bottom: 20px;
+    margin-bottom: clamp(14px, 2.5vh, 18px);
 }
 
 .section-title-gothic {
     font-family: 'Cinzel', serif;
-    font-size: 0.9rem;
+    font-size: clamp(0.75rem, 1.1vw, 0.85rem);
     color: var(--card-color);
     text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 10px;
+    letter-spacing: 2px;
+    margin-bottom: clamp(8px, 1.5vh, 10px);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: clamp(8px, 1.2vw, 10px);
+    font-weight: 700;
 }
 
 .section-title-gothic::before {
     content: "";
-    width: 3px;
-    height: 14px;
+    width: 2px;
+    height: clamp(12px, 1.8vh, 14px);
     background: var(--card-color);
 }
 
 .card-text-gothic {
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 1.2vw, 0.9rem);
     line-height: 1.6;
-    color: #ddd;
+    color: #efefef;
+    font-weight: 400;
 }
 
 .card-extra-info {
@@ -1072,10 +1097,12 @@ body {
         --carousel-gap: 20px;
         --carousel-controls-padding-top: 20px;
         --carousel-controls-padding-bottom: 10px;
+        --card-height-active-max: 380px;
+        --carousel-wrapper-height-max: 420px;
     }
 
     .carousel-wrapper {
-        min-height: 320px;
+        min-height: 350px;
     }
 
     .harbinger-card {
@@ -1084,7 +1111,7 @@ body {
     }
 
     .harbinger-card.active {
-        height: 320px;
+        height: clamp(330px, 50vh, 380px);
     }
 
     .carousel-btn {
@@ -1127,6 +1154,11 @@ body {
     .carousel-track {
         gap: 20px;
     }
+
+    :root {
+        --scale-active: 1.12;
+        --card-height-active-max: 520px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1161,5 +1193,14 @@ body {
 
     .inimigos-grid {
         grid-template-columns: 1fr;
+    }
+
+    :root {
+        --scale-active: 1.1;
+        --card-height-active-max: 420px;
+    }
+
+    .harbinger-card {
+        width: clamp(180px, 70vw, 240px);
     }
 }
