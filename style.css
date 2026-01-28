@@ -196,7 +196,7 @@ body {
     color: var(--text-primary);
     overflow-x: hidden;
     scroll-behavior: smooth;
-    scroll-padding-top: var(--header-height);
+    scroll-padding-top: calc(var(--header-height) + 20px);
 }
 
 /* SCROLLBAR */
@@ -613,9 +613,10 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: var(--carousel-padding-top) var(--section-padding-x) var(--carousel-padding-bottom);
+    padding: calc(var(--carousel-padding-top) + var(--header-height)) var(--section-padding-x) var(--carousel-padding-bottom);
     gap: var(--carousel-gap);
     background: var(--bg-dark);
+    margin-top: calc(var(--header-height) * -1);
 }
 
 .carousel-bg-video {
