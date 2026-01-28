@@ -199,6 +199,89 @@ body {
     scroll-padding-top: calc(var(--header-height) + 20px);
 }
 
+/* ANIMAÇÕES GLOBAIS */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* CLASSE PARA ELEMENTOS ANIMADOS */
+.animate-on-scroll {
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.animated {
+    opacity: 1;
+}
+
 /* SCROLLBAR */
 ::-webkit-scrollbar {
     width: 10px;
@@ -241,7 +324,8 @@ body {
     text-decoration: none;
     opacity: 0.8;
     padding-left: 20px;
-    transition: all 0.3s;
+    transition: all var(--transition-fast);
+    position: relative;
 }
 
 .header-right a:not(:last-child)::after {
@@ -441,6 +525,8 @@ body {
     height: 100%;
     object-fit: cover;
     filter: brightness(0.4) contrast(1.2);
+    will-change: transform;
+    transition: transform 0.1s linear;
 }
 
 .overlay-dark {
@@ -448,6 +534,7 @@ body {
     inset: 0;
     background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.9) 100%);
     z-index: 2;
+    transition: opacity 0.3s ease;
 }
 
 .tagline,
@@ -493,6 +580,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .intro-content {
@@ -504,6 +592,7 @@ body {
     background: rgba(0, 5, 15, 0.3);
     text-align: center;
     max-width: 90vw;
+    animation: scaleIn 0.8s ease-out;
 }
 
 .citacao {
@@ -513,6 +602,7 @@ body {
     line-height: 1.1;
     color: #f0f0f0;
     text-transform: uppercase;
+    animation: fadeInUp 1s ease-out 0.2s both;
 }
 
 .destaque-cryo {
@@ -969,14 +1059,14 @@ body {
 .inimigos-content {
     position: relative;
     z-index: 10;
-    max-width: 1400px;
+    max-width: 1600px;
     width: 100%;
 }
 
 .inimigos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: clamp(20px, 3vw, 30px);
+    grid-template-columns: repeat(5, 1fr);
+    gap: clamp(15px, 2vw, 25px);
 }
 
 .inimigo-card {
@@ -987,7 +1077,15 @@ body {
     overflow: hidden;
     cursor: pointer;
     transition: all var(--transition-normal);
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+}
+
+.inimigo-card.animate-on-scroll {
+    transform: translateY(30px);
+}
+
+.inimigo-card.animate-on-scroll.animated {
+    transform: translateY(0);
 }
 
 .inimigo-card::before {
@@ -1004,17 +1102,17 @@ body {
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     background: var(--element-color);
     opacity: 0.6;
     clip-path: polygon(100% 0, 100% 100%, 0 100%);
 }
 
 .inimigo-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-5px);
     border-color: var(--element-color);
-    box-shadow: var(--shadow-card), 0 0 30px var(--element-color);
+    box-shadow: var(--shadow-card), 0 0 25px var(--element-color);
 }
 
 .inimigo-card:hover::before {
@@ -1028,7 +1126,7 @@ body {
 .inimigo-image-wrapper {
     position: relative;
     width: 100%;
-    height: 400px;
+    height: clamp(220px, 28vh, 320px);
     overflow: hidden;
 }
 
@@ -1040,7 +1138,7 @@ body {
 }
 
 .inimigo-card:hover .inimigo-image {
-    transform: scale(1.1);
+    transform: scale(1.08);
 }
 
 .inimigo-overlay {
@@ -1050,42 +1148,43 @@ body {
 }
 
 .inimigo-info {
-    padding: 25px;
+    padding: clamp(15px, 2.5vh, 20px);
 }
 
 .inimigo-nome {
     font-family: 'Cinzel', serif;
-    font-size: 1.4rem;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
     font-weight: 700;
     color: var(--element-color);
     text-transform: uppercase;
-    margin-bottom: 10px;
-    text-shadow: 0 0 15px var(--element-color);
+    margin-bottom: clamp(6px, 1vh, 8px);
+    text-shadow: 0 0 12px var(--element-color);
+    line-height: 1.1;
 }
 
 .inimigo-elemento {
     font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
+    font-size: clamp(0.65rem, 0.9vw, 0.75rem);
     color: var(--element-color);
     text-transform: uppercase;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     opacity: 0.8;
-    margin-bottom: 15px;
+    margin-bottom: clamp(8px, 1.5vh, 12px);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .inimigo-elemento::before {
     content: "";
-    width: 3px;
-    height: 12px;
+    width: 2px;
+    height: 10px;
     background: var(--element-color);
 }
 
 .inimigo-descricao {
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: clamp(0.8rem, 1.1vw, 0.9rem);
+    line-height: 1.5;
     color: #ccc;
 }
 
@@ -1143,6 +1242,10 @@ body {
     .inimigos-content {
         padding: 50px 40px;
     }
+
+    .inimigos-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 @media (max-width: 900px) {
@@ -1153,6 +1256,10 @@ body {
 
     .carousel-track {
         gap: 20px;
+    }
+
+    .inimigos-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 
     :root {
@@ -1178,6 +1285,10 @@ body {
     .harbinger-card.expanded .card-content-gothic {
         grid-template-columns: 1fr;
         gap: 20px;
+    }
+
+    .inimigos-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
