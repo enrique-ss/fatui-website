@@ -1,5 +1,5 @@
 :root {
-    /* CORES - HARBINGERS */
+    /* Cores Harbingers */
     --pierro: #9bbad1;
     --capitano: #7c8ea0;
     --dottore: #f2c7b1;
@@ -12,7 +12,7 @@
     --pantalone: #7cb9e8;
     --tartaglia: #e0d88d;
 
-    /* CORES - ELEMENTOS */
+    /* Cores Elementos */
     --cryo: #9bbad1;
     --electro: #b899ff;
     --pyro: #ff6b3d;
@@ -20,232 +20,219 @@
     --geo: #f4a460;
     --anemo: #74c2a8;
 
-    /* CORES - SISTEMA */
-    --bg-dark: #02050a;
-    --bg-card: rgba(0, 5, 15, 0.4);
-    --bg-glass: rgba(0, 5, 15, 0.75);
-    --border: rgba(255, 255, 255, 0.1);
-    --text-primary: #ffffff;
-    --text-secondary: #ddd;
-    --text-muted: rgba(255, 255, 255, 0.6);
+    /* Sistema */
+    --bg: #02050a;
+    --card: rgba(0, 5, 15, .4);
+    --glass: rgba(0, 5, 15, .75);
+    --border: rgba(255, 255, 255, .1);
+    --txt: #fff;
+    --txt-dim: #ddd;
+    --txt-muted: rgba(255, 255, 255, .6);
     --accent: #a3d6ff;
-    --accent-dim: rgba(163, 214, 255, 0.3);
+    --accent-dim: rgba(163, 214, 255, .3);
 
-    /* SISTEMA DE ESPAÇAMENTO BASE */
-    --space-xs: clamp(8px, 1.5vh, 12px);
-    --space-sm: clamp(15px, 2.5vh, 20px);
-    --space-md: clamp(20px, 3.5vh, 30px);
-    --space-lg: clamp(30px, 5vh, 50px);
-    --space-xl: clamp(40px, 6vh, 60px);
-    --space-2xl: clamp(60px, 10vh, 100px);
-    --space-3xl: clamp(80px, 12vh, 120px);
+    /* Espaçamento */
+    --s-xs: clamp(8px, 1.5vh, 12px);
+    --s-sm: clamp(15px, 2.5vh, 20px);
+    --s-md: clamp(20px, 3.5vh, 30px);
+    --s-lg: clamp(30px, 5vh, 50px);
+    --s-xl: clamp(40px, 6vh, 60px);
+    --s-2xl: clamp(60px, 10vh, 100px);
+    --s-3xl: clamp(80px, 12vh, 120px);
 
-    /* TAMANHOS RESPONSIVOS */
-    --header-height: 70px;
-    --sidebar-width: 350px;
-    --card-width: clamp(220px, 22vw, 320px);
-    --card-height: clamp(280px, 38vh, 420px);
-    --card-height-active: clamp(380px, 52vh, 600px);
-    --card-height-expanded: min(700px, 85vh);
-    --control-size: 45px;
-    --icon-size: 20px;
+    /* Tamanhos */
+    --header: 70px;
+    --sidebar: 350px;
+    --card-w: clamp(220px, 22vw, 320px);
+    --card-h: clamp(280px, 38vh, 420px);
+    --card-h-active: clamp(380px, 52vh, 600px);
+    --card-h-expand: min(700px, 85vh);
 
-    /* BORDAS */
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-full: 50%;
-
-    /* TRANSIÇÕES */
-    --transition: 0.3s ease;
-    --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-
-    /* EFEITOS */
-    --shadow-glow: 0 0 15px var(--accent);
-    --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.5);
-    --blur-light: blur(8px);
-    --blur-heavy: blur(20px);
-
-    /* ESCALAS */
-    --scale-down: 0.75;
-    --scale-up: 1.15;
-    --scale-hover: 1.3;
+    /* Design */
+    --r-sm: 4px;
+    --r-md: 8px;
+    --r-full: 50%;
+    --tr: .3s ease;
+    --tr-smooth: .4s cubic-bezier(.4, 0, .2, 1);
+    --tr-slow: .6s cubic-bezier(.4, 0, .2, 1);
+    --glow: 0 0 15px var(--accent);
+    --shadow: 0 10px 40px rgba(0, 0, 0, .5);
 }
 
-/* MAPEAMENTO DE CORES */
+/* Mapeamento */
 [data-character="pierro"] {
-    --card-color: var(--pierro);
+    --c: var(--pierro)
 }
 
 [data-character="capitano"] {
-    --card-color: var(--capitano);
+    --c: var(--capitano)
 }
 
 [data-character="dottore"] {
-    --card-color: var(--dottore);
+    --c: var(--dottore)
 }
 
 [data-character="columbina"] {
-    --card-color: var(--columbina);
+    --c: var(--columbina)
 }
 
 [data-character="arlecchino"] {
-    --card-color: var(--arlecchino);
+    --c: var(--arlecchino)
 }
 
 [data-character="pulcinella"] {
-    --card-color: var(--pulcinella);
+    --c: var(--pulcinella)
 }
 
 [data-character="scaramouche"] {
-    --card-color: var(--scaramouche);
+    --c: var(--scaramouche)
 }
 
 [data-character="sandrone"] {
-    --card-color: var(--sandrone);
+    --c: var(--sandrone)
 }
 
 [data-character="signora"] {
-    --card-color: var(--signora);
+    --c: var(--signora)
 }
 
 [data-character="pantalone"] {
-    --card-color: var(--pantalone);
+    --c: var(--pantalone)
 }
 
 [data-character="tartaglia"] {
-    --card-color: var(--tartaglia);
+    --c: var(--tartaglia)
 }
 
 [data-element="cryo"] {
-    --element-color: var(--cryo);
+    --e: var(--cryo)
 }
 
 [data-element="electro"] {
-    --element-color: var(--electro);
+    --e: var(--electro)
 }
 
 [data-element="pyro"] {
-    --element-color: var(--pyro);
+    --e: var(--pyro)
 }
 
 [data-element="hydro"] {
-    --element-color: var(--hydro);
+    --e: var(--hydro)
 }
 
 [data-element="geo"] {
-    --element-color: var(--geo);
+    --e: var(--geo)
 }
 
 [data-element="anemo"] {
-    --element-color: var(--anemo);
+    --e: var(--anemo)
 }
 
-/* RESET & BASE */
+/* Reset */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box
 }
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background: var(--bg-dark);
-    color: var(--text-primary);
+    background: var(--bg);
+    color: var(--txt);
     overflow-x: hidden;
     scroll-behavior: smooth;
-    scroll-padding-top: calc(var(--header-height) + 20px);
+    scroll-padding-top: calc(var(--header) + 20px)
 }
 
-/* ANIMAÇÕES */
+/* Animações */
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(40px);
+        transform: translateY(40px)
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0)
     }
 }
 
 @keyframes scaleIn {
     from {
         opacity: 0;
-        transform: scale(0.9);
+        transform: scale(.9)
     }
 
     to {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1)
     }
 }
 
 .animate-on-scroll {
     opacity: 0;
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity .6s, transform .6s
 }
 
 .animate-on-scroll.animated {
-    opacity: 1;
+    opacity: 1
 }
 
-/* SCROLLBAR */
+/* Scrollbar */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 10px
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(2, 5, 10, 0.8);
+    background: rgba(2, 5, 10, .8)
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--accent-dim), rgba(163, 214, 255, 0.5));
-    border-radius: 5px;
+    background: linear-gradient(180deg, var(--accent-dim), rgba(163, 214, 255, .5));
+    border-radius: 5px
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, rgba(163, 214, 255, 0.5), rgba(163, 214, 255, 0.7));
+    background: linear-gradient(180deg, rgba(163, 214, 255, .5), rgba(163, 214, 255, .7))
 }
 
-/* HEADER */
+/* Layout Base */
 .main-header {
     position: fixed;
     top: 0;
     width: 100%;
-    height: var(--header-height);
+    height: var(--header);
     z-index: 999;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 clamp(20px, 5vw, 50px);
-    background: var(--bg-glass);
-    backdrop-filter: var(--blur-light);
-    border-bottom: 1px solid var(--border);
+    background: var(--glass);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border)
 }
 
 .header-right a {
     font-family: 'Cinzel', serif;
-    font-size: 0.75rem;
+    font-size: .75rem;
     letter-spacing: 3px;
-    color: var(--text-secondary);
+    color: var(--txt-dim);
     text-decoration: none;
-    opacity: 0.8;
+    opacity: .8;
     padding-left: 20px;
-    transition: all var(--transition);
-    position: relative;
+    transition: var(--tr);
+    position: relative
 }
 
 .header-right a:not(:last-child)::after {
     content: "/";
     margin-left: 12px;
-    color: var(--accent-dim);
+    color: var(--accent-dim)
 }
 
 .header-right a:hover {
     opacity: 1;
-    color: var(--accent);
+    color: var(--accent)
 }
 
 .hamburger-btn {
@@ -253,52 +240,52 @@ body {
     height: 40px;
     background: transparent;
     border: 1px solid var(--accent-dim);
-    border-radius: var(--radius-sm);
+    border-radius: var(--r-sm);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 5px;
     cursor: pointer;
-    transition: all var(--transition);
+    transition: var(--tr)
 }
 
 .hamburger-btn:hover {
     border-color: var(--accent);
-    background: rgba(163, 214, 255, 0.1);
+    background: rgba(163, 214, 255, .1)
 }
 
 .hamburger-line {
     width: 20px;
     height: 2px;
-    background: var(--accent);
+    background: var(--accent)
 }
 
-/* SIDEBAR */
+/* Sidebar */
 .sidebar-menu {
     position: fixed;
     top: 0;
-    left: calc(var(--sidebar-width) * -1);
-    width: var(--sidebar-width);
+    left: calc(var(--sidebar)*-1);
+    width: var(--sidebar);
     height: 100vh;
-    background: rgba(2, 5, 10, 0.95);
-    backdrop-filter: var(--blur-heavy);
-    border-right: 1px solid rgba(163, 214, 255, 0.2);
+    background: rgba(2, 5, 10, .95);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(163, 214, 255, .2);
     z-index: 10000;
-    transition: left var(--transition-smooth);
-    overflow-y: auto;
+    transition: left var(--tr-smooth);
+    overflow-y: auto
 }
 
 .sidebar-menu.active {
-    left: 0;
+    left: 0
 }
 
 .sidebar-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--space-md);
-    border-bottom: 1px solid rgba(163, 214, 255, 0.15);
+    padding: var(--s-md);
+    border-bottom: 1px solid rgba(163, 214, 255, .15)
 }
 
 .sidebar-title {
@@ -307,31 +294,31 @@ body {
     font-weight: 900;
     letter-spacing: 5px;
     color: var(--accent);
-    text-shadow: 0 0 15px rgba(163, 214, 255, 0.6);
+    text-shadow: 0 0 15px rgba(163, 214, 255, .6)
 }
 
 .sidebar-close {
     width: 35px;
     height: 35px;
-    background: rgba(163, 214, 255, 0.1);
+    background: rgba(163, 214, 255, .1);
     border: 1px solid var(--accent-dim);
-    border-radius: var(--radius-full);
+    border-radius: var(--r-full);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     color: var(--accent);
-    transition: all var(--transition);
+    transition: var(--tr)
 }
 
 .sidebar-close:hover {
-    background: rgba(255, 50, 50, 0.3);
-    border-color: #ff3232;
-    transform: rotate(90deg);
+    background: rgba(255, 50, 50, .3);
+    border-color: #f32;
+    transform: rotate(90deg)
 }
 
 .sidebar-nav {
-    padding: var(--space-sm) 0;
+    padding: var(--s-sm) 0
 }
 
 .sidebar-item {
@@ -339,11 +326,11 @@ body {
     grid-template-columns: 50px 60px 1fr;
     grid-template-rows: auto auto;
     gap: 5px 15px;
-    padding: var(--space-sm) var(--space-md);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: var(--s-sm) var(--s-md);
+    border-bottom: 1px solid rgba(255, 255, 255, .05);
     text-decoration: none;
     position: relative;
-    transition: all var(--transition);
+    transition: var(--tr)
 }
 
 .sidebar-item::before {
@@ -355,41 +342,41 @@ body {
     height: 100%;
     background: var(--accent);
     transform: scaleY(0);
-    transition: transform var(--transition);
+    transition: var(--tr)
 }
 
 .sidebar-item:hover {
-    background: rgba(163, 214, 255, 0.08);
+    background: rgba(163, 214, 255, .08)
 }
 
 .sidebar-item:hover::before {
-    transform: scaleY(1);
+    transform: scaleY(1)
 }
 
 .sidebar-icon {
     grid-column: 1;
-    grid-row: 1 / 3;
+    grid-row: 1/3;
     width: 50px;
     height: 50px;
-    border-radius: var(--radius-md);
+    border-radius: var(--r-md);
     object-fit: cover;
-    transition: transform var(--transition);
+    transition: var(--tr)
 }
 
 .sidebar-item:hover .sidebar-icon {
-    transform: scale(1.05);
+    transform: scale(1.05)
 }
 
 .sidebar-rank {
     grid-column: 2;
-    grid-row: 1 / 3;
+    grid-row: 1/3;
     font-family: 'Cinzel', serif;
     font-size: 1.2rem;
     font-weight: 700;
     color: var(--accent);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center
 }
 
 .sidebar-name {
@@ -398,62 +385,66 @@ body {
     font-family: 'Cinzel', serif;
     font-size: 1.1rem;
     font-weight: 700;
-    color: #fff;
+    color: #fff
 }
 
 .sidebar-item .sidebar-title {
     grid-column: 3;
     grid-row: 2;
-    font-size: 0.85rem;
-    color: var(--text-muted);
+    font-size: .85rem;
+    color: var(--txt-muted);
     font-style: italic;
     font-weight: 400;
-    text-shadow: none;
+    text-shadow: none
 }
 
 .sidebar-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, .7);
     backdrop-filter: blur(4px);
     z-index: 9999;
     opacity: 0;
     pointer-events: none;
-    transition: opacity var(--transition-smooth);
+    transition: opacity var(--tr-smooth)
 }
 
 .sidebar-overlay.active {
     opacity: 1;
-    pointer-events: all;
+    pointer-events: all
 }
 
-/* ELEMENTOS COMUNS */
+/* Elementos Comuns */
 .video-fundo,
 .carousel-bg-video {
     position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(0.4) contrast(1.2);
+    filter: brightness(.4) contrast(1.2)
 }
 
 .overlay-dark,
 .carousel-overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.9) 100%);
-    pointer-events: none;
+    background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, .9) 100%);
+    pointer-events: none
+}
+
+.carousel-overlay {
+    background: radial-gradient(circle, transparent 0%, rgba(0, 0, 0, .85) 100%)
 }
 
 .tagline,
 .historia-tagline {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.8rem;
+    font-size: .8rem;
     letter-spacing: 8px;
     color: var(--accent);
-    margin-bottom: var(--space-sm);
-    opacity: 0.8;
-    text-transform: uppercase;
+    margin-bottom: var(--s-sm);
+    opacity: .8;
+    text-transform: uppercase
 }
 
 .divisor-gótico,
@@ -461,8 +452,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: var(--space-xl) 0;
-    padding: 0 var(--space-md);
+    margin: var(--s-xl) 0;
+    padding: 0 var(--s-md)
 }
 
 .divisor-gótico::before,
@@ -472,7 +463,7 @@ body {
     content: "";
     flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    background: linear-gradient(90deg, transparent, var(--accent), transparent)
 }
 
 .diamante,
@@ -481,24 +472,24 @@ body {
     height: clamp(6px, 1vw, 12px);
     background: var(--accent);
     transform: rotate(45deg);
-    margin: 0 var(--space-sm);
-    box-shadow: var(--shadow-glow);
-    border: 1px solid #fff;
+    margin: 0 var(--s-sm);
+    box-shadow: var(--glow);
+    border: 1px solid #fff
 }
 
 .gothic-ornament {
-    background: var(--card-color);
-    box-shadow: 0 0 10px var(--card-color);
+    background: var(--c);
+    box-shadow: 0 0 10px var(--c)
 }
 
-/* INTRO */
+/* Sections */
 #intro {
     position: relative;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow: hidden
 }
 
 .intro-content {
@@ -506,11 +497,11 @@ body {
     z-index: 10;
     padding: clamp(40px, 8vh, 100px) clamp(30px, 10vw, 100px);
     backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, .05);
+    background: var(--card);
     text-align: center;
     max-width: 90vw;
-    animation: scaleIn 0.8s ease-out;
+    animation: scaleIn .8s ease-out
 }
 
 .citacao {
@@ -520,55 +511,54 @@ body {
     line-height: 1.1;
     color: #f0f0f0;
     text-transform: uppercase;
-    animation: fadeInUp 1s ease-out 0.2s both;
+    animation: fadeInUp 1s ease-out .2s both
 }
 
 .destaque-cryo {
     color: #fff;
-    text-shadow: 0 0 10px rgba(163, 214, 255, 0.8);
+    text-shadow: 0 0 10px rgba(163, 214, 255, .8)
 }
 
 .destaque-cryo-glow {
     color: var(--accent);
     font-style: italic;
-    text-shadow: 0 0 20px rgba(163, 214, 255, 0.6);
+    text-shadow: 0 0 20px rgba(163, 214, 255, .6)
 }
 
 .subtexto-intro {
     font-size: 1.2rem;
     font-weight: 300;
     color: #cbd5e0;
-    letter-spacing: 5px;
+    letter-spacing: 5px
 }
 
 .vontade {
     display: block;
-    margin-top: 10px;
+    margin-top: 10px
 }
 
-/* HISTÓRIA */
 #historia-section {
     position: relative;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--space-3xl) clamp(20px, 5vw, 60px);
+    padding: var(--s-3xl) clamp(20px, 5vw, 60px)
 }
 
 .historia-content {
     position: relative;
     z-index: 10;
     max-width: 900px;
-    background: var(--bg-card);
+    background: var(--card);
     backdrop-filter: blur(12px);
     border: 1px solid var(--accent-dim);
-    padding: var(--space-xl) var(--space-lg);
+    padding: var(--s-xl) var(--s-lg)
 }
 
 .historia-header {
     text-align: center;
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--s-xl)
 }
 
 .historia-titulo {
@@ -577,27 +567,27 @@ body {
     font-weight: 900;
     color: #f0f0f0;
     text-transform: uppercase;
-    text-shadow: 0 0 20px rgba(163, 214, 255, 0.5);
+    text-shadow: 0 0 20px rgba(163, 214, 255, .5)
 }
 
 .historia-texto {
     font-size: 1.05rem;
     line-height: 1.9;
-    color: var(--text-secondary);
-    text-align: justify;
+    color: var(--txt-dim);
+    text-align: justify
 }
 
 .historia-texto p {
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--s-md)
 }
 
 .historia-final {
-    margin-top: var(--space-xl);
-    padding-top: var(--space-md);
-    border-top: 1px solid rgba(163, 214, 255, 0.2);
+    margin-top: var(--s-xl);
+    padding-top: var(--s-md);
+    border-top: 1px solid rgba(163, 214, 255, .2);
     font-size: 1.1rem;
     font-weight: 500;
-    text-align: center;
+    text-align: center
 }
 
 .harbinger-link {
@@ -605,15 +595,15 @@ body {
     font-weight: 700;
     text-decoration: none;
     position: relative;
-    transition: all var(--transition);
+    transition: var(--tr)
 }
 
 .harbinger-link:hover {
     text-shadow: 0 0 15px currentColor;
-    filter: brightness(1.3);
+    filter: brightness(1.3)
 }
 
-/* CAROUSEL */
+/* Carousel */
 .carousel-section {
     position: relative;
     min-height: 100vh;
@@ -621,20 +611,16 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: calc(var(--space-lg) + var(--header-height)) clamp(20px, 5vw, 60px) var(--space-lg);
-    gap: var(--space-xl);
-    background: var(--bg-dark);
-    margin-top: calc(var(--header-height) * -1);
-}
-
-.carousel-overlay {
-    background: radial-gradient(circle, transparent 0%, rgba(0, 0, 0, 0.85) 100%);
+    padding: calc(var(--s-lg) + var(--header)) clamp(20px, 5vw, 60px) var(--s-lg);
+    gap: var(--s-xl);
+    background: var(--bg);
+    margin-top: calc(var(--header)*-1)
 }
 
 .inimigos-header {
     position: relative;
     z-index: 10;
-    text-align: center;
+    text-align: center
 }
 
 .carousel-wrapper {
@@ -645,7 +631,7 @@ body {
     z-index: 10;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center
 }
 
 .carousel-container {
@@ -653,75 +639,75 @@ body {
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center
 }
 
 .carousel-track {
     display: flex;
     gap: clamp(20px, 3vw, 40px);
     will-change: transform;
-    transition: transform var(--transition-slow);
+    transition: transform var(--tr-slow)
 }
 
 .harbinger-card {
     flex-shrink: 0;
-    width: var(--card-width);
-    height: var(--card-height);
-    opacity: 0.3;
-    transform: scale(var(--scale-down));
-    filter: brightness(0.4);
+    width: var(--card-w);
+    height: var(--card-h);
+    opacity: .3;
+    transform: scale(.75);
+    filter: brightness(.4);
     cursor: pointer;
-    transition: all var(--transition-slow);
+    transition: all var(--tr-slow)
 }
 
 .harbinger-card.active {
     opacity: 1;
-    height: var(--card-height-active);
-    transform: scale(var(--scale-up));
+    height: var(--card-h-active);
+    transform: scale(1.15);
     filter: brightness(1.3);
-    z-index: 10;
+    z-index: 10
 }
 
 .harbinger-card.expanded {
     width: min(1200px, 90vw);
-    height: var(--card-height-expanded);
+    height: var(--card-h-expand);
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1) !important;
     z-index: 1000;
     opacity: 1 !important;
-    filter: brightness(1.2) !important;
+    filter: brightness(1.2) !important
 }
 
 .carousel-section.card-expanded::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, .85);
     backdrop-filter: blur(10px);
-    z-index: 999;
+    z-index: 999
 }
 
 .card-inner-gothic {
     width: 100%;
     height: 100%;
-    background: var(--bg-glass);
+    background: var(--glass);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, .15);
     position: relative;
     display: flex;
     flex-direction: column;
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%)
 }
 
 .card-inner-gothic::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, transparent 0%, var(--card-color) 100%);
-    opacity: 0.12;
-    pointer-events: none;
+    background: linear-gradient(135deg, transparent 0%, var(--c) 100%);
+    opacity: .12;
+    pointer-events: none
 }
 
 .card-inner-gothic::after {
@@ -731,119 +717,119 @@ body {
     right: 0;
     width: 30px;
     height: 30px;
-    background: var(--card-color);
-    opacity: 0.5;
-    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    background: var(--c);
+    opacity: .5;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%)
 }
 
 .card-header-gothic {
-    padding: var(--space-md) var(--space-md) var(--space-sm);
-    border-bottom: 1px solid var(--border);
+    padding: var(--s-md) var(--s-md) var(--s-sm);
+    border-bottom: 1px solid var(--border)
 }
 
 .card-rank {
     font-family: 'Cinzel', serif;
-    font-size: clamp(0.65rem, 1vw, 0.75rem);
+    font-size: clamp(.65rem, 1vw, .75rem);
     letter-spacing: 3px;
-    color: var(--card-color);
+    color: var(--c);
     text-transform: uppercase;
-    opacity: 0.8;
-    margin-bottom: var(--space-xs);
-    font-weight: 600;
+    opacity: .8;
+    margin-bottom: var(--s-xs);
+    font-weight: 600
 }
 
 .card-title-gothic {
     font-family: 'Cinzel', serif;
     font-size: clamp(1.4rem, 2.5vw, 1.8rem);
     font-weight: 900;
-    color: var(--card-color);
+    color: var(--c);
     text-transform: uppercase;
-    text-shadow: 0 0 20px var(--card-color);
-    line-height: 1;
+    text-shadow: 0 0 20px var(--c);
+    line-height: 1
 }
 
 .card-subtitle-gothic {
-    font-size: clamp(0.75rem, 1.1vw, 0.85rem);
-    color: rgba(255, 255, 255, 0.85);
+    font-size: clamp(.75rem, 1.1vw, .85rem);
+    color: rgba(255, 255, 255, .85);
     font-style: italic;
     margin-top: 5px;
-    font-weight: 300;
+    font-weight: 300
 }
 
 .gothic-divider {
-    margin: var(--space-sm) 0;
+    margin: var(--s-sm) 0
 }
 
 .card-content-gothic {
     flex: 1;
-    padding: var(--space-sm) var(--space-md);
-    overflow-y: auto;
+    padding: var(--s-sm) var(--s-md);
+    overflow-y: auto
 }
 
 .card-content-gothic::-webkit-scrollbar {
-    width: 5px;
+    width: 5px
 }
 
 .card-content-gothic::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 3px;
+    background: rgba(0, 0, 0, .3);
+    border-radius: 3px
 }
 
 .card-content-gothic::-webkit-scrollbar-thumb {
-    background: var(--card-color);
+    background: var(--c);
     border-radius: 3px;
-    opacity: 0.8;
+    opacity: .8
 }
 
 .card-content-gothic::-webkit-scrollbar-thumb:hover {
-    background: var(--card-color);
-    opacity: 1;
+    background: var(--c);
+    opacity: 1
 }
 
 .harbinger-card.expanded .card-content-gothic {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-md);
-    padding: var(--space-md) var(--space-lg);
+    gap: var(--s-md);
+    padding: var(--s-md) var(--s-lg)
 }
 
 .card-section {
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--s-sm)
 }
 
 .section-title-gothic {
     font-family: 'Cinzel', serif;
-    font-size: clamp(0.75rem, 1.1vw, 0.85rem);
-    color: var(--card-color);
+    font-size: clamp(.75rem, 1.1vw, .85rem);
+    color: var(--c);
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin-bottom: var(--space-xs);
+    margin-bottom: var(--s-xs);
     display: flex;
     align-items: center;
-    gap: var(--space-xs);
-    font-weight: 700;
+    gap: var(--s-xs);
+    font-weight: 700
 }
 
 .section-title-gothic::before {
     content: "";
     width: 2px;
     height: clamp(12px, 1.8vh, 14px);
-    background: var(--card-color);
+    background: var(--c)
 }
 
 .card-text-gothic {
-    font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+    font-size: clamp(.8rem, 1.2vw, .9rem);
     line-height: 1.6;
     color: #efefef;
-    font-weight: 400;
+    font-weight: 400
 }
 
 .card-extra-info {
-    display: none;
+    display: none
 }
 
 .harbinger-card.expanded .card-extra-info {
-    display: block;
+    display: block
 }
 
 .card-close-btn {
@@ -852,26 +838,26 @@ body {
     right: 20px;
     width: 40px;
     height: 40px;
-    background: var(--bg-glass);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-full);
+    background: var(--glass);
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: var(--r-full);
     display: none;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     color: #fff;
-    transition: all var(--transition);
-    z-index: 10;
+    transition: var(--tr);
+    z-index: 10
 }
 
 .harbinger-card.expanded .card-close-btn {
-    display: flex;
+    display: flex
 }
 
 .card-close-btn:hover {
-    background: rgba(255, 50, 50, 0.8);
-    border-color: #ff3232;
-    transform: rotate(90deg);
+    background: rgba(255, 50, 50, .8);
+    border-color: #f32;
+    transform: rotate(90deg)
 }
 
 .carousel-controls {
@@ -880,17 +866,17 @@ body {
     display: flex;
     align-items: center;
     gap: 30px;
-    padding: var(--space-md) 0 var(--space-sm);
+    padding: var(--s-md) 0 var(--s-sm)
 }
 
 .carousel-section.card-expanded .carousel-controls {
     opacity: 0;
-    pointer-events: none;
+    pointer-events: none
 }
 
 .carousel-btn {
-    width: var(--control-size);
-    height: var(--control-size);
+    width: 45px;
+    height: 45px;
     background: transparent;
     border: none;
     display: flex;
@@ -898,90 +884,90 @@ body {
     justify-content: center;
     cursor: pointer;
     color: var(--accent);
-    transition: all var(--transition);
+    transition: var(--tr)
 }
 
 .carousel-btn:hover {
-    transform: scale(var(--scale-hover));
+    transform: scale(1.3)
 }
 
 .carousel-btn svg {
-    width: var(--icon-size);
-    height: var(--icon-size);
+    width: 20px;
+    height: 20px
 }
 
 .carousel-indicators {
     display: flex;
-    gap: 12px;
+    gap: 12px
 }
 
 .indicator-dot {
     width: 8px;
     height: 8px;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, .2);
     transform: rotate(45deg);
     cursor: pointer;
-    transition: all var(--transition);
+    transition: var(--tr)
 }
 
 .indicator-dot:hover {
-    background: var(--accent-dim);
+    background: var(--accent-dim)
 }
 
 .indicator-dot.active {
     background: var(--accent);
-    box-shadow: var(--shadow-glow);
+    box-shadow: var(--glow)
 }
 
-/* INIMIGOS */
+/* Inimigos */
 #inimigos-section {
     position: relative;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--space-3xl) clamp(20px, 5vw, 60px);
+    padding: var(--s-3xl) clamp(20px, 5vw, 60px)
 }
 
 .inimigos-content {
     position: relative;
     z-index: 10;
     max-width: 1600px;
-    width: 100%;
+    width: 100%
 }
 
 .inimigos-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: clamp(15px, 2vw, 25px);
+    gap: clamp(15px, 2vw, 25px)
 }
 
 .inimigo-card {
     position: relative;
-    background: var(--bg-card);
+    background: var(--card);
     backdrop-filter: blur(10px);
     border: 1px solid var(--border);
     overflow: hidden;
     cursor: pointer;
-    transition: all var(--transition-smooth);
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+    transition: all var(--tr-smooth);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%)
 }
 
 .inimigo-card.animate-on-scroll {
-    transform: translateY(30px);
+    transform: translateY(30px)
 }
 
 .inimigo-card.animate-on-scroll.animated {
-    transform: translateY(0);
+    transform: translateY(0)
 }
 
 .inimigo-card::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, transparent 0%, var(--element-color) 100%);
+    background: linear-gradient(135deg, transparent 0%, var(--e) 100%);
     opacity: 0;
-    transition: opacity var(--transition-smooth);
+    transition: opacity var(--tr-smooth)
 }
 
 .inimigo-card::after {
@@ -991,180 +977,180 @@ body {
     right: 0;
     width: 15px;
     height: 15px;
-    background: var(--element-color);
-    opacity: 0.6;
-    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    background: var(--e);
+    opacity: .6;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%)
 }
 
 .inimigo-card:hover {
     transform: translateY(-5px);
-    border-color: var(--element-color);
-    box-shadow: var(--shadow-card), 0 0 25px var(--element-color);
+    border-color: var(--e);
+    box-shadow: var(--shadow), 0 0 25px var(--e)
 }
 
 .inimigo-card:hover::before {
-    opacity: 0.15;
+    opacity: .15
 }
 
 .inimigo-card:hover::after {
-    opacity: 1;
+    opacity: 1
 }
 
 .inimigo-image-wrapper {
     position: relative;
     width: 100%;
     height: clamp(220px, 28vh, 320px);
-    overflow: hidden;
+    overflow: hidden
 }
 
 .inimigo-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s;
+    transition: transform .5s
 }
 
 .inimigo-card:hover .inimigo-image {
-    transform: scale(1.08);
+    transform: scale(1.08)
 }
 
 .inimigo-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 5, 15, 0.9) 100%);
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 5, 15, .9) 100%)
 }
 
 .inimigo-info {
-    padding: var(--space-sm);
+    padding: var(--s-sm)
 }
 
 .inimigo-nome {
     font-family: 'Cinzel', serif;
     font-size: clamp(1rem, 1.5vw, 1.2rem);
     font-weight: 700;
-    color: var(--element-color);
+    color: var(--e);
     text-transform: uppercase;
-    margin-bottom: var(--space-xs);
-    text-shadow: 0 0 12px var(--element-color);
-    line-height: 1.1;
+    margin-bottom: var(--s-xs);
+    text-shadow: 0 0 12px var(--e);
+    line-height: 1.1
 }
 
 .inimigo-elemento {
     font-family: 'Cinzel', serif;
-    font-size: clamp(0.65rem, 0.9vw, 0.75rem);
-    color: var(--element-color);
+    font-size: clamp(.65rem, .9vw, .75rem);
+    color: var(--e);
     text-transform: uppercase;
     letter-spacing: 3px;
-    opacity: 0.8;
-    margin-bottom: var(--space-sm);
+    opacity: .8;
+    margin-bottom: var(--s-sm);
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 6px
 }
 
 .inimigo-elemento::before {
     content: "";
     width: 2px;
     height: 10px;
-    background: var(--element-color);
+    background: var(--e)
 }
 
 .inimigo-descricao {
-    font-size: clamp(0.8rem, 1.1vw, 0.9rem);
+    font-size: clamp(.8rem, 1.1vw, .9rem);
     line-height: 1.5;
-    color: #ccc;
+    color: #ccc
 }
 
-/* RESPONSIVE */
-@media (max-height: 800px) {
+/* Responsive */
+@media(max-height:800px) {
     :root {
-        --card-height-active: clamp(330px, 50vh, 380px);
+        --card-h-active: clamp(330px, 50vh, 380px)
     }
 
     .carousel-wrapper {
-        min-height: 350px;
+        min-height: 350px
     }
 
     .harbinger-card {
         height: 250px;
-        width: clamp(200px, 20vw, 280px);
+        width: clamp(200px, 20vw, 280px)
     }
 
     .carousel-btn {
         width: 35px;
-        height: 35px;
+        height: 35px
     }
 
     .carousel-btn svg {
         width: 16px;
-        height: 16px;
+        height: 16px
     }
 
     .indicator-dot {
         width: 6px;
-        height: 6px;
+        height: 6px
     }
 }
 
-@media (max-width: 1200px) {
+@media(max-width:1200px) {
     .inimigos-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, 1fr)
     }
 }
 
-@media (max-width: 900px) {
+@media(max-width:900px) {
     .header-right a {
-        font-size: 0.7rem;
-        padding-left: 15px;
+        font-size: .7rem;
+        padding-left: 15px
     }
 
     .carousel-track {
-        gap: 20px;
+        gap: 20px
     }
 
     .inimigos-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr)
     }
 
     :root {
-        --scale-up: 1.12;
+        --scale-up: 1.12
     }
 }
 
-@media (max-width: 768px) {
+@media(max-width:768px) {
     :root {
-        --header-height: 60px;
+        --header: 60px
     }
 
     .harbinger-card.expanded .card-content-gothic {
         grid-template-columns: 1fr;
-        gap: var(--space-sm);
+        gap: var(--s-sm)
     }
 
     .inimigos-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr)
     }
 }
 
-@media (max-width: 600px) {
+@media(max-width:600px) {
     .header-right {
-        display: none;
+        display: none
     }
 
     .sidebar-menu {
         width: 85vw;
-        left: -85vw;
+        left: -85vw
     }
 
     .inimigos-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr
     }
 
     :root {
-        --scale-up: 1.1;
+        --scale-up: 1.1
     }
 
     .harbinger-card {
-        width: clamp(180px, 70vw, 240px);
+        width: clamp(180px, 70vw, 240px)
     }
 }
