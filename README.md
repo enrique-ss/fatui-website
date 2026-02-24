@@ -10,13 +10,13 @@ Clone o repositório e abra o `index.html` no navegador.
 
 ## O que tem dentro
 
-**Introdução cinematográfica** — vídeo de abertura com Snezhnaya antes do carrossel
+**Introdução cinematográfica** vídeo de abertura com Snezhnaya antes do carrossel
 
-**11 cards interativos** — cada Harbinger com história, personalidade e cor própria
+**11 cards interativos** cada Harbinger com história, personalidade e cor própria
 
-**Vídeos dinâmicos** — o fundo troca automaticamente para combinar com o personagem ativo
+**Vídeos dinâmicos** o fundo troca automaticamente para combinar com o personagem ativo
 
-**Navegação múltipla** — setas do teclado, clique nos cards, swipe no mobile e indicadores de posição
+**Navegação múltipla** setas do teclado, clique nos cards, swipe no mobile e indicadores de posição
 
 ## Personagens
 
