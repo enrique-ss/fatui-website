@@ -1,0 +1,116 @@
+/*
+ * _responsive.css
+ * ─────────────────────────────────────────────
+ * Media queries — ajustes de layout para telas
+ * menores. Sempre o ÚLTIMO arquivo importado.
+ *
+ * BREAKPOINTS (do maior para o menor)
+ *   max-height: 800px  → telas curtas (notebooks)
+ *   max-width:  1200px → tablets landscape
+ *   max-width:   900px → tablets portrait
+ *   max-width:   768px → mobile landscape
+ *   max-width:   600px → mobile portrait
+ */
+
+/* ── Telas baixas (altura < 800px) ──────────── */
+@media (max-height: 800px) {
+    :root {
+        /* Reduz a altura do card ativo para caber na tela */
+        --card-h-active: clamp(330px, 50vh, 380px);
+    }
+
+    .carousel-wrapper {
+        min-height: 350px;
+    }
+
+    .harbinger-card {
+        height: 250px;
+        width: clamp(200px, 20vw, 280px);
+    }
+
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+    }
+
+    .carousel-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .indicator-dot {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+/* ── Tablets landscape (≤ 1200px) ───────────── */
+@media (max-width: 1200px) {
+    .inimigos-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ── Tablets portrait (≤ 900px) ─────────────── */
+@media (max-width: 900px) {
+    .header-right a {
+        font-size: .7rem;
+        padding-left: 15px;
+    }
+
+    .carousel-track {
+        gap: 20px;
+    }
+
+    .inimigos-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    :root {
+        --scale-up: 1.12;
+    }
+}
+
+/* ── Mobile landscape (≤ 768px) ─────────────── */
+@media (max-width: 768px) {
+    :root {
+        --header: 60px;
+    }
+
+    /* Card expandido em coluna única no mobile */
+    .harbinger-card.expanded .card-content-gothic {
+        grid-template-columns: 1fr;
+        gap: var(--s-sm);
+    }
+
+    .inimigos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ── Mobile portrait (≤ 600px) ──────────────── */
+@media (max-width: 600px) {
+
+    /* Esconde a nav do header — fica só o hambúrguer */
+    .header-right {
+        display: none;
+    }
+
+    /* Sidebar ocupa 85% da largura da tela */
+    .sidebar-menu {
+        width: 85vw;
+        left: -85vw;
+    }
+
+    .inimigos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    :root {
+        --scale-up: 1.1;
+    }
+
+    .harbinger-card {
+        width: clamp(180px, 70vw, 240px);
+    }
+}

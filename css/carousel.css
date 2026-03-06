@@ -1,0 +1,377 @@
+/*
+ * _carousel.css
+ * ─────────────────────────────────────────────
+ * Estilos do carrossel de Harbingers.
+ *
+ * HIERARQUIA DE ELEMENTOS
+ * ────────────────────────
+ * .carousel-section
+ *   ├── .carousel-bg-video       vídeo de fundo
+ *   ├── .carousel-overlay        escurece o vídeo
+ *   ├── .inimigos-header         título da seção
+ *   ├── .carousel-wrapper
+ *   │    └── .carousel-container
+ *   │         └── .carousel-track   ← movida pelo JS
+ *   │              └── .harbinger-card
+ *   │                   └── .card-inner-gothic
+ *   │                        ├── .card-header-gothic
+ *   │                        ├── .gothic-divider
+ *   │                        ├── .card-content-gothic
+ *   │                        │    ├── .card-section
+ *   │                        │    └── .card-extra-info (oculto)
+ *   │                        └── .card-close-btn
+ *   └── .carousel-controls
+ *        ├── .carousel-btn-prev
+ *        ├── .carousel-indicators
+ *        └── .carousel-btn-next
+ *
+ * ESTADOS DO CARD
+ * ────────────────
+ * (padrão)   → pequeno, escurecido, opaco
+ * .active    → grande, brilhante, centralizado
+ * .expanded  → fixed no centro da tela (modal)
+ */
+
+/* ── Seção container ─────────────────────────── */
+.carousel-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: calc(var(--s-lg) + var(--header)) clamp(20px, 5vw, 60px) var(--s-lg);
+    gap: var(--s-xl);
+    background: var(--bg);
+    margin-top: calc(var(--header) * -1);
+}
+
+/* Título centralizado acima da faixa */
+.inimigos-header {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+}
+
+/* ── Faixa e container ───────────────────────── */
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    min-height: clamp(350px, 50vh, 600px);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*
+   .carousel-track é a faixa que o JS move com translateX.
+   O JS calcula o offset baseado em currentIndex × (cardWidth + gap).
+*/
+.carousel-track {
+    display: flex;
+    gap: clamp(20px, 3vw, 40px);
+    will-change: transform;
+    transition: transform var(--tr-slow);
+}
+
+/* ── Cards ───────────────────────────────────── */
+
+/* Estado padrão: pequeno e escurecido */
+.harbinger-card {
+    flex-shrink: 0;
+    width: var(--card-w);
+    height: var(--card-h);
+    opacity: .3;
+    transform: scale(.75);
+    filter: brightness(.4);
+    cursor: pointer;
+    transition: all var(--tr-slow);
+}
+
+/* Estado ativo: central, grande, brilhante */
+.harbinger-card.active {
+    opacity: 1;
+    height: var(--card-h-active);
+    transform: scale(1.15);
+    filter: brightness(1.3);
+    z-index: 10;
+}
+
+/* Estado expandido: modal fixo no centro da tela */
+.harbinger-card.expanded {
+    width: min(1200px, 90vw);
+    height: var(--card-h-expand);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1) !important;
+    z-index: 1000;
+    opacity: 1 !important;
+    filter: brightness(1.2) !important;
+}
+
+/* Backdrop escuro quando um card está expandido */
+.carousel-section.card-expanded::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .85);
+    backdrop-filter: blur(10px);
+    z-index: 999;
+}
+
+/* ── Interior do card ────────────────────────── */
+
+/*
+   clip-path cria o corte diagonal na borda inferior direita
+   (efeito "canto cortado" característico).
+*/
+.card-inner-gothic {
+    width: 100%;
+    height: 100%;
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, .15);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+}
+
+/* Brilho sutil na cor do personagem como fundo */
+.card-inner-gothic::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 0%, var(--c) 100%);
+    opacity: .12;
+    pointer-events: none;
+}
+
+/* Triângulo colorido no canto inferior direito */
+.card-inner-gothic::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--c);
+    opacity: .5;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+/* Cabeçalho do card: rank + nome + apelido */
+.card-header-gothic {
+    padding: var(--s-md) var(--s-md) var(--s-sm);
+    border-bottom: 1px solid var(--border);
+}
+
+.card-rank {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(.65rem, 1vw, .75rem);
+    letter-spacing: 3px;
+    color: var(--c);
+    text-transform: uppercase;
+    opacity: .8;
+    margin-bottom: var(--s-xs);
+    font-weight: 600;
+}
+
+.card-title-gothic {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    font-weight: 900;
+    color: var(--c);
+    text-transform: uppercase;
+    text-shadow: 0 0 20px var(--c);
+    line-height: 1;
+}
+
+.card-subtitle-gothic {
+    font-size: clamp(.75rem, 1.1vw, .85rem);
+    color: rgba(255, 255, 255, .85);
+    font-style: italic;
+    margin-top: 5px;
+    font-weight: 300;
+}
+
+/* Divisor interno do card — margem menor que o global */
+.gothic-divider {
+    margin: var(--s-sm) 0;
+}
+
+/* Área de conteúdo rolável */
+.card-content-gothic {
+    flex: 1;
+    padding: var(--s-sm) var(--s-md);
+    overflow-y: auto;
+}
+
+/* Scrollbar fina na cor do personagem */
+.card-content-gothic::-webkit-scrollbar {
+    width: 5px;
+}
+
+.card-content-gothic::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, .3);
+    border-radius: 3px;
+}
+
+.card-content-gothic::-webkit-scrollbar-thumb {
+    background: var(--c);
+    border-radius: 3px;
+}
+
+/* Quando expandido, o conteúdo vira um grid de 2 colunas */
+.harbinger-card.expanded .card-content-gothic {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-md);
+    padding: var(--s-md) var(--s-lg);
+}
+
+/* Seção dentro do card (história, personalidade...) */
+.card-section {
+    margin-bottom: var(--s-sm);
+}
+
+.section-title-gothic {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(.75rem, 1.1vw, .85rem);
+    color: var(--c);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: var(--s-xs);
+    display: flex;
+    align-items: center;
+    gap: var(--s-xs);
+    font-weight: 700;
+}
+
+/* Barra vertical à esquerda do título da seção */
+.section-title-gothic::before {
+    content: "";
+    width: 2px;
+    height: clamp(12px, 1.8vh, 14px);
+    background: var(--c);
+}
+
+.card-text-gothic {
+    font-size: clamp(.8rem, 1.2vw, .9rem);
+    line-height: 1.6;
+    color: #efefef;
+    font-weight: 400;
+}
+
+/* Seções extras — visíveis apenas quando o card está expandido */
+.card-extra-info {
+    display: none;
+}
+
+.harbinger-card.expanded .card-extra-info {
+    display: block;
+}
+
+/* Botão fechar do card expandido */
+.card-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: var(--glass);
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: var(--r-full);
+    display: none;
+    /* só aparece quando .expanded */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    transition: var(--tr);
+    z-index: 10;
+}
+
+.harbinger-card.expanded .card-close-btn {
+    display: flex;
+}
+
+.card-close-btn:hover {
+    background: rgba(255, 50, 50, .8);
+    border-color: #f32;
+    transform: rotate(90deg);
+}
+
+/* ── Controles ───────────────────────────────── */
+.carousel-controls {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: var(--s-md) 0 var(--s-sm);
+}
+
+/* Esconde os controles quando um card está em modal */
+.carousel-section.card-expanded .carousel-controls {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Botões ← → */
+.carousel-btn {
+    width: 45px;
+    height: 45px;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--accent);
+    transition: var(--tr);
+}
+
+.carousel-btn:hover {
+    transform: scale(1.3);
+}
+
+.carousel-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Pontos indicadores — losangos girados 45° */
+.carousel-indicators {
+    display: flex;
+    gap: 12px;
+}
+
+.indicator-dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, .2);
+    transform: rotate(45deg);
+    cursor: pointer;
+    transition: var(--tr);
+}
+
+.indicator-dot:hover {
+    background: var(--accent-dim);
+}
+
+.indicator-dot.active {
+    background: var(--accent);
+    box-shadow: var(--glow);
+}

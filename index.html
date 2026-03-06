@@ -1,6 +1,43 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
+<!--
+    index.html
+    ══════════════════════════════════════════════
+    Arquivo principal da página.
+    Todo o conteúdo está aqui — não há includes externos.
+
+    ESTRUTURA DO PROJETO
+    ─────────────────────
+    index.html          ← você está aqui
+    css/
+      style.css         ← importa os módulos abaixo
+      _variables.css    cores, espaçamentos, tokens
+      _utilities.css    animações, scrollbar, globais
+      _header.css       header fixo + sidebar
+      _sections.css     intro + história
+      _carousel.css     carrossel dos harbingers
+      _inimigos.css     grid de soldados
+      _responsive.css   media queries (sempre o último)
+    js/
+      config.js         configurações globais (CONFIG)
+      sidebar.js        classe Sidebar
+      parallax.js       classe ParallaxManager
+      carousel.js       classe Carousel
+      main.js           inicializa tudo
+    html/
+      header.html           apenas para referência/edição
+      section-intro.html    apenas para referência/edição
+      section-historia.html apenas para referência/edição
+      section-carousel.html apenas para referência/edição
+      section-inimigos.html apenas para referência/edição
+
+    ORDEM DOS SCRIPTS — NÃO ALTERE
+    ────────────────────────────────
+    config.js primeiro — os outros dependem de CONFIG.
+    main.js por último — precisa que as classes já existam.
+══════════════════════════════════════════════ -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,11 +47,37 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@200;300;400&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+
+    <!--
+        CSS — carregado por um único link.
+        O style.css usa @import para puxar os módulos.
+        Se @import não funcionar no seu servidor,
+        substitua por um <link> para cada arquivo:
+
+        <link rel="stylesheet" href="css/_variables.css">
+        <link rel="stylesheet" href="css/_utilities.css">
+        <link rel="stylesheet" href="css/_header.css">
+        <link rel="stylesheet" href="css/_sections.css">
+        <link rel="stylesheet" href="css/_carousel.css">
+        <link rel="stylesheet" href="css/_inimigos.css">
+        <link rel="stylesheet" href="css/_responsive.css">
+    -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+
+    <!-- ══ 1. HEADER + SIDEBAR ══════════════════
+         Fonte: html/header.html
+         CSS:   css/_header.css
+         JS:    js/sidebar.js
+    ════════════════════════════════════════════ -->
+    <!-- ══════════════════════════════════════════
+     BARRA SUPERIOR
+     ══════════════════════════════════════════ -->
     <header class="main-header">
+
+        <!-- Lado esquerdo: botão que abre o menu lateral -->
         <div class="header-left">
             <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
                 <span class="hamburger-line"></span>
@@ -23,6 +86,7 @@
             </button>
         </div>
 
+        <!-- Lado direito: links de navegação por âncora (#id da seção) -->
         <nav class="header-right">
             <a href="#intro">Intro</a>
             <a href="#historia-section">História</a>
@@ -32,12 +96,20 @@
             <a href="#curiosidades-section">Curiosidades</a>
             <a href="#galeria-section">Galeria</a>
         </nav>
+
     </header>
 
-    <!-- MENU LATERAL -->
+
+    <!-- ══════════════════════════════════════════
+     MENU LATERAL (SIDEBAR)
+     Controlado por: sidebar.js
+     ══════════════════════════════════════════ -->
     <aside class="sidebar-menu" id="sidebarMenu">
+
         <div class="sidebar-header">
             <h2 class="sidebar-title">HARBINGERS</h2>
+
+            <!-- Botão X para fechar o menu -->
             <button class="sidebar-close" id="sidebarClose" aria-label="Fechar">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -46,108 +118,142 @@
             </button>
         </div>
 
+        <!-- Lista de Harbingers — data-index deve bater com a posição no carrossel -->
         <nav class="sidebar-nav">
+
             <a href="#" class="sidebar-item" data-index="0">
                 <img src="resources/pierro.webp" alt="Pierro" class="sidebar-icon">
                 <span class="sidebar-rank">Nº 0</span>
                 <span class="sidebar-name">Pierro</span>
                 <span class="sidebar-title">"O Bobo"</span>
             </a>
+
             <a href="#" class="sidebar-item" data-index="1">
                 <img src="resources/capitano.webp" alt="Il Capitano" class="sidebar-icon">
                 <span class="sidebar-rank">Nº 1</span>
                 <span class="sidebar-name">Il Capitano</span>
                 <span class="sidebar-title">"O Capitão"</span>
             </a>
+
             <a href="#" class="sidebar-item" data-index="2">
                 <img src="resources/dottore.webp" alt="Dottore" class="sidebar-icon">
                 <span class="sidebar-rank">Nº 2</span>
                 <span class="sidebar-name">Dottore</span>
                 <span class="sidebar-title">"O Doutor"</span>
             </a>
+
             <a href="#" class="sidebar-item" data-index="3">
                 <img src="resources/columbina.webp" alt="Columbina" class="sidebar-icon">
                 <span class="sidebar-rank">Nº 3</span>
                 <span class="sidebar-name">Columbina</span>
                 <span class="sidebar-title">"A Damisela"</span>
             </a>
+
             <a href="#" class="sidebar-item" data-index="4">
                 <img src="resources/arlecchino.webp" alt="Arlecchino" class="sidebar-icon">
                 <span class="sidebar-rank">Nº 4</span>
                 <span class="sidebar-name">Arlecchino</span>
                 <span class="sidebar-title">"A Serva"</span>
             </a>
+
             <a href="#" class="sidebar-item" data-index="5">
                 <img src="resources/pulcinella.webp" alt="Pulcinella" class="sidebar-icon">
                 <span class="sidebar-rank">Nº 5</span>
                 <span class="sidebar-name">Pulcinella</span>
                 <span class="sidebar-title">"O Galo"</span>
             </a>
+
             <a href="#" class="sidebar-item" data-index="6">
                 <img src="resources/scaramouche.webp" alt="Scaramouche" class="sidebar-icon">
                 <span class="sidebar-rank">Nº 6</span>
                 <span class="sidebar-name">Scaramouche</span>
                 <span class="sidebar-title">"O Baladeiro"</span>
             </a>
+
             <a href="#" class="sidebar-item" data-index="7">
                 <img src="resources/sandrone.webp" alt="Sandrone" class="sidebar-icon">
                 <span class="sidebar-rank">Nº 7</span>
                 <span class="sidebar-name">Sandrone</span>
                 <span class="sidebar-title">"A Marionete"</span>
             </a>
+
             <a href="#" class="sidebar-item" data-index="8">
                 <img src="resources/signora.webp" alt="La Signora" class="sidebar-icon">
                 <span class="sidebar-rank">Nº 8</span>
                 <span class="sidebar-name">La Signora</span>
                 <span class="sidebar-title">"A Senhora"</span>
             </a>
+
             <a href="#" class="sidebar-item" data-index="9">
                 <img src="resources/pantalone.webp" alt="Pantalone" class="sidebar-icon">
                 <span class="sidebar-rank">Nº 9</span>
                 <span class="sidebar-name">Pantalone</span>
                 <span class="sidebar-title">"O Regrator"</span>
             </a>
+
             <a href="#" class="sidebar-item" data-index="10">
                 <img src="resources/tartaglia.webp" alt="Tartaglia" class="sidebar-icon">
                 <span class="sidebar-rank">Nº 11</span>
                 <span class="sidebar-name">Tartaglia</span>
                 <span class="sidebar-title">"Childe"</span>
             </a>
+
         </nav>
     </aside>
 
+    <!-- Fundo escuro atrás do menu; clique fecha o painel (sidebar.js) -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 
-    <!-- INTRO -->
+    <!-- ══ 2. INTRO ══════════════════════════════
+         Fonte: html/section-intro.html
+         CSS:   css/_sections.css
+         JS:    js/parallax.js (fade ao rolar)
+    ════════════════════════════════════════════ -->
     <section id="intro">
+
+        <!-- Vídeo de fundo em loop automático e sem som -->
         <video autoplay loop muted playsinline class="video-fundo">
             <source src="resources/snezhnaya-main.mp4" type="video/mp4">
         </video>
 
+        <!-- Camada escura para dar contraste ao texto -->
         <div class="overlay-dark"></div>
 
+        <!-- Conteúdo central — animado pelo parallax.js -->
         <div class="intro-content">
             <div class="moldura-fatuus">
+
                 <p class="tagline">ORDÔNIA • SUPREMACIA • ETERNIDADE</p>
+
                 <h2 class="citacao">
-                    OS <span class="destaque-cryo">ONZE</span> QUE DESAFIAM <span
-                        class="destaque-cryo-glow">CELESTIA</span><br>
-                    <span class="vontade">A VONTADE DA <span class="destaque-cryo">TSARITSA</span> É <span
-                            class="destaque-cryo-glow">ABSOLUTA</span></span>
+                    OS <span class="destaque-cryo">ONZE</span> QUE DESAFIAM
+                    <span class="destaque-cryo-glow">CELESTIA</span><br>
+                    <span class="vontade">
+                        A VONTADE DA <span class="destaque-cryo">TSARITSA</span> É
+                        <span class="destaque-cryo-glow">ABSOLUTA</span>
+                    </span>
                 </h2>
+
                 <div class="divisor-gótico">
                     <span class="diamante"></span>
                 </div>
-                <p class="subtexto-intro">
-                    HARBINGERS OF SNEZHNAYA
-                </p>
+
+                <p class="subtexto-intro">HARBINGERS OF SNEZHNAYA</p>
+
             </div>
         </div>
+
     </section>
 
-    <!-- HISTÓRIA SECTION -->
+
+    <!-- ══ 3. HISTÓRIA ══════════════════════════
+         Fonte: html/section-historia.html
+         CSS:   css/_sections.css
+         JS:    js/main.js (cliques nos .harbinger-link)
+    ════════════════════════════════════════════ -->
     <section id="historia-section">
+
         <video autoplay loop muted playsinline class="video-fundo">
             <source src="resources/historia.mp4" type="video/mp4">
         </video>
@@ -155,6 +261,8 @@
         <div class="overlay-dark"></div>
 
         <div class="historia-content">
+
+            <!-- Cabeçalho da seção -->
             <div class="historia-header">
                 <p class="historia-tagline">A ORIGEM • O PROPÓSITO • O DESTINO</p>
                 <h2 class="historia-titulo">A CRUZADA CONTRA CELESTIA</h2>
@@ -163,94 +271,98 @@
                 </div>
             </div>
 
+            <!-- Texto narrativo — links com data-index abrem o card no carrossel -->
             <div class="historia-texto">
+
                 <p>
-                    Nas terras gélidas de Snezhnaya, sob o comando da <span class="destaque-cryo">Tsaritsa</span>,
-                    nasceu a força militar e diplomática mais temida de Teyvat: os <span class="destaque-cryo-glow">Onze
-                        Mensageiros Fatui</span>.
+                    Nas terras gélidas de Snezhnaya, sob o comando da
+                    <span class="destaque-cryo">Tsaritsa</span>, nasceu a força
+                    militar e diplomática mais temida de Teyvat: os
+                    <span class="destaque-cryo-glow">Onze Mensageiros Fatui</span>.
                 </p>
 
                 <p>
-                    Tudo começou com <a href="#" class="harbinger-link" data-index="0"
-                        style="color: var(--pierro)">Pierro</a>,
-                    o Bobo — um sobrevivente de Khaenri'ah que testemunhou a destruição de sua pátria pelas mãos de
-                    Celestia.
-                    Consumido pela dor e pelo desejo de vingança, ele se tornou o primeiro dos Harbingers e arquiteto da
-                    rebelião
-                    contra os deuses celestiais. Foi ele quem recrutou os demais, cada um trazendo suas próprias
-                    cicatrizes
-                    e motivações.
+                    Tudo começou com
+                    <a href="#" class="harbinger-link" data-index="0" style="color: var(--pierro)">Pierro</a>,
+                    o Bobo — um sobrevivente de Khaenri'ah que testemunhou a destruição de sua pátria
+                    pelas mãos de Celestia. Consumido pela dor e pelo desejo de vingança, ele se tornou
+                    o primeiro dos Harbingers e arquiteto da rebelião contra os deuses celestiais.
+                    Foi ele quem recrutou os demais, cada um trazendo suas próprias cicatrizes e motivações.
                 </p>
 
                 <p>
                     <a href="#" class="harbinger-link" data-index="1" style="color: var(--capitano)">Il Capitano</a>,
-                    o guerreiro mais forte dentre os mortais, jurou sua lealdade inabalável à Tsaritsa, tornando-se o
-                    braço
-                    militar
-                    da organização. Ao seu lado, <a href="#" class="harbinger-link" data-index="2"
-                        style="color: var(--dottore)">Dottore</a>,
-                    o cientista herético expulso da Academia, busca transcender os limites da humanidade através de
-                    experimentos
-                    que desafiam toda ética conhecida.
+                    o guerreiro mais forte dentre os mortais, jurou sua lealdade inabalável à Tsaritsa,
+                    tornando-se o braço militar da organização. Ao seu lado,
+                    <a href="#" class="harbinger-link" data-index="2" style="color: var(--dottore)">Dottore</a>,
+                    o cientista herético expulso da Academia, busca transcender os limites da humanidade
+                    através de experimentos que desafiam toda ética conhecida.
                 </p>
 
                 <p>
-                    Entre os enigmas mais profundos está <a href="#" class="harbinger-link" data-index="3"
-                        style="color: var(--columbina)">Columbina</a>,
+                    Entre os enigmas mais profundos está
+                    <a href="#" class="harbinger-link" data-index="3" style="color: var(--columbina)">Columbina</a>,
                     cuja natureza sobrenatural e poder transcendental permanecem envoltos em mistério.
                     <a href="#" class="harbinger-link" data-index="4" style="color: var(--arlecchino)">Arlecchino</a>,
-                    a Serva, comanda a Casa das Lareiras com punho de ferro envolvido em seda, transformando órfãos em
-                    agentes letais.
+                    a Serva, comanda a Casa das Lareiras com punho de ferro envolvido em seda,
+                    transformando órfãos em agentes letais.
                 </p>
 
                 <p>
                     <a href="#" class="harbinger-link" data-index="5" style="color: var(--pulcinella)">Pulcinella</a>,
-                    o político astuto que serve como prefeito de Snezhnaya, tece redes de influência através de favores
-                    e
-                    diplomacia.
+                    o político astuto que serve como prefeito de Snezhnaya, tece redes de influência
+                    através de favores e diplomacia.
                     <a href="#" class="harbinger-link" data-index="6" style="color: var(--scaramouche)">Scaramouche</a>,
-                    a marionete abandonada pela Shogun Raiden, vagou séculos em busca de um propósito antes de
-                    eventualmente
-                    apagar sua própria existência do mundo.
+                    a marionete abandonada pela Shogun Raiden, vagou séculos em busca de um propósito
+                    antes de eventualmente apagar sua própria existência do mundo.
                 </p>
 
                 <p>
                     <a href="#" class="harbinger-link" data-index="7" style="color: var(--sandrone)">Sandrone</a>,
                     a gênia da engenharia, busca replicar a consciência humana em autômatos perfeitos.
                     <a href="#" class="harbinger-link" data-index="8" style="color: var(--signora)">La Signora</a>,
-                    a Bruxa das Chamas Carmesim, canalizou sua dor pela perda de seu amor em fúria eterna contra o mundo
-                    —
-                    até encontrar seu fim em Inazuma.
+                    a Bruxa das Chamas Carmesim, canalizou sua dor pela perda de seu amor em fúria eterna
+                    contra o mundo — até encontrar seu fim em Inazuma.
                 </p>
 
                 <p>
                     <a href="#" class="harbinger-link" data-index="9" style="color: var(--pantalone)">Pantalone</a>,
-                    nascido na pobreza e sem Visão, jurou dominar Teyvat através do poder econômico, provando que o
-                    capital
-                    supera a bênção divina. Por fim, <a href="#" class="harbinger-link" data-index="10"
-                        style="color: var(--tartaglia)">Tartaglia</a>,
-                    o mais jovem dos Harbingers, caiu no Abismo aos 14 anos e emergiu como uma máquina de guerra —
-                    leal à Tsaritsa, mas ainda tentando proteger a inocência de sua família.
+                    nascido na pobreza e sem Visão, jurou dominar Teyvat através do poder econômico,
+                    provando que o capital supera a bênção divina. Por fim,
+                    <a href="#" class="harbinger-link" data-index="10" style="color: var(--tartaglia)">Tartaglia</a>,
+                    o mais jovem dos Harbingers, caiu no Abismo aos 14 anos e emergiu como uma máquina
+                    de guerra — leal à Tsaritsa, mas ainda tentando proteger a inocência de sua família.
                 </p>
 
                 <p class="historia-final">
-                    Unidos sob a vontade da <span class="destaque-cryo">Deusa do Amor</span> que perdeu sua compaixão,
-                    os Onze Mensageiros não são apenas soldados — são símbolos de uma humanidade que se recusa a aceitar
-                    o destino imposto pelos céus. Sua missão: <span class="destaque-cryo-glow">reescrever as regras do
-                        mundo</span>,
+                    Unidos sob a vontade da
+                    <span class="destaque-cryo">Deusa do Amor</span> que perdeu sua compaixão,
+                    os Onze Mensageiros não são apenas soldados — são símbolos de uma humanidade que se
+                    recusa a aceitar o destino imposto pelos céus. Sua missão:
+                    <span class="destaque-cryo-glow">reescrever as regras do mundo</span>,
                     mesmo que isso signifique desafiar os próprios deuses.
                 </p>
+
             </div>
         </div>
+
     </section>
 
-    <!-- CARROSSEL - ESTRUTURA CORRIGIDA -->
+
+    <!-- ══ 4. CARROSSEL ══════════════════════════
+         Fonte: html/section-carousel.html
+         CSS:   css/_carousel.css
+         JS:    js/carousel.js
+    ════════════════════════════════════════════ -->
     <section class="carousel-section" id="carousel-section">
+
+        <!-- Vídeo de fundo — src trocado pelo carousel.js conforme o card ativo -->
         <video autoplay loop muted playsinline class="carousel-bg-video">
             <source src="resources/snezhnaya-main.mp4" type="video/mp4">
         </video>
         <div class="carousel-overlay"></div>
 
+        <!-- Título da seção -->
         <div class="inimigos-header">
             <p class="historia-tagline">AS FORÇAS • OS SOLDADOS • A VANGUARDA</p>
             <h2 class="historia-titulo">OS 11 MENSAGEIROS</h2>
@@ -259,11 +371,25 @@
             </div>
         </div>
 
+        <!-- ── FAIXA DE CARDS ─────────────────────────── -->
         <div class="carousel-wrapper">
             <div class="carousel-container">
                 <div class="carousel-track">
 
-                    <!-- PIERRO -->
+                    <!--
+                    Cada .harbinger-card representa um Harbinger.
+                    Atributos obrigatórios:
+                      data-character="nome"        → usado pelo CSS para estilizar
+                      data-video="resources/x.mp4" → vídeo de fundo deste card
+
+                    Estrutura interna de cada card:
+                      .card-header-gothic   → rank + nome + apelido
+                      .gothic-divider       → ornamento decorativo
+                      .card-content-gothic  → seções de conteúdo (história, personalidade...)
+                        .card-extra-info    → seções extras (ocultadas até expandir, se houver)
+                -->
+
+                    <!-- ── CARD 0: PIERRO ── -->
                     <div class="harbinger-card active" data-character="pierro" data-video="resources/pierro-bg.mp4">
                         <div class="card-inner-gothic">
                             <div class="card-header-gothic">
@@ -271,50 +397,42 @@
                                 <h1 class="card-title-gothic">Pierro</h1>
                                 <p class="card-subtitle-gothic">"O Bobo"</p>
                             </div>
-
                             <div class="gothic-divider">
                                 <div class="gothic-ornament"></div>
                             </div>
-
                             <div class="card-content-gothic">
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">História</h3>
                                     <p class="card-text-gothic">O primeiro Fatui. Ex-mago de Khaenri'ah que falhou em
                                         impedir o cataclisma, agora busca reescrever o destino.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Personalidade</h3>
                                     <p class="card-text-gothic">Estrategista melancólico e supremo. Vê o mundo como um
                                         tabuleiro onde sacrifícios são necessários.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Motivação</h3>
                                     <p class="card-text-gothic">Vingar-se dos deuses de Celestia por terem destruído sua
                                         terra natal e provar que a humanidade pode superar o destino.</p>
                                 </div>
-
                                 <div class="card-section card-extra-info">
                                     <h3 class="section-title-gothic">Habilidades</h3>
                                     <p class="card-text-gothic">Mestre em manipulação de energia elemental e estratégia
                                         militar. Possui conhecimento profundo sobre Khaenri'ah e os segredos do Abismo.
                                     </p>
                                 </div>
-
                                 <div class="card-section card-extra-info">
                                     <h3 class="section-title-gothic">Relacionamentos</h3>
                                     <p class="card-text-gothic">Mentor de todos os Harbingers. Mantém uma relação
                                         próxima com a Tsaritsa e respeita profundamente Il Capitano.</p>
                                 </div>
-
                                 <div class="card-section card-extra-info">
                                     <h3 class="section-title-gothic">Curiosidades</h3>
                                     <p class="card-text-gothic">Foi um dos sábios de Khaenri'ah antes da destruição. Usa
                                         uma máscara para ocultar metade do rosto, simbolizando sua dualidade.</p>
                                 </div>
                             </div>
-
                             <button class="card-close-btn">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2">
@@ -325,7 +443,7 @@
                         </div>
                     </div>
 
-                    <!-- CAPITANO -->
+                    <!-- ── CARD 1: IL CAPITANO ── -->
                     <div class="harbinger-card" data-character="capitano" data-video="resources/capitano-bg.mp4">
                         <div class="card-inner-gothic">
                             <div class="card-header-gothic">
@@ -333,49 +451,41 @@
                                 <h1 class="card-title-gothic">Il Capitano</h1>
                                 <p class="card-subtitle-gothic">"O Capitão"</p>
                             </div>
-
                             <div class="gothic-divider">
                                 <div class="gothic-ornament"></div>
                             </div>
-
                             <div class="card-content-gothic">
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">História</h3>
                                     <p class="card-text-gothic">O mortal mais forte de Teyvat. Lidera as frentes de
                                         batalha de Snezhnaya com força que desafia os deuses.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Personalidade</h3>
                                     <p class="card-text-gothic">Honrado e disciplinado. Respeitado por seu código de
                                         ética inabalável e coragem extrema.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Motivação</h3>
                                     <p class="card-text-gothic">Busca a verdadeira justiça através da força militar e o
                                         cumprimento da promessa feita à Tsaritsa.</p>
                                 </div>
-
                                 <div class="card-section card-extra-info">
                                     <h3 class="section-title-gothic">Habilidades</h3>
                                     <p class="card-text-gothic">Mestre em combate corpo a corpo e tático militar. Sua
                                         força física rivaliza com a dos deuses, mesmo sendo mortal.</p>
                                 </div>
-
                                 <div class="card-section card-extra-info">
                                     <h3 class="section-title-gothic">Relacionamentos</h3>
                                     <p class="card-text-gothic">Respeita profundamente Pierro. Possui rivalidade
                                         amigável com outros Harbingers. Admirado por todos os soldados de Snezhnaya.</p>
                                 </div>
-
                                 <div class="card-section card-extra-info">
                                     <h3 class="section-title-gothic">Curiosidades</h3>
                                     <p class="card-text-gothic">Sempre usa um elmo completo que nunca foi removido em
                                         público. Sua verdadeira identidade permanece um mistério.</p>
                                 </div>
                             </div>
-
                             <button class="card-close-btn">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2">
@@ -386,7 +496,7 @@
                         </div>
                     </div>
 
-                    <!-- DOTTORE -->
+                    <!-- ── CARD 2: DOTTORE ── -->
                     <div class="harbinger-card" data-character="dottore" data-video="resources/dottore-bg.mp4">
                         <div class="card-inner-gothic">
                             <div class="card-header-gothic">
@@ -394,49 +504,41 @@
                                 <h1 class="card-title-gothic">Dottore</h1>
                                 <p class="card-subtitle-gothic">"O Doutor"</p>
                             </div>
-
                             <div class="gothic-divider">
                                 <div class="gothic-ornament"></div>
                             </div>
-
                             <div class="card-content-gothic">
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">História</h3>
                                     <p class="card-text-gothic">Expulso da Academia por ideias heréticas. Criou clones
                                         de si mesmo para realizar pesquisas proibidas.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Personalidade</h3>
                                     <p class="card-text-gothic">Frio e amoral. Vê a humanidade e os deuses como meros
                                         objetos de estudo para suas experiências.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Motivação</h3>
                                     <p class="card-text-gothic">Transcender os limites humanos e criar um "deus" através
                                         da ciência, provando que o conhecimento não conhece ética.</p>
                                 </div>
-
                                 <div class="card-section card-extra-info">
                                     <h3 class="section-title-gothic">Habilidades</h3>
                                     <p class="card-text-gothic">Geneticista e cientista brilhante. Criou segmentos
                                         (clones) de si mesmo em diferentes idades para maximizar sua pesquisa.</p>
                                 </div>
-
                                 <div class="card-section card-extra-info">
                                     <h3 class="section-title-gothic">Relacionamentos</h3>
                                     <p class="card-text-gothic">Expulso da Academia de Sumeru. Mantém relação tensa com
                                         outros Harbingers devido aos seus métodos controversos.</p>
                                 </div>
-
                                 <div class="card-section card-extra-info">
                                     <h3 class="section-title-gothic">Curiosidades</h3>
                                     <p class="card-text-gothic">Seus experimentos são considerados heréticos até mesmo
                                         pelos Fatui. Possui obsessão com a ideia de superar os deuses.</p>
                                 </div>
                             </div>
-
                             <button class="card-close-btn">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2">
@@ -447,7 +549,7 @@
                         </div>
                     </div>
 
-                    <!-- COLUMBINA -->
+                    <!-- ── CARD 3: COLUMBINA ── -->
                     <div class="harbinger-card" data-character="columbina" data-video="resources/columbina-bg.mp4">
                         <div class="card-inner-gothic">
                             <div class="card-header-gothic">
@@ -455,24 +557,20 @@
                                 <h1 class="card-title-gothic">Columbina</h1>
                                 <p class="card-subtitle-gothic">"A Damisela"</p>
                             </div>
-
                             <div class="gothic-divider">
                                 <div class="gothic-ornament"></div>
                             </div>
-
                             <div class="card-content-gothic">
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">História</h3>
                                     <p class="card-text-gothic">Ocupa o terceiro posto dos Fatui. Possui um poder
                                         transcendental que intimida até os guerreiros mais experientes.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Personalidade</h3>
                                     <p class="card-text-gothic">Calma e misteriosa. Exala uma aura de perigo
                                         sobrenatural, agindo com uma delicadeza mortal.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Motivação</h3>
                                     <p class="card-text-gothic">Suas intenções permanecem ocultas, mas sua lealdade
@@ -482,7 +580,7 @@
                         </div>
                     </div>
 
-                    <!-- ARLECCHINO -->
+                    <!-- ── CARD 4: ARLECCHINO ── -->
                     <div class="harbinger-card" data-character="arlecchino" data-video="resources/arlecchino-bg.mp4">
                         <div class="card-inner-gothic">
                             <div class="card-header-gothic">
@@ -490,24 +588,20 @@
                                 <h1 class="card-title-gothic">Arlecchino</h1>
                                 <p class="card-subtitle-gothic">"A Serva"</p>
                             </div>
-
                             <div class="gothic-divider">
                                 <div class="gothic-ornament"></div>
                             </div>
-
                             <div class="card-content-gothic">
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">História</h3>
                                     <p class="card-text-gothic">A "Pai" da Casa das Lareiras. Transformou o orfanato em
                                         uma rede de elite para servir à Tsaritsa.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Personalidade</h3>
                                     <p class="card-text-gothic">Elegante e implacável. Protege seus "filhos" com um
                                         código de honra letal e exige lealdade.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Motivação</h3>
                                     <p class="card-text-gothic">Garantir um futuro seguro para os órfãos da Casa das
@@ -517,7 +611,7 @@
                         </div>
                     </div>
 
-                    <!-- PULCINELLA -->
+                    <!-- ── CARD 5: PULCINELLA ── -->
                     <div class="harbinger-card" data-character="pulcinella" data-video="resources/pulcinella-bg.mp4">
                         <div class="card-inner-gothic">
                             <div class="card-header-gothic">
@@ -525,24 +619,20 @@
                                 <h1 class="card-title-gothic">Pulcinella</h1>
                                 <p class="card-subtitle-gothic">"O Galo"</p>
                             </div>
-
                             <div class="gothic-divider">
                                 <div class="gothic-ornament"></div>
                             </div>
-
                             <div class="card-content-gothic">
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">História</h3>
                                     <p class="card-text-gothic">Prefeito de Snezhnaya e mentor burocrático. Foi quem
                                         integrou Childe à organização Fatui.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Personalidade</h3>
                                     <p class="card-text-gothic">Político astuto. Sob a fachada de gentil, esconde um
                                         estrategista que usa favores para controle.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Motivação</h3>
                                     <p class="card-text-gothic">Prosperidade absoluta de Snezhnaya e a expansão da
@@ -552,7 +642,7 @@
                         </div>
                     </div>
 
-                    <!-- SCARAMOUCHE -->
+                    <!-- ── CARD 6: SCARAMOUCHE ── -->
                     <div class="harbinger-card" data-character="scaramouche" data-video="resources/scara-bg.mp4">
                         <div class="card-inner-gothic">
                             <div class="card-header-gothic">
@@ -560,24 +650,20 @@
                                 <h1 class="card-title-gothic">Scaramouche</h1>
                                 <p class="card-subtitle-gothic">"O Baladeiro"</p>
                             </div>
-
                             <div class="gothic-divider">
                                 <div class="gothic-ornament"></div>
                             </div>
-
                             <div class="card-content-gothic">
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">História</h3>
                                     <p class="card-text-gothic">Marionete criada pela Shogun Raiden e descartada. Vagou
                                         séculos antes de apagar sua existência.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Personalidade</h3>
                                     <p class="card-text-gothic">Cínico e orgulhoso. Atualmente busca redenção solitária
                                         como o Andarilho.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Motivação</h3>
                                     <p class="card-text-gothic">Anteriormente, desejava um "coração" e poder divino.
@@ -587,7 +673,7 @@
                         </div>
                     </div>
 
-                    <!-- SANDRONE -->
+                    <!-- ── CARD 7: SANDRONE ── -->
                     <div class="harbinger-card" data-character="sandrone" data-video="resources/sandrone-bg.mp4">
                         <div class="card-inner-gothic">
                             <div class="card-header-gothic">
@@ -595,24 +681,20 @@
                                 <h1 class="card-title-gothic">Sandrone</h1>
                                 <p class="card-subtitle-gothic">"A Marionete"</p>
                             </div>
-
                             <div class="gothic-divider">
                                 <div class="gothic-ornament"></div>
                             </div>
-
                             <div class="card-content-gothic">
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">História</h3>
                                     <p class="card-text-gothic">Gênia da engenharia mecânica. Sempre acompanhada por uma
                                         máquina colossal com vínculo mente-máquina.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Personalidade</h3>
                                     <p class="card-text-gothic">Taciturna e antissocial. Despreza aqueles sem
                                         conhecimento técnico.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Motivação</h3>
                                     <p class="card-text-gothic">Aperfeiçoar a tecnologia de autômatos e possivelmente
@@ -622,7 +704,7 @@
                         </div>
                     </div>
 
-                    <!-- SIGNORA -->
+                    <!-- ── CARD 8: LA SIGNORA ── -->
                     <div class="harbinger-card" data-character="signora" data-video="resources/signora-bg.mp4">
                         <div class="card-inner-gothic">
                             <div class="card-header-gothic">
@@ -630,24 +712,20 @@
                                 <h1 class="card-title-gothic">La Signora</h1>
                                 <p class="card-subtitle-gothic">"A Senhora"</p>
                             </div>
-
                             <div class="gothic-divider">
                                 <div class="gothic-ornament"></div>
                             </div>
-
                             <div class="card-content-gothic">
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">História</h3>
                                     <p class="card-text-gothic">A Bruxa das Chamas Carmesim. Teve seu fogo selado por um
                                         Delírio após perder seu amor no cataclisma.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Personalidade</h3>
                                     <p class="card-text-gothic">Arrogante e cruel. Movida por uma fúria eterna contra o
                                         mundo e os deuses negligentes.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Motivação</h3>
                                     <p class="card-text-gothic">Limpar o "mundo distorcido" através do gelo da Tsaritsa,
@@ -657,7 +735,7 @@
                         </div>
                     </div>
 
-                    <!-- PANTALONE -->
+                    <!-- ── CARD 9: PANTALONE ── -->
                     <div class="harbinger-card" data-character="pantalone" data-video="resources/pantalone-bg.mp4">
                         <div class="card-inner-gothic">
                             <div class="card-header-gothic">
@@ -665,24 +743,20 @@
                                 <h1 class="card-title-gothic">Pantalone</h1>
                                 <p class="card-subtitle-gothic">"O Regrator"</p>
                             </div>
-
                             <div class="gothic-divider">
                                 <div class="gothic-ornament"></div>
                             </div>
-
                             <div class="card-content-gothic">
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">História</h3>
                                     <p class="card-text-gothic">Nascido na pobreza e sem Visão. Jurou dominar o mundo
                                         pelo controle econômico e financeiro.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Personalidade</h3>
                                     <p class="card-text-gothic">Ambicioso e calculista. Vê Teyvat como uma balança
                                         comercial movida por dívidas.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Motivação</h3>
                                     <p class="card-text-gothic">Tornar Snezhnaya o coração econômico do mundo, provando
@@ -692,7 +766,7 @@
                         </div>
                     </div>
 
-                    <!-- TARTAGLIA -->
+                    <!-- ── CARD 10: TARTAGLIA ── -->
                     <div class="harbinger-card" data-character="tartaglia" data-video="resources/tartaglia-bg.mp4">
                         <div class="card-inner-gothic">
                             <div class="card-header-gothic">
@@ -700,43 +774,36 @@
                                 <h1 class="card-title-gothic">Tartaglia</h1>
                                 <p class="card-subtitle-gothic">"Childe"</p>
                             </div>
-
                             <div class="gothic-divider">
                                 <div class="gothic-ornament"></div>
                             </div>
-
                             <div class="card-content-gothic">
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">História</h3>
                                     <p class="card-text-gothic">Caiu no Abismo aos 14 anos e foi treinado por Skirk. O
                                         mais jovem e letal dos Mensageiros.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Personalidade</h3>
                                     <p class="card-text-gothic">Aventureiro e leal à família. Vê o combate como a única
                                         linguagem pura de evolução.</p>
                                 </div>
-
                                 <div class="card-section">
                                     <h3 class="section-title-gothic">Motivação</h3>
                                     <p class="card-text-gothic">Tornar-se o guerreiro mais forte do mundo e proteger a
                                         inocência de seus irmãos em Snezhnaya.</p>
                                 </div>
-
                                 <div class="card-section card-extra-info">
                                     <h3 class="section-title-gothic">Habilidades</h3>
                                     <p class="card-text-gothic">Mestre em todas as armas. Pode invocar a Forma Abissal,
                                         uma transformação que amplifica drasticamente seu poder de combate.</p>
                                 </div>
-
                                 <div class="card-section card-extra-info">
                                     <h3 class="section-title-gothic">Relacionamentos</h3>
                                     <p class="card-text-gothic">Extremamente protetor com seus irmãos Teucer, Tonia e
                                         Anthon. Foi recrutado por Pulcinella. Treinado pela misteriosa Skirk no Abismo.
                                     </p>
                                 </div>
-
                                 <div class="card-section card-extra-info">
                                     <h3 class="section-title-gothic">Curiosidades</h3>
                                     <p class="card-text-gothic">É o mais jovem Harbinger. Mantém sua identidade Fatui em
@@ -745,18 +812,26 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- CONTROLES MOVIDOS PARA FORA DO WRAPPER -->
+                </div><!-- /.carousel-track -->
+            </div><!-- /.carousel-container -->
+        </div><!-- /.carousel-wrapper -->
+
+        <!-- ── CONTROLES DO CARROSSEL ─────────────────── -->
+        <!--
+        Os botões e indicadores ficam FORA do .carousel-wrapper
+        para não serem afetados pelo overflow:hidden do container.
+        O carousel.js adiciona/remove .active nos .indicator-dot.
+    -->
         <div class="carousel-controls">
+
             <button class="carousel-btn carousel-btn-prev" aria-label="Anterior">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
             </button>
 
+            <!-- Um ponto por card — devem ser exatamente 11 -->
             <div class="carousel-indicators">
                 <div class="indicator-dot active"></div>
                 <div class="indicator-dot"></div>
@@ -776,11 +851,19 @@
                     <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
             </button>
+
         </div>
+
     </section>
 
-    <!-- INIMIGOS SECTION -->
+
+    <!-- ══ 5. INIMIGOS ══════════════════════════
+         Fonte: html/section-inimigos.html
+         CSS:   css/_inimigos.css
+         JS:    nenhum
+    ════════════════════════════════════════════ -->
     <section id="inimigos-section">
+
         <video autoplay loop muted playsinline class="video-fundo">
             <source src="resources/historia.mp4" type="video/mp4">
         </video>
@@ -788,6 +871,8 @@
         <div class="overlay-dark"></div>
 
         <div class="inimigos-content">
+
+            <!-- Cabeçalho -->
             <div class="inimigos-header">
                 <p class="historia-tagline">OS ESCOLHIDOS • OS LEAIS • A JUSTIÇA</p>
                 <h2 class="historia-titulo">SOLDADOS DOS FATUI</h2>
@@ -796,8 +881,17 @@
                 </div>
             </div>
 
+            <!-- Grid de soldados
+             data-element define a cor de destaque via CSS:
+             [data-element="cryo"]    → azul gelo
+             [data-element="electro"] → roxo elétrico
+             [data-element="pyro"]    → laranja/vermelho
+             [data-element="hydro"]   → azul água
+             [data-element="geo"]     → dourado
+             [data-element="anemo"]   → verde-água
+        -->
             <div class="inimigos-grid">
-                <!-- Feiticeira Cicin Cryo -->
+
                 <div class="inimigo-card" data-element="cryo">
                     <div class="inimigo-image-wrapper">
                         <img src="resources/Feiticeira_Cicin_Cryo.webp" alt="Feiticeira Cicin Cryo"
@@ -808,12 +902,10 @@
                         <h3 class="inimigo-nome">Feiticeira Cicin Cryo</h3>
                         <p class="inimigo-elemento">CRYO</p>
                         <p class="inimigo-descricao">Invoca insetos Cryo e utiliza magia gélida para controlar o campo
-                            de
-                            batalha.</p>
+                            de batalha.</p>
                     </div>
                 </div>
 
-                <!-- Feiticeira Cicin Electro -->
                 <div class="inimigo-card" data-element="electro">
                     <div class="inimigo-image-wrapper">
                         <img src="resources/Feiticeira_Cicin_Electro.webp" alt="Feiticeira Cicin Electro"
@@ -827,7 +919,6 @@
                     </div>
                 </div>
 
-                <!-- Agente Pyro -->
                 <div class="inimigo-card" data-element="pyro">
                     <div class="inimigo-image-wrapper">
                         <img src="resources/Fatui_-_Agente_Pyro.webp" alt="Agente Pyro Fatui" class="inimigo-image">
@@ -841,7 +932,6 @@
                     </div>
                 </div>
 
-                <!-- Soldado Cryo -->
                 <div class="inimigo-card" data-element="cryo">
                     <div class="inimigo-image-wrapper">
                         <img src="resources/Soldado_dos_Fatui_Cryo.webp" alt="Soldado Fatui Cryo" class="inimigo-image">
@@ -851,12 +941,10 @@
                         <h3 class="inimigo-nome">Soldado Cryo</h3>
                         <p class="inimigo-elemento">CRYO</p>
                         <p class="inimigo-descricao">Infantaria pesada armada com rifles de gelo e escudos
-                            impenetráveis.
-                        </p>
+                            impenetráveis.</p>
                     </div>
                 </div>
 
-                <!-- Soldado Hydro -->
                 <div class="inimigo-card" data-element="hydro">
                     <div class="inimigo-image-wrapper">
                         <img src="resources/Soldado_dos_Fatui_Hydro.webp" alt="Soldado Fatui Hydro"
@@ -871,7 +959,6 @@
                     </div>
                 </div>
 
-                <!-- Soldado Electro -->
                 <div class="inimigo-card" data-element="electro">
                     <div class="inimigo-image-wrapper">
                         <img src="resources/Inimigo_Soldado_dos_Fatui_Electro.webp" alt="Soldado Fatui Electro"
@@ -882,12 +969,10 @@
                         <h3 class="inimigo-nome">Soldado Electro</h3>
                         <p class="inimigo-elemento">ELECTRO</p>
                         <p class="inimigo-descricao">Portador de martelo elétrico capaz de esmagar inimigos com
-                            descargas
-                            massivas.</p>
+                            descargas massivas.</p>
                     </div>
                 </div>
 
-                <!-- Soldado Geo -->
                 <div class="inimigo-card" data-element="geo">
                     <div class="inimigo-image-wrapper">
                         <img src="resources/Inimigo_Soldado_dos_Fatui_Geo.webp" alt="Soldado Fatui Geo"
@@ -902,7 +987,6 @@
                     </div>
                 </div>
 
-                <!-- Soldado Pyro -->
                 <div class="inimigo-card" data-element="pyro">
                     <div class="inimigo-image-wrapper">
                         <img src="resources/Inimigo_Soldado_dos_Fatui_Pyro.webp" alt="Soldado Fatui Pyro"
@@ -913,12 +997,10 @@
                         <h3 class="inimigo-nome">Soldado Pyro</h3>
                         <p class="inimigo-elemento">PYRO</p>
                         <p class="inimigo-descricao">Artilheiro equipado com lança-chamas que incinera tudo em seu
-                            caminho.
-                        </p>
+                            caminho.</p>
                     </div>
                 </div>
 
-                <!-- Soldado Anemo -->
                 <div class="inimigo-card" data-element="anemo">
                     <div class="inimigo-image-wrapper">
                         <img src="resources/Inimigo_Soldado_dos_Fatui_Anemo.webp" alt="Soldado Fatui Anemo"
@@ -932,11 +1014,26 @@
                             devastadores.</p>
                     </div>
                 </div>
-            </div>
-        </div>
+
+            </div><!-- /.inimigos-grid -->
+        </div><!-- /.inimigos-content -->
+
     </section>
 
-    <script src="/js/script.js"></script>
+
+    <!-- ══ SCRIPTS — ordem importa ══════════════
+         1. config.js   → CONFIG (objeto global)
+         2. sidebar.js  → class Sidebar
+         3. parallax.js → class ParallaxManager
+         4. carousel.js → class Carousel
+         5. main.js     → new Sidebar(), new Carousel()...
+    ════════════════════════════════════════════ -->
+    <script src="js/config.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/parallax.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/main.js"></script>
+
 </body>
 
 </html>

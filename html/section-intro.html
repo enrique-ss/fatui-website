@@ -1,0 +1,50 @@
+<!--
+    _section-intro.html
+    ─────────────────────────────────────────────
+    Seção de abertura (#intro) — a primeira coisa
+    que o visitante vê ao entrar na página.
+
+    CAMADAS (de baixo para cima):
+    1. <video>         vídeo em loop no fundo
+    2. .overlay-dark   escurece o vídeo para o texto ficar legível
+    3. .intro-content  texto centralizado com título e tagline
+
+    O parallax.js anima o .intro-content:
+    conforme o usuário rola, o texto some e encolhe.
+-->
+
+<section id="intro">
+
+    <!-- Vídeo de fundo em loop automático e sem som -->
+    <video autoplay loop muted playsinline class="video-fundo">
+        <source src="resources/snezhnaya-main.mp4" type="video/mp4">
+    </video>
+
+    <!-- Camada escura para dar contraste ao texto -->
+    <div class="overlay-dark"></div>
+
+    <!-- Conteúdo central — animado pelo parallax.js -->
+    <div class="intro-content">
+        <div class="moldura-fatuus">
+
+            <p class="tagline">ORDÔNIA • SUPREMACIA • ETERNIDADE</p>
+
+            <h2 class="citacao">
+                OS <span class="destaque-cryo">ONZE</span> QUE DESAFIAM
+                <span class="destaque-cryo-glow">CELESTIA</span><br>
+                <span class="vontade">
+                    A VONTADE DA <span class="destaque-cryo">TSARITSA</span> É
+                    <span class="destaque-cryo-glow">ABSOLUTA</span>
+                </span>
+            </h2>
+
+            <div class="divisor-gótico">
+                <span class="diamante"></span>
+            </div>
+
+            <p class="subtexto-intro">HARBINGERS OF SNEZHNAYA</p>
+
+        </div>
+    </div>
+
+</section>

@@ -1,0 +1,173 @@
+/*
+ * _utilities.css
+ * ─────────────────────────────────────────────
+ * Animações, scrollbar customizada e classes
+ * utilitárias reutilizadas em toda a página.
+ *
+ * SEÇÕES
+ *   1. Animações @keyframes
+ *   2. Classe .animate-on-scroll (ativada pelo JS)
+ *   3. Scrollbar customizada
+ *   4. Elementos visuais comuns (vídeo, overlay,
+ *      tagline, divisor, diamante)
+ */
+
+/* ── 1. Animações ────────────────────────────── */
+
+/* Sobe e aparece (usado no título da intro) */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Cresce e aparece (usado no box da intro) */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ── 2. Animate on scroll ────────────────────── */
+/*
+   Elementos com .animate-on-scroll começam invisíveis.
+   O JS adiciona .animated quando entram na viewport,
+   disparando a transição de opacidade/posição.
+*/
+.animate-on-scroll {
+    opacity: 0;
+    transition: opacity .6s, transform .6s;
+}
+
+.animate-on-scroll.animated {
+    opacity: 1;
+}
+
+/* ── 3. Scrollbar customizada ────────────────── */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(2, 5, 10, .8);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--accent-dim), rgba(163, 214, 255, .5));
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, rgba(163, 214, 255, .5), rgba(163, 214, 255, .7));
+}
+
+/* ── 4. Elementos visuais comuns ─────────────── */
+
+/*
+   Vídeos de fundo — usados em todas as sections.
+   Ficam atrás de tudo (position: absolute)
+   e cobrem 100% da section pai.
+*/
+.video-fundo,
+.carousel-bg-video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(.4) contrast(1.2);
+}
+
+/*
+   Overlay escuro — camada sobre o vídeo para dar
+   contraste ao texto. O gradiente radial mantém
+   o centro mais transparente que as bordas.
+*/
+.overlay-dark,
+.carousel-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, .9) 100%);
+    pointer-events: none;
+}
+
+.carousel-overlay {
+    background: radial-gradient(circle, transparent 0%, rgba(0, 0, 0, .85) 100%);
+}
+
+/* Tagline — texto pequeno com letras espaçadas acima dos títulos */
+.tagline,
+.historia-tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: .8rem;
+    letter-spacing: 8px;
+    color: var(--accent);
+    margin-bottom: var(--s-sm);
+    opacity: .8;
+    text-transform: uppercase;
+}
+
+/*
+   Divisor gótico — linha horizontal com diamante central.
+   Usa pseudoelementos ::before e ::after para as linhas
+   e um elemento filho .diamante / .gothic-ornament para
+   o losango central.
+*/
+.divisor-gótico,
+.gothic-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: var(--s-xl) 0;
+    padding: 0 var(--s-md);
+}
+
+.divisor-gótico::before,
+.divisor-gótico::after,
+.gothic-divider::before,
+.gothic-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.diamante,
+.gothic-ornament {
+    width: clamp(6px, 1vw, 12px);
+    height: clamp(6px, 1vw, 12px);
+    background: var(--accent);
+    transform: rotate(45deg);
+    margin: 0 var(--s-sm);
+    box-shadow: var(--glow);
+    border: 1px solid #fff;
+}
+
+/* Nos cards, o ornamento usa a cor do personagem (--c) */
+.gothic-ornament {
+    background: var(--c);
+    box-shadow: 0 0 10px var(--c);
+}
+
+/* Destaques de texto usados na narrativa e títulos */
+.destaque-cryo {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(163, 214, 255, .8);
+}
+
+.destaque-cryo-glow {
+    color: var(--accent);
+    font-style: italic;
+    text-shadow: 0 0 20px rgba(163, 214, 255, .6);
+}

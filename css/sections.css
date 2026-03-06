@@ -1,0 +1,141 @@
+/*
+ * _sections.css
+ * ─────────────────────────────────────────────
+ * Estilos das seções de conteúdo estático:
+ *   - #intro         (tela de abertura)
+ *   - #historia-section (narrativa com links)
+ *
+ * O carrossel e os inimigos têm arquivos próprios.
+ */
+
+/* ══════════════════════════════════════════════
+   SEÇÃO INTRO (#intro)
+   ══════════════════════════════════════════════ */
+
+#intro {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/*
+   Box central com o título.
+   animation: scaleIn — definida em _utilities.css
+*/
+.intro-content {
+    position: relative;
+    z-index: 10;
+    padding: clamp(40px, 8vh, 100px) clamp(30px, 10vw, 100px);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, .05);
+    background: var(--card);
+    text-align: center;
+    max-width: 90vw;
+    animation: scaleIn .8s ease-out;
+}
+
+/* Título principal da intro */
+.citacao {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: #f0f0f0;
+    text-transform: uppercase;
+    animation: fadeInUp 1s ease-out .2s both;
+}
+
+/* Subtítulo menor abaixo do divisor */
+.subtexto-intro {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #cbd5e0;
+    letter-spacing: 5px;
+}
+
+/* Quebra de linha extra para a segunda frase do título */
+.vontade {
+    display: block;
+    margin-top: 10px;
+}
+
+/* ══════════════════════════════════════════════
+   SEÇÃO HISTÓRIA (#historia-section)
+   ══════════════════════════════════════════════ */
+
+#historia-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--s-3xl) clamp(20px, 5vw, 60px);
+}
+
+/* Box de conteúdo — vidro fosco centralizado */
+.historia-content {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    background: var(--card);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--accent-dim);
+    padding: var(--s-xl) var(--s-lg);
+}
+
+.historia-header {
+    text-align: center;
+    margin-bottom: var(--s-xl);
+}
+
+.historia-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    color: #f0f0f0;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(163, 214, 255, .5);
+}
+
+/* Parágrafos da narrativa */
+.historia-texto {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--txt-dim);
+    text-align: justify;
+}
+
+.historia-texto p {
+    margin-bottom: var(--s-md);
+}
+
+/* Último parágrafo — destacado com borda superior */
+.historia-final {
+    margin-top: var(--s-xl);
+    padding-top: var(--s-md);
+    border-top: 1px solid rgba(163, 214, 255, .2);
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+/*
+   Links dos Harbingers dentro do texto.
+   A cor vem do style="color: var(--nome)" inline no HTML.
+   O JS (main.js) trata o clique → scroll + navegação.
+*/
+.harbinger-link {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    text-decoration: none;
+    position: relative;
+    transition: var(--tr);
+}
+
+.harbinger-link:hover {
+    text-shadow: 0 0 15px currentColor;
+    filter: brightness(1.3);
+}

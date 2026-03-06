@@ -1,0 +1,187 @@
+/*
+ * _variables.css
+ * ─────────────────────────────────────────────
+ * Tokens de design globais: cores, espaçamentos,
+ * tamanhos, transições e sombras.
+ *
+ * COMO USAR
+ * ──────────
+ * Todos os outros arquivos CSS consomem estas
+ * variáveis com var(--nome).
+ * Para mudar o visual do site inteiro, altere
+ * apenas este arquivo.
+ *
+ * SEÇÕES
+ *   1. Cores dos Harbingers    (--pierro, --capitano ...)
+ *   2. Cores dos Elementos     (--cryo, --electro ...)
+ *   3. Cores do Sistema        (--bg, --card, --txt ...)
+ *   4. Espaçamentos            (--s-xs ... --s-3xl)
+ *   5. Tamanhos de componentes (--header, --card-w ...)
+ *   6. Design tokens           (--r-*, --tr-*, --glow ...)
+ *   7. Mapeamento data-attr    ([data-character="x"])
+ *   8. Reset CSS
+ */
+
+/* ── 1. Cores dos Harbingers ─────────────────── */
+:root {
+    --pierro: #9bbad1;
+    --capitano: #7c8ea0;
+    --dottore: #f2c7b1;
+    --columbina: #ff8a8a;
+    --arlecchino: #9e1b1b;
+    --pulcinella: #5c7ee6;
+    --scaramouche: #9d78e6;
+    --sandrone: #b34d65;
+    --signora: #ff3d40;
+    --pantalone: #7cb9e8;
+    --tartaglia: #e0d88d;
+}
+
+/* ── 2. Cores dos Elementos ──────────────────── */
+:root {
+    --cryo: #9bbad1;
+    --electro: #b899ff;
+    --pyro: #ff6b3d;
+    --hydro: #4fc3f7;
+    --geo: #f4a460;
+    --anemo: #74c2a8;
+}
+
+/* ── 3. Cores do Sistema ─────────────────────── */
+:root {
+    --bg: #02050a;
+    --card: rgba(0, 5, 15, .4);
+    --glass: rgba(0, 5, 15, .75);
+    --border: rgba(255, 255, 255, .1);
+    --txt: #fff;
+    --txt-dim: #ddd;
+    --txt-muted: rgba(255, 255, 255, .6);
+    --accent: #a3d6ff;
+    --accent-dim: rgba(163, 214, 255, .3);
+}
+
+/* ── 4. Espaçamentos (responsivos com clamp) ─── */
+:root {
+    --s-xs: clamp(8px, 1.5vh, 12px);
+    --s-sm: clamp(15px, 2.5vh, 20px);
+    --s-md: clamp(20px, 3.5vh, 30px);
+    --s-lg: clamp(30px, 5vh, 50px);
+    --s-xl: clamp(40px, 6vh, 60px);
+    --s-2xl: clamp(60px, 10vh, 100px);
+    --s-3xl: clamp(80px, 12vh, 120px);
+}
+
+/* ── 5. Tamanhos de componentes ──────────────── */
+:root {
+    --header: 70px;
+    --sidebar: 350px;
+    --card-w: clamp(220px, 22vw, 320px);
+    --card-h: clamp(280px, 38vh, 420px);
+    --card-h-active: clamp(380px, 52vh, 600px);
+    --card-h-expand: min(700px, 85vh);
+}
+
+/* ── 6. Design tokens ────────────────────────── */
+:root {
+    --r-sm: 4px;
+    --r-md: 8px;
+    --r-full: 50%;
+    --tr: .3s ease;
+    --tr-smooth: .4s cubic-bezier(.4, 0, .2, 1);
+    --tr-slow: .6s cubic-bezier(.4, 0, .2, 1);
+    --glow: 0 0 15px var(--accent);
+    --shadow: 0 10px 40px rgba(0, 0, 0, .5);
+}
+
+/* ── 7. Mapeamento data-character → --c ─────────
+   Cada card usa var(--c) para suas cores.
+   O atributo data-character define qual cor usar.
+   Ex: <div data-character="pierro"> → --c = #9bbad1
+────────────────────────────────────────────── */
+[data-character="pierro"] {
+    --c: var(--pierro)
+}
+
+[data-character="capitano"] {
+    --c: var(--capitano)
+}
+
+[data-character="dottore"] {
+    --c: var(--dottore)
+}
+
+[data-character="columbina"] {
+    --c: var(--columbina)
+}
+
+[data-character="arlecchino"] {
+    --c: var(--arlecchino)
+}
+
+[data-character="pulcinella"] {
+    --c: var(--pulcinella)
+}
+
+[data-character="scaramouche"] {
+    --c: var(--scaramouche)
+}
+
+[data-character="sandrone"] {
+    --c: var(--sandrone)
+}
+
+[data-character="signora"] {
+    --c: var(--signora)
+}
+
+[data-character="pantalone"] {
+    --c: var(--pantalone)
+}
+
+[data-character="tartaglia"] {
+    --c: var(--tartaglia)
+}
+
+/* Mapeamento data-element → --e
+   Cards de inimigos usam var(--e) para cores.
+   Ex: <div data-element="cryo"> → --e = #9bbad1  */
+[data-element="cryo"] {
+    --e: var(--cryo)
+}
+
+[data-element="electro"] {
+    --e: var(--electro)
+}
+
+[data-element="pyro"] {
+    --e: var(--pyro)
+}
+
+[data-element="hydro"] {
+    --e: var(--hydro)
+}
+
+[data-element="geo"] {
+    --e: var(--geo)
+}
+
+[data-element="anemo"] {
+    --e: var(--anemo)
+}
+
+/* ── 8. Reset CSS ────────────────────────────── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--bg);
+    color: var(--txt);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    /* Compensa a altura do header fixo nos links âncora */
+    scroll-padding-top: calc(var(--header) + 20px);
+}
